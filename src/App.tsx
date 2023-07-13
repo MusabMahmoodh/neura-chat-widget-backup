@@ -1,18 +1,8 @@
-import { useState, useEffect } from "react";
 import "./App.css";
-import { WidgetContainer } from "./WidgetContainer";
+import ChatWidget from "./components/ChatWidget/ChatWidget";
 
 function App() {
-  const [license, setLicense] = useState<string | null>(null);
-
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const license = urlParams.get("license");
-    setLicense(license);
-  }, []);
-
-  return <WidgetContainer license={license} />;
+  return <ChatWidget />;
 }
 
 export default App;

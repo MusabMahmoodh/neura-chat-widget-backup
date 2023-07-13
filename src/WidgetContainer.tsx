@@ -1,9 +1,6 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { Widget } from "./Widget";
-import { nanoid } from "nanoid";
 import { MessageModel } from "@chatscope/chat-ui-kit-react";
-import { MessageDirection } from "@chatscope/chat-ui-kit-react/src/types/unions";
-import { getResponse } from "./messageService";
 import { useMessage } from "./useMessage";
 
 export interface CustomMessageModel extends MessageModel {

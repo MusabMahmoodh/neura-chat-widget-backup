@@ -15,20 +15,17 @@ export const createSession = async (sessionId: string) => {
 };
 
 export const getResponse = async (message: string, session: string) => {
-  // const response = await fetch(`https://esoft-demo.ascii.ai/generate?session_id=${session}`, {
-  //   method: 'POST',
-  //   headers: {
-  //     'accept': 'application/json',
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({
-  //     "user_input":message
-  //   })
-  // });
+  const response = await fetch(`https://esoft-demo.ascii.ai/generate?session_id=${session}`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_input: message,
+    }),
+  });
 
-  // const data = await response.json();
-  const response = await fetch("https://type.fit/api/quotes");
   const data = await response.json();
-  const randomNumber = getRandomNumber(0, data.length - 1);
-  return data[randomNumber];
+  return data.generated;
 };

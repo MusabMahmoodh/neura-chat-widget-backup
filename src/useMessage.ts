@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { CustomMessageModel } from "./WidgetContainer";
 import { MessageDirection } from "@chatscope/chat-ui-kit-react/src/types/unions";
 import { createSession, getResponse } from "./messageService";
-import { randomUUID } from "crypto";
 import { nanoid } from "nanoid";
 
 const greeTingMessage = {
@@ -55,7 +54,7 @@ export const useMessage = () => {
     const res = await getResponse(message, session);
     const response = {
       _id: nanoid(),
-      message: `${res.text}`,
+      message: `${res}`,
       sender: "remote",
       direction: "incoming" as MessageDirection,
       position: "single" as const,
