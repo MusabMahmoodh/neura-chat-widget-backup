@@ -1,19 +1,9 @@
-import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import {
-  MainContainer,
-  ChatContainer,
-  ConversationHeader,
-  MessageList,
-  Message,
-  MessageInput,
-  Loader,
-  TypingIndicator,
-  Avatar,
-  Button,
-} from "@chatscope/chat-ui-kit-react";
-import { CustomMessageModel } from "./WidgetContainer";
-import ResetIcon from "./assets/refresh.svg";
-import CloseIcon from "./assets/close.svg";
+import ReactLoading from "react-loading";
+import ConversationHeader from "./components/ConversationHeader";
+import RobotIcon from "./assets/bot.svg";
+import UserSpeakerIcon from "./assets/speaker.svg";
+import { CustomMessageModel } from "./types";
+import ChatInput from "./components/ChatInput/ChatInput";
 
 export const Widget: React.FC<{
   isLoadingNewMessage: boolean;
@@ -22,36 +12,52 @@ export const Widget: React.FC<{
   onSend: (message: string) => void;
 }> = ({ remoteName = "", messages = [], onSend, isLoadingNewMessage }) => {
   return (
-    <MainContainer>
-      <ChatContainer
-        style={{
-          boxShadow: "0 5px 40px rgba(0, 0, 0, 0.16) !important",
-          borderRadius: "10px !important",
-        }}
-      >
-        <ConversationHeader>
-          <Avatar src="https://picsum.photos/200/300" name="Emily" />
-          <ConversationHeader.Content userName={remoteName} info="Demo" />
-          <ConversationHeader.Actions>
-            <Button
-              style={{
-                marginRight: "10px",
-              }}
-              icon={<img src={ResetIcon} width="20" />}
-              className="widget-header-btn"
-            ></Button>
-            <Button icon={<img src={CloseIcon} width="18" />} className="widget-header-btn"></Button>
-          </ConversationHeader.Actions>
-        </ConversationHeader>
+    <div className="widget-container">
+      <ConversationHeader remoteName={remoteName} />
+      <div className="widget-container-chat">
+        <ul className="widget-container-message-list">
+          {messages.map((message) =>
+            message.sender === "remote" ? (
+              <li key={message._id} className="widget-container-message-item widget-container-message-item--left">
+                <div className="widget-container-message-listItemAvatar">
+                  <div className="widget-container-message-avatar">
+                    <img className="widget-container-message-avatar-icon" src={RobotIcon}></img>
+                  </div>
+                </div>
+                <div className="widget-container-message-listItemText">
+                  <h6 className="widget-container-message-primaryText">{message.message}</h6>
+                </div>
+              </li>
+            ) : (
+              <li key={message._id} className="widget-container-message-item widget-container-message-item--right">
+                <div className="widget-container-message-listItemText">
+                  <h6 className="widget-container-message-primaryText">{message.message}</h6>
+                </div>
+                <div className="widget-container-message-listItemAvatar">
+                  <div className="widget-container-message-avatar">
+                    <img className="widget-container-message-avatar-icon" src={UserSpeakerIcon}></img>
+                  </div>
+                </div>
+              </li>
+            )
+          )}
+          {isLoadingNewMessage && (
+            <li className="widget-container-message-item widget-container-message-item--left">
+              <div className="widget-container-message-listItemAvatar">
+                <div className="widget-container-message-avatar">
+                  <img className="widget-container-message-avatar-icon" src={RobotIcon}></img>
+                </div>
+              </div>
+              <div className="widget-container-message-listItemText widget-container-message-listItemText--processing ">
+                <h6 className="widget-container-message-primaryText"> Typing </h6>
+                <ReactLoading type="bubbles" color="#000" />
+              </div>
+            </li>
+          )}
+        </ul>
 
-        <MessageList typingIndicator={isLoadingNewMessage && <TypingIndicator content="Generating response" />}>
-          {messages.map((message) => (
-            <Message key={message._id} model={message} />
-          ))}
-        </MessageList>
-
-        <MessageInput placeholder="Type message here" attachButton={false} onSend={onSend} />
-      </ChatContainer>
-    </MainContainer>
+        <ChatInput sendMessage={onSend} />
+      </div>
+    </div>
   );
 };

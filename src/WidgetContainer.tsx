@@ -1,11 +1,7 @@
 import { useMemo } from "react";
 import { Widget } from "./Widget";
-import { MessageModel } from "@chatscope/chat-ui-kit-react";
 import { useMessage } from "./useMessage";
 
-export interface CustomMessageModel extends MessageModel {
-  _id: string;
-}
 export const WidgetContainer: React.FC<{
   license?: string | null;
   greeting?: string;
