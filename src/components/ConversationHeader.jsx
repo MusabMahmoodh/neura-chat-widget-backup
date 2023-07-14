@@ -1,6 +1,5 @@
 import React from "react";
 import ResetIcon from "../assets/reset.svg";
-import CloseIcon from "../assets/close.svg";
 const ConversationHeader = ({ remoteName }) => {
   return (
     <div className="widget-header">
@@ -14,9 +13,6 @@ const ConversationHeader = ({ remoteName }) => {
       <div className="widget-header-actions">
         <button className="widget-header-action-btn">
           <img src={ResetIcon} width="20px" alt="Refresh" className="icon" />
-        </button>
-        <button className="widget-header-action-btn">
-          <img src={CloseIcon} width="20px" alt="Close" className="icon" />
         </button>
       </div>
     </div>

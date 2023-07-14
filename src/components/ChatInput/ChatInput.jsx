@@ -15,13 +15,18 @@ const ChatInput = ({ sendMessage }) => {
 
   const handleSendClick = () => {
     SpeechRecognition.stopListening();
-    sendMessage(inputValue);
+    if (inputValue.trim() !== "") {
+      sendMessage(inputValue);
+    }
     setInputValue("");
   };
 
   const sendAudioTranscript = () => {
     SpeechRecognition.stopListening();
-    sendMessage(transcript);
+    if (transcript.trim() !== "") {
+      sendMessage(transcript);
+    }
+
     resetTranscript();
   };
 
@@ -39,16 +44,17 @@ const ChatInput = ({ sendMessage }) => {
       {transcript && <p className="chat-input-trasncript">{transcript} |</p>}
       {listening ? (
         <div className="chat-input-recording">
-          <button onClick={resetTranscriptAndStopListening} className="chat-input-send-icon">
+          <button onClick={resetTranscriptAndStopListening} className="chat-input-icon chat-input-trash-icon">
             <img src={TrashIcon} alt="stop" className="chat-input-send-icon-img" />
           </button>
           <div className="chat-input-recording-placeholder">
-            <ReactLoading type="bubbles" color="#000" />
-            <ReactLoading type="bubbles" color="#000" />
+            <div className="chat-input-recording-dot"></div>
+            <ReactLoading type="bars" color="#5896EB" />
+            <ReactLoading type="bars" color="#B7E6FF" delay={500} />
           </div>
 
-          <button className="chat-input-send-icon" onClick={sendAudioTranscript}>
-            <img src={SendIcon} alt="mic" className="chat-input-send-icon-img" />
+          <button className="chat-input-icon chat-input-send-icon" onClick={sendAudioTranscript}>
+            <img src={SendIcon} alt="send" className="chat-input-send-icon-img" />
           </button>
         </div>
       ) : (
@@ -61,11 +67,11 @@ const ChatInput = ({ sendMessage }) => {
             placeholder="Type a message"
           />
           {inputValue.trim() ? (
-            <button className="chat-input-send-icon" onClick={handleSendClick}>
-              <img src={SendIcon} alt="mic" className="chat-input-send-icon-img" />
+            <button className="chat-input-icon chat-input-send-icon" onClick={handleSendClick}>
+              <img src={SendIcon} alt="send" className="chat-input-send-icon-img" />
             </button>
           ) : (
-            <button onClick={startListening} className="chat-input-send-icon">
+            <button onClick={startListening} className="chat-input-icon chat-input-mic-icon">
               <img src={MicIcon} alt="mic" className="chat-input-send-icon-img" />
             </button>
           )}
