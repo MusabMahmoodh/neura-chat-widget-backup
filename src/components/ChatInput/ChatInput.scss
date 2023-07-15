@@ -34,12 +34,12 @@
       &-dot {
         height: 15px;
         width: 15px;
-        background-color: #ccc;
+        background-color: red;
         border-radius: 50%;
         display: inline-block;
-        animation: blink 1s infinite;
+        animation: blinkDot 1s infinite;
 
-        @keyframes blink {
+        @keyframes blinkDot {
           0% {
             background-color: red;
           }

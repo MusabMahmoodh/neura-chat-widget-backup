@@ -3,6 +3,28 @@ import { createSession, getResponse } from "./messageService";
 import { nanoid } from "nanoid";
 import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./types";
 
+const getCurrentTime = () => {
+  const now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let meridiem = "";
+
+  // Convert to 12-hour format
+  if (hours >= 12) {
+    meridiem = "PM";
+    hours = hours === 12 ? 12 : hours - 12;
+  } else {
+    meridiem = "AM";
+    hours = hours === 0 ? 12 : hours;
+  }
+
+  // Add leading zeros if necessary
+  hours = Number(hours.toString().padStart(2, "0"));
+  minutes = Number(minutes.toString().padStart(2, "0"));
+
+  return `${hours}:${minutes} ${meridiem}`;
+};
+
 const greeTingMessage = {
   _id: "1",
   message:
@@ -41,7 +63,6 @@ export const useMessage = () => {
   );
 
   const getApiResponse = async (message: string) => {
-    console.log("getApiResponse", message);
     setIsLoadingResponse(true);
     const newMessage = {
       _id: nanoid(),
@@ -49,6 +70,7 @@ export const useMessage = () => {
       sender: "me" as SenderType,
       direction: "outgoing" as DirectionType,
       position: "single" as PositionType,
+      time: getCurrentTime(),
     };
     addMessage(newMessage);
     const res = await getResponse(message, session);
@@ -58,6 +80,7 @@ export const useMessage = () => {
       sender: "remote" as SenderType,
       direction: "incoming" as DirectionType,
       position: "single" as PositionType,
+      time: getCurrentTime(),
     };
     addMessage(response);
     setIsLoadingResponse(false);

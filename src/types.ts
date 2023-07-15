@@ -8,4 +8,5 @@ export interface CustomMessageModel {
   sender: SenderType;
   direction: DirectionType;
   position: PositionType;
+  time?: string;
 }

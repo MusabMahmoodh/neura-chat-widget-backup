@@ -3,7 +3,7 @@ import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognitio
 import MicIcon from "../../assets/mic.svg";
 import TrashIcon from "../../assets/trash.svg";
 import SendIcon from "../../assets/send.svg";
-import ReactLoading from "react-loading";
+import SendGreenIcon from "../../assets/send-green.svg";
 
 import "./ChatInput.scss";
 
@@ -54,9 +54,15 @@ const ChatInput = ({ sendMessage }) => {
               {transcript} <blink>|</blink>
             </div>
           </div>
-          <button className="chat-input-btn chat-input-send-icon" onClick={sendAudioTranscript}>
-            <img src={SendIcon} alt="send" className="chat-input-btn-img" />
-          </button>
+          {transcript.trim() ? (
+            <button className="chat-input-btn chat-input-send-icon" onClick={sendAudioTranscript}>
+              <img src={SendGreenIcon} alt="send" className="chat-input-btn-img" />
+            </button>
+          ) : (
+            <button className="chat-input-btn chat-input-send-icon">
+              <img src={SendIcon} alt="send" className="chat-input-btn-img" />
+            </button>
+          )}
         </div>
       ) : (
         <div className="chat-input-text">
@@ -67,13 +73,16 @@ const ChatInput = ({ sendMessage }) => {
             onChange={handleInputChange}
             placeholder="Write a message..."
           />
+          <button onClick={startListening} className="chat-input-btn chat-input-mic-icon">
+            <img src={MicIcon} alt="mic" className="chat-input-btn-img" />
+          </button>
           {inputValue.trim() ? (
             <button className="chat-input-btn chat-input-send-icon" onClick={handleSendClick}>
-              <img src={SendIcon} alt="send" className="chat-input-btn-img" />
+              <img src={SendGreenIcon} alt="send" className="chat-input-btn-img" />
             </button>
           ) : (
-            <button onClick={startListening} className="chat-input-btn chat-input-mic-icon">
-              <img src={MicIcon} alt="mic" className="chat-input-btn-img" />
+            <button className="chat-input-btn chat-input-send-icon">
+              <img src={SendIcon} alt="send" className="chat-input-btn-img" />
             </button>
           )}
         </div>
