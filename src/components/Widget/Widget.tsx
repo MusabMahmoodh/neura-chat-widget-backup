@@ -1,9 +1,9 @@
 import ReactLoading from "react-loading";
-import ConversationHeader from "./components/ConversationHeader";
-import RobotIcon from "./assets/bot.svg";
-import UserSpeakerIcon from "./assets/speaker.svg";
-import { CustomMessageModel } from "./types";
-import ChatInput from "./components/ChatInput/ChatInput";
+import ConversationHeader from "../ConversationHeader/ConversationHeader";
+import RobotIcon from "../../assets/bot.svg";
+import UserSpeakerIcon from "../../assets/speaker.svg";
+import { CustomMessageModel } from "../../types";
+import ChatInput from "../ChatInput/ChatInput";
 
 export const Widget: React.FC<{
   isLoadingNewMessage: boolean;

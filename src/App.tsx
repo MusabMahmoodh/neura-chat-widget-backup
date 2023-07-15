@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import ChatWidget from "./components/ChatWidget/ChatWidget";
 
 function App() {

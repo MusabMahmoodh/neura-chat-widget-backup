@@ -1,0 +1,93 @@
+@import "./variables.scss";
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+body {
+  position: relative;
+  padding: 0;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.icon {
+  width: 20px;
+}
+
+.widget-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.widget-container-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: calc(100% - 80px);
+  justify-content: space-between;
+}
+.widget-container-message-list {
+  list-style-type: none;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.widget-container-message-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  max-width: 600px;
+  min-width: 200px;
+  width: 90%;
+}
+
+.widget-container-message-item--left {
+  float: left;
+}
+
+.widget-container-message-item--right {
+  float: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.widget-container-message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+.widget-container-message-listItemText {
+  background: #f2f2f2;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.widget-container-message-listItemText--processing {
+  max-height: 3rem;
+  padding: 0 2rem;
+  background-color: transparent !important;
+}
+.widget-container-message-avatar-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.widget-container-message-content {
+  margin-left: 1rem;
+}
+
+.widget-container-message-primaryText {
+  margin: 0;
+}

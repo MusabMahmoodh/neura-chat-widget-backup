@@ -1,6 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 17V21M12 21H9M12 21H15" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="10" y="3" width="4" height="10" rx="2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M17.7378 12.7542C17.3674 13.9659 16.6228 15.0293 15.6109 15.7918C14.599 16.5544 13.3716 16.977 12.1047 16.9991C10.8378 17.0212 9.59647 16.6417 8.55854 15.9149C7.52061 15.1881 6.73941 14.1515 6.32689 12.9534" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.8698 6.51253C17.8698 4.13602 15.9432 2.20947 13.5667 2.20947C11.1902 2.20947 9.26367 4.13602 9.26367 6.51253V12.9671C9.26367 15.3436 11.1902 17.2702 13.5667 17.2702C15.9432 17.2702 17.8698 15.3436 17.8698 12.9671V6.51253Z" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
+<path d="M6.0365 11.3535V12.9672C6.0365 17.1261 9.40795 20.4975 13.5669 20.4975C17.7258 20.4975 21.0972 17.1261 21.0972 12.9672V11.3535" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
+<path d="M13.5668 2.74756V5.97485" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
+<path d="M9.26367 8.66455H11.9531" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
+<path d="M15.1803 8.66455H17.8697" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
+<path d="M9.26367 11.8921H11.9531" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
+<path d="M15.1803 11.8921H17.8697" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
+<path d="M13.5668 20.498V23.7253" stroke="#2E5260" stroke-width="1.5491"/>
+<path d="M9.26367 23.7256H17.8698" stroke="#2E5260" stroke-width="1.5491" stroke-linecap="square"/>
 </svg>
