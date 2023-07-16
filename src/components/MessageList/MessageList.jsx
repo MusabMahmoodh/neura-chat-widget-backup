@@ -4,6 +4,7 @@ import UserSpeakerIcon from "../../assets/speaker.svg";
 
 import "./MessageList.scss";
 import TypeLoader from "../TypeLoader/TypeLoader";
+import ResponseComponent from "../ResponseComponent/ResponseComponent";
 const MessageList = ({ messages, isLoadingNewMessage }) => {
   const chatListRef = useRef(null);
 
@@ -52,7 +53,7 @@ const MessageList = ({ messages, isLoadingNewMessage }) => {
                       : "widget-container-chat-list-item-text widget-container-chat-list-item-text--right"
                   }
                 >
-                  <p className="widget-container-chat-primaryText">{message.message}</p>
+                  <ResponseComponent response={message.message} />
                 </div>
 
                 {message?.time && (
