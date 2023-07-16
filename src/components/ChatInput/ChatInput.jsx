@@ -61,7 +61,7 @@ const ChatInput = ({ sendMessage }) => {
           <div className="chat-input-recording-placeholder">
             <div className="chat-input-recording-placeholder-dot"></div>
             <div className="chat-input-recording-placeholder-transcript">
-              {transcript} <blink>|</blink>
+              {transcript} <span className="blink">|</span>
             </div>
           </div>
           {transcript.trim() ? (

@@ -68,7 +68,7 @@
         color: $text-dark;
         border-radius: 10px;
         overflow: scroll;
-        blink {
+        .blink {
           animation: blinkTag 1s infinite;
           @keyframes blinkTag {
             0% {
