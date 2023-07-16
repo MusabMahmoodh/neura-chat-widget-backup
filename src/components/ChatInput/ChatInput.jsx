@@ -43,7 +43,6 @@ const ChatInput = ({ sendMessage }) => {
 
   const handlekeyPress = (event) => {
     if (inputValue.trim() && event.code === "Enter") {
-      console.log("enter pressed");
       handleSendClick();
     } else if (event.key === 32 && !listening) {
       startListening();
