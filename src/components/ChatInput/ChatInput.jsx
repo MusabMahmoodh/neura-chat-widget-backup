@@ -42,11 +42,12 @@ const ChatInput = ({ sendMessage }) => {
   };
 
   const handlekeyPress = (event) => {
-    if (event.key === "Enter") {
+    if (inputValue.trim() && event.code === "Enter") {
+      console.log("enter pressed");
       handleSendClick();
-    } else if (event.key === " " && !listening) {
+    } else if (event.key === 32 && !listening) {
       startListening();
-    } else if (event.key === " " && listening) {
+    } else if (event.key === 32 && listening) {
       sendAudioTranscript();
     }
   };
@@ -85,9 +86,10 @@ const ChatInput = ({ sendMessage }) => {
             type="text"
             value={inputValue}
             onChange={handleInputChange}
+            onKeyUp={inputValue.trim() ? handlekeyPress : null}
             placeholder="Write a message..."
           />
-          <button onClick={startListening} onKeyUp={handlekeyPress} className="chat-input-btn chat-input-mic-icon">
+          <button onClick={startListening} className="chat-input-btn chat-input-mic-icon">
             <img src={MicIcon} alt="mic" className="chat-input-btn-img" />
           </button>
           {inputValue.trim() ? (
