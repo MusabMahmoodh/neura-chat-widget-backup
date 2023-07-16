@@ -52,7 +52,7 @@ const MessageList = ({ messages, isLoadingNewMessage }) => {
                       : "widget-container-chat-list-item-text widget-container-chat-list-item-text--right"
                   }
                 >
-                  <h6 className="widget-container-chat-primaryText">{message.message}</h6>
+                  <p className="widget-container-chat-primaryText">{message.message}</p>
                 </div>
 
                 {message?.time && (
