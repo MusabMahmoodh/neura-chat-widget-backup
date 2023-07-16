@@ -39,19 +39,19 @@ export const useMessage = () => {
   const [isLoadingResponse, setIsLoadingResponse] = useState<boolean>(false);
   const [session, setSession] = useState<string>("");
 
-  useEffect(() => {
-    const generateSession = async () => {
-      setIsSessionCreated(true);
-      const sessionId = nanoid();
-      try {
-        await createSession(sessionId);
-      } catch (e) {
-        console.log(e);
-      }
+  const generateSession = async () => {
+    setIsSessionCreated(true);
+    const sessionId = nanoid();
+    try {
+      await createSession(sessionId);
+    } catch (e) {
+      console.log(e);
+    }
 
-      setSession(sessionId);
-      setIsLoadingResponse(false);
-    };
+    setSession(sessionId);
+    setIsLoadingResponse(false);
+  };
+  useEffect(() => {
     generateSession();
   }, []);
 
@@ -61,6 +61,12 @@ export const useMessage = () => {
     },
     [setMessages]
   );
+
+  const resetSession = () => {
+    setMessages([greeTingMessage]);
+    setIsSessionCreated(false);
+    generateSession();
+  };
 
   const getApiResponse = async (message: string) => {
     setIsLoadingResponse(true);
@@ -86,5 +92,5 @@ export const useMessage = () => {
     setIsLoadingResponse(false);
   };
 
-  return { messages, getApiResponse, session, isLoadingResponse, isSessionCreated };
+  return { messages, getApiResponse, session, isLoadingResponse, isSessionCreated, resetSession };
 };

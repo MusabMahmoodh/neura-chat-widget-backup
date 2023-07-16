@@ -10,10 +10,11 @@ export const Widget: React.FC<{
   remoteName?: string;
   messages?: Array<CustomMessageModel>;
   onSend: (message: string) => void;
-}> = ({ remoteName = "", messages = [], onSend, isLoadingNewMessage }) => {
+  resetSession: () => void;
+}> = ({ remoteName = "", messages = [], onSend, isLoadingNewMessage, resetSession }) => {
   return (
     <div className="widget-container">
-      <ConversationHeader remoteName={remoteName} />
+      <ConversationHeader resetSession={resetSession} remoteName={remoteName} />
       <MessageList messages={messages} isLoadingNewMessage={isLoadingNewMessage} />
       <ChatInput sendMessage={onSend} />
     </div>

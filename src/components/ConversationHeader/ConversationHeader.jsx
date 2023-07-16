@@ -2,7 +2,7 @@ import React from "react";
 import ResetIcon from "../../assets/reset.svg";
 import "./ConversationHeader.scss";
 
-const ConversationHeader = ({ remoteName }) => {
+const ConversationHeader = ({ remoteName, resetSession }) => {
   return (
     <div className="conversation-header">
       <div className="conversation-header-data">
@@ -13,7 +13,7 @@ const ConversationHeader = ({ remoteName }) => {
         </div>
       </div>
       <div className="conversation-header-actions">
-        <button className="conversation-header-action-btn">
+        <button className="conversation-header-action-btn" onClick={resetSession}>
           <img src={ResetIcon} width="20px" alt="Refresh" className="action-icon" />
         </button>
       </div>

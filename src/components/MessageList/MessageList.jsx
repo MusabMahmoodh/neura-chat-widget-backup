@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import RobotIcon from "../../assets/bot.svg";
 import UserSpeakerIcon from "../../assets/speaker.svg";
 
 import "./MessageList.scss";
 import TypeLoader from "../TypeLoader/TypeLoader";
 const MessageList = ({ messages, isLoadingNewMessage }) => {
+  const chatListRef = useRef(null);
+
+  useEffect(() => {
+    // Scroll to the bottom when the list of messages changes
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    if (chatListRef.current) {
+      const { scrollHeight, clientHeight } = chatListRef.current;
+      chatListRef.current.scrollTop = scrollHeight - clientHeight;
+    }
+  };
   return (
-    <div className="widget-container-chat">
+    <div ref={chatListRef} className="widget-container-chat">
       <ul className="widget-container-chat-list">
         {messages.map((message) => {
           const isRemoteMessage = message.sender === "remote";

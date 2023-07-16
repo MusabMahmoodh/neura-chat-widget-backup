@@ -1,9 +1,29 @@
 @import "../../variables.scss";
 .widget-container-chat {
+  flex: 1;
+  max-height: $chat-message-list-height;
+  padding-bottom: 30px;
   .widget-container-chat-list {
+    height: 100%;
+    overflow: scroll;
     list-style-type: none;
     padding: $container-padding;
     overflow-y: scroll;
+    // add a customized scroll bar
+    &::-webkit-scrollbar {
+      width: 0.3rem;
+    }
+    &::-webkit-scrollbar-track {
+      background: $secondary-color;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $primary-color-light;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: $primary-color-light;
+    }
 
     .widget-container-chat-list-item {
       display: flex;

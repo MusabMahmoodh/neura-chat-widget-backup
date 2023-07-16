@@ -41,6 +41,16 @@ const ChatInput = ({ sendMessage }) => {
     SpeechRecognition.startListening({ continuous: true });
   };
 
+  const handlekeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSendClick();
+    } else if (event.key === " " && !listening) {
+      startListening();
+    } else if (event.key === " " && listening) {
+      sendAudioTranscript();
+    }
+  };
+
   return (
     <div className="chat-input">
       {listening ? (
@@ -55,7 +65,11 @@ const ChatInput = ({ sendMessage }) => {
             </div>
           </div>
           {transcript.trim() ? (
-            <button className="chat-input-btn chat-input-send-icon" onClick={sendAudioTranscript}>
+            <button
+              className="chat-input-btn chat-input-send-icon"
+              onClick={sendAudioTranscript}
+              onKeyUp={handlekeyPress}
+            >
               <img src={SendGreenIcon} alt="send" className="chat-input-btn-img" />
             </button>
           ) : (
@@ -73,11 +87,11 @@ const ChatInput = ({ sendMessage }) => {
             onChange={handleInputChange}
             placeholder="Write a message..."
           />
-          <button onClick={startListening} className="chat-input-btn chat-input-mic-icon">
+          <button onClick={startListening} onKeyUp={handlekeyPress} className="chat-input-btn chat-input-mic-icon">
             <img src={MicIcon} alt="mic" className="chat-input-btn-img" />
           </button>
           {inputValue.trim() ? (
-            <button className="chat-input-btn chat-input-send-icon" onClick={handleSendClick}>
+            <button className="chat-input-btn chat-input-send-icon" onClick={handleSendClick} onKeyUp={handlekeyPress}>
               <img src={SendGreenIcon} alt="send" className="chat-input-btn-img" />
             </button>
           ) : (

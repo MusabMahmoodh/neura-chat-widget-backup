@@ -7,7 +7,7 @@
   padding: 1rem;
   background-color: $white;
   border-bottom: 1px solid #ccc;
-  height: 131.67px; /* Rounded to two decimal places */
+  height: $header-height; /* Rounded to two decimal places */
   border-radius: 12.91px 12.91px 0 0; /* Rounded to two decimal places */
 
   &-data {
@@ -23,7 +23,7 @@
   }
 
   &-content-vendor-name {
-    font-size: 1.4rem;
+    font-size: 1rem;
     letter-spacing: 0.011em; /* Rounded to three decimal places */
     color: $text-dark;
     line-height: 1.5rem;
@@ -32,7 +32,7 @@
   }
 
   &-content-subtitle {
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: 400;
     line-height: 1.66;
     letter-spacing: 0.033em; /* Rounded to three decimal places */
@@ -41,8 +41,8 @@
   }
 
   &-avatar {
-    width: 69.71px; /* Rounded to two decimal places */
-    height: 69.71px; /* Rounded to two decimal places */
+    width: 50px; /* Rounded to two decimal places */
+    height: 50px; /* Rounded to two decimal places */
     border-radius: 50%;
   }
 
