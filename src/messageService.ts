@@ -1,9 +1,3 @@
-function getRandomNumber(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 export const createSession = async (sessionId: string) => {
   const response = await fetch(`https://esoft-demo.ascii.ai/create_session?session_id=${sessionId}`, {
     method: "GET",
