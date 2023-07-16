@@ -8,7 +8,7 @@ import SendGreenIcon from "../../assets/send-green.svg";
 import "./ChatInput.scss";
 
 const ChatInput = ({ sendMessage }) => {
-  const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+  const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
