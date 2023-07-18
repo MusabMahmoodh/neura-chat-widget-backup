@@ -30,15 +30,17 @@ const MessageList = ({ messages, isLoadingNewMessage }) => {
 
           return (
             <li key={message._id} className={`widget-container-chat-list-item ${itemClass}`}>
-              <div className="widget-container-chat-list-item-avatarimg">
-                <div className="widget-container-chat-list-item-avatarimg-avatar">
-                  <img
-                    className="widget-container-chat-list-item-avatarimg-img"
-                    src={isRemoteMessage ? RobotIcon : UserSpeakerIcon}
-                    alt={isRemoteMessage ? "Robot" : "User Speaker"}
-                  />
+              {isRemoteMessage && (
+                <div className="widget-container-chat-list-item-avatarimg">
+                  <div className="widget-container-chat-list-item-avatarimg-avatar">
+                    <img
+                      className="widget-container-chat-list-item-avatarimg-img"
+                      src={isRemoteMessage ? RobotIcon : UserSpeakerIcon}
+                      alt={isRemoteMessage ? "Robot" : "User Speaker"}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
               <div
                 className={
                   isRemoteMessage
