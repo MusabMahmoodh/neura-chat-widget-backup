@@ -10,7 +10,6 @@ const MessageList = ({ isSpeakerOn, messages, isLoadingNewMessage }) => {
   const chatListRef = useRef(null);
 
   useEffect(() => {
-    console.log("messages", messages, isSpeakerOn);
     // only generate voice for remote messages
 
     if (isSpeakerOn && messages.length > 1 && messages[messages.length - 1].sender === "remote") {
