@@ -5,11 +5,18 @@ import UserSpeakerIcon from "../../assets/speaker.svg";
 import "./MessageList.scss";
 import TypeLoader from "../TypeLoader/TypeLoader";
 import ResponseComponent from "../ResponseComponent/ResponseComponent";
+import { generateTextToVoice } from "../../utils/converstionUtils";
 const MessageList = ({ messages, isLoadingNewMessage }) => {
   const chatListRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to the bottom when the list of messages changes
+    console.log("messages", messages);
+    // only generate voice for remote messages
+
+    if (messages.length > 1 && messages[messages.length - 1].sender === "remote") {
+      generateTextToVoice(messages[messages.length - 1].message);
+    }
+
     scrollToBottom();
   }, [messages]);
 
