@@ -7,3 +7,7 @@ export const generateTextToVoice = (text: string) => {
   speech.pitch = 1;
   window.speechSynthesis.speak(speech);
 };
+
+export const stopVoice = () => {
+  window.speechSynthesis.cancel();
+};

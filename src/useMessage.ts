@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { createSession, getResponse } from "./messageService";
 import { nanoid } from "nanoid";
 import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./types";
+import { stopVoice } from "./utils/converstionUtils";
 
 const getCurrentTime = () => {
   const now = new Date();
@@ -42,6 +43,9 @@ export const useMessage = () => {
 
   const toggleSpeaker = () => {
     setIsSpeakerOn((pre) => !pre);
+    if (isSpeakerOn) {
+      stopVoice();
+    }
   };
 
   const generateSession = async () => {
