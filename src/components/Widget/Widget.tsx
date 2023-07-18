@@ -22,7 +22,7 @@ export const Widget: React.FC<{
         isSpeakerOn={isSpeakerOn}
         toggleMic={toggleMic}
       />
-      <MessageList messages={messages} isLoadingNewMessage={isLoadingNewMessage} />
+      <MessageList isSpeakerOn={isSpeakerOn} messages={messages} isLoadingNewMessage={isLoadingNewMessage} />
       <ChatInput sendMessage={onSend} />
     </div>
   );

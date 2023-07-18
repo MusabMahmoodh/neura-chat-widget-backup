@@ -6,14 +6,14 @@ import "./MessageList.scss";
 import TypeLoader from "../TypeLoader/TypeLoader";
 import ResponseComponent from "../ResponseComponent/ResponseComponent";
 import { generateTextToVoice } from "../../utils/converstionUtils";
-const MessageList = ({ messages, isLoadingNewMessage }) => {
+const MessageList = ({ isSpeakerOn, messages, isLoadingNewMessage }) => {
   const chatListRef = useRef(null);
 
   useEffect(() => {
-    console.log("messages", messages);
+    console.log("messages", messages, isSpeakerOn);
     // only generate voice for remote messages
 
-    if (messages.length > 1 && messages[messages.length - 1].sender === "remote") {
+    if (isSpeakerOn && messages.length > 1 && messages[messages.length - 1].sender === "remote") {
       generateTextToVoice(messages[messages.length - 1].message);
     }
 
