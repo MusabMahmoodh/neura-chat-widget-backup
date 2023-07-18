@@ -2,8 +2,9 @@ import React from "react";
 import ResetIcon from "../../assets/reset.svg";
 import LogoImg from "../../assets/logo.svg";
 import "./ConversationHeader.scss";
+import SpeakerToggleButton from "../SpeakerToggle/SpeakerToggleButton";
 
-const ConversationHeader = ({ remoteName, resetSession }) => {
+const ConversationHeader = ({ remoteName, resetSession, isSpeakerOn, toggleMic }) => {
   return (
     <div className="conversation-header">
       <div className="conversation-header-data">
@@ -14,6 +15,9 @@ const ConversationHeader = ({ remoteName, resetSession }) => {
         </div>
       </div>
       <div className="conversation-header-actions">
+        <div className="conversation-header-action-btn">
+          <SpeakerToggleButton isSpeakerOn={isSpeakerOn} toggleMic={toggleMic} />
+        </div>
         <button className="conversation-header-action-btn" onClick={resetSession}>
           <img src={ResetIcon} width="20px" alt="Refresh" className="action-icon" />
         </button>

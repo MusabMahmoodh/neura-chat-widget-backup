@@ -38,6 +38,11 @@ export const useMessage = () => {
   const [isSessionCreated, setIsSessionCreated] = useState<boolean>(false);
   const [isLoadingResponse, setIsLoadingResponse] = useState<boolean>(false);
   const [session, setSession] = useState<string>("");
+  const [isSpeakerOn, setIsSpeakerOn] = useState<boolean>(false);
+
+  const toggleSpeaker = () => {
+    setIsSpeakerOn((pre) => !pre);
+  };
 
   const generateSession = async () => {
     setIsSessionCreated(true);
@@ -92,5 +97,14 @@ export const useMessage = () => {
     setIsLoadingResponse(false);
   };
 
-  return { messages, getApiResponse, session, isLoadingResponse, isSessionCreated, resetSession };
+  return {
+    messages,
+    getApiResponse,
+    session,
+    isLoadingResponse,
+    isSessionCreated,
+    resetSession,
+    isSpeakerOn,
+    toggleSpeaker,
+  };
 };

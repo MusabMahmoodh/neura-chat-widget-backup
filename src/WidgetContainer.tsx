@@ -6,7 +6,7 @@ export const WidgetContainer: React.FC<{
   license?: string | null;
   greeting?: string;
 }> = ({ license = "", greeting = "" }) => {
-  const { messages, getApiResponse, resetSession, isLoadingResponse } = useMessage();
+  const { messages, getApiResponse, resetSession, isLoadingResponse, isSpeakerOn, toggleSpeaker } = useMessage();
 
   const remoteName = useMemo(() => {
     if (license === "123") {
@@ -25,6 +25,8 @@ export const WidgetContainer: React.FC<{
       messages={messages}
       onSend={getApiResponse}
       resetSession={resetSession}
+      isSpeakerOn={isSpeakerOn}
+      toggleMic={toggleSpeaker}
     />
   );
 };
