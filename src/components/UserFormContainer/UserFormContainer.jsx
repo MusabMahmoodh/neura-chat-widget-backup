@@ -5,7 +5,8 @@ import StartConverstionIcon from "../../assets/send.svg";
 
 import "./UserFormContainer.scss";
 import { emailValidator, nameValidator, phoneValidator } from "../../utils/inputValidator";
-const UserFormContainer = () => {
+import { storeUserData } from "../../utils/userrUtils";
+const UserFormContainer = ({ updatePage }) => {
   const [userData, setUserData] = useState({ name: "", email: "", phone: "", inquiry: "" });
   const [errors, setErrors] = useState({ name: "", email: "", phone: "", inquiry: "" });
   const handleChange = (e) => {
@@ -36,13 +37,13 @@ const UserFormContainer = () => {
       setErrors(errors);
     } else {
       setErrors({});
-      console.log("submit");
+      storeUserData(userData);
+      updatePage();
     }
   };
 
   return (
     <div className="user-form-container">
-      {JSON.stringify(userData)}
       <img src={LogoIcon} className="user-form-container-img" alt="logo" />
       <div className="user-form-container-title">Hi there 👋</div>
       <div className="user-form-container-subtitle">Need help? Let's start a conversation!</div>

@@ -6,9 +6,10 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
   .welcome-container-img {
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
     margin-bottom: 1rem;
   }
   .welcome-container-title {
@@ -16,12 +17,14 @@
     font-weight: 700;
     color: $text-dark;
     margin-bottom: 1rem;
+    text-align: center;
   }
   .welcome-container-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
-    color: $text-light;
+    color: #6c7072;
     margin-bottom: 1rem;
+    text-align: center;
   }
   .welcome-container-button {
     width: 100%;
