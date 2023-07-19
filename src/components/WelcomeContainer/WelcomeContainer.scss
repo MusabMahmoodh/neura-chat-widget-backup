@@ -1,0 +1,62 @@
+@import "../../variables.scss";
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  .welcome-container-img {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+  }
+  .welcome-container-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: 1rem;
+  }
+  .welcome-container-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $text-light;
+    margin-bottom: 1rem;
+  }
+  .welcome-container-button {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border: 1px solid $primary-color;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: $primary-color-light;
+      color: $text-white;
+      .welcome-container-button-icon {
+        fill: $text-white;
+      }
+      .welcome-container-button-text {
+        color: $text-white;
+      }
+    }
+    &:active {
+      background-color: $primary-color;
+    }
+  }
+  .welcome-container-button-icon {
+    margin-right: 0.5rem;
+    width: 20px;
+    height: 20px;
+  }
+  .welcome-container-button-text {
+    font-size: 1rem;
+    font-weight: 400;
+    color: $primary-color;
+  }
+}

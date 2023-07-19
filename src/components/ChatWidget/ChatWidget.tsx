@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { WidgetContainer } from "../../WidgetContainer";
 
 import "./ChatWidget.scss";
+import WelcomeContainer from "../WelcomeContainer/WelcomeContainer";
 
 const ChatWidget = () => {
   const [license, setLicense] = useState<string | null>(null);
@@ -15,7 +16,8 @@ const ChatWidget = () => {
 
   return (
     <div className="widget-chat-container">
-      <WidgetContainer license={license} />
+      <WelcomeContainer />
+      {/* <WidgetContainer license={license} /> */}
     </div>
   );
 };
