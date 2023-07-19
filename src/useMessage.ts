@@ -3,6 +3,7 @@ import { createSession, getResponse } from "./messageService";
 import { nanoid } from "nanoid";
 import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./types";
 import { stopVoice } from "./utils/converstionUtils";
+import { getUserData } from "./utils/userrUtils";
 
 const getCurrentTime = () => {
   const now = new Date();
@@ -26,15 +27,15 @@ const getCurrentTime = () => {
   return `${hours}:${minutes} ${meridiem}`;
 };
 
-const greeTingMessage = {
-  _id: "1",
-  message:
-    "👋 Hello! Welcome to Neura Chat Bot! How can I assist you today? Feel free to ask any questions or share any concerns you may have. I'm here to help! 😊",
-  sender: "remote" as SenderType,
-  direction: "incoming" as DirectionType,
-  position: "single" as PositionType,
-};
 export const useMessage = () => {
+  const userName = getUserData()?.name;
+  const greeTingMessage = {
+    _id: "1",
+    message: `👋 Hello **${userName}**! Welcome back to Neura Chat Bot! How can I assist you today? Feel free to ask any questions or share any concerns you may have. I'm here to help! 😊`,
+    sender: "remote" as SenderType,
+    direction: "incoming" as DirectionType,
+    position: "single" as PositionType,
+  };
   const [messages, setMessages] = useState<Array<CustomMessageModel>>([greeTingMessage]);
   const [isSessionCreated, setIsSessionCreated] = useState<boolean>(false);
   const [isLoadingResponse, setIsLoadingResponse] = useState<boolean>(false);
