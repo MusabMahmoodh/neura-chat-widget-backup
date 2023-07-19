@@ -3,6 +3,7 @@ import { WidgetContainer } from "../../WidgetContainer";
 
 import "./ChatWidget.scss";
 import WelcomeContainer from "../WelcomeContainer/WelcomeContainer";
+import UserFormContainer from "../UserFormContainer/UserFormContainer";
 
 const ChatWidget = () => {
   const [license, setLicense] = useState<string | null>(null);
@@ -16,7 +17,8 @@ const ChatWidget = () => {
 
   return (
     <div className="widget-chat-container">
-      <WelcomeContainer />
+      <UserFormContainer />
+      {/* <WelcomeContainer /> */}
       {/* <WidgetContainer license={license} /> */}
     </div>
   );

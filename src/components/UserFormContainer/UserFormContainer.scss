@@ -1,0 +1,123 @@
+@import "../../variables.scss";
+
+.user-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: $container-padding;
+  .user-form-container-img {
+    width: 100px;
+    margin-bottom: 1rem;
+  }
+  .user-form-container-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: 1rem;
+  }
+  .user-form-container-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $text-light;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .user-form-container-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    padding: 2px;
+    margin-bottom: 1rem;
+    background-color: $white;
+    padding: 20px 10px;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 0 1px $border-color;
+    .user-form-container-form-error {
+      font-size: 1rem;
+      font-weight: 400;
+      color: red;
+      margin-bottom: 1rem;
+    }
+
+    .user-form-container-form-label {
+      font-size: 1rem;
+      font-weight: 400;
+      color: $text-dark;
+      margin-bottom: 0.5rem;
+    }
+    .user-form-container-form-input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid $border-color;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: $text-dark;
+      margin-bottom: 0.2rem;
+      background-color: $secondary-color;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        background-color: $white;
+      }
+    }
+    .user-form-container-form-text-area {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid $border-color;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: $text-dark;
+      margin-bottom: 1rem;
+      background-color: $secondary-color;
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        background-color: $white;
+      }
+    }
+    .user-form-container-form-btn {
+      width: 100%;
+
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      background-color: $primary-color;
+
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: $primary-color-light;
+        color: $text-white;
+        .user-form-container-form-btn-icon {
+          fill: $text-white;
+        }
+        .user-form-container-form-btn-text {
+          color: $text-white;
+        }
+      }
+      &:active {
+        background-color: $primary-color;
+      }
+    }
+    .user-form-container-form-btn-icon {
+      margin-right: 0.5rem;
+      width: 20px;
+      height: 20px;
+    }
+    .user-form-container-form-btn-text {
+      font-size: 1rem;
+      font-weight: 400;
+      color: $text-white;
+    }
+  }
+}
