@@ -6,6 +6,7 @@ import StartConverstionIcon from "../../assets/send.svg";
 import "./UserFormContainer.scss";
 import { emailValidator, nameValidator, phoneValidator } from "../../utils/inputValidator";
 import { storeUserData } from "../../utils/userrUtils";
+import WavingHand from "../WavingHand/WavingHand";
 const UserFormContainer = ({ updatePage }) => {
   const [userData, setUserData] = useState({ name: "", email: "", phone: "", inquiry: "" });
   const [errors, setErrors] = useState({ name: "", email: "", phone: "", inquiry: "" });
@@ -45,7 +46,9 @@ const UserFormContainer = ({ updatePage }) => {
   return (
     <div className="user-form-container">
       <img src={LogoIcon} className="user-form-container-img" alt="logo" />
-      <div className="user-form-container-title">Hi there 👋</div>
+      <div className="user-form-container-title">
+        Hi there <WavingHand />
+      </div>
       <div className="user-form-container-subtitle">Need help? Let's start a conversation!</div>
 
       <form className="user-form-container-form">
