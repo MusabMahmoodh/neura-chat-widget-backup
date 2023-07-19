@@ -8,7 +8,7 @@ import { OnboardStep, useUserData } from "../../useUserData";
 
 const ChatWidget = () => {
   const [license, setLicense] = useState<string | null>(null);
-  const { userData, isDataFetching, userOnoardStep, setUserOnboardStep } = useUserData();
+  const { isDataFetching, userOnoardStep, setUserOnboardStep } = useUserData();
 
   useEffect(() => {
     const queryString = window.location.search;
@@ -29,7 +29,7 @@ const ChatWidget = () => {
   if (userOnoardStep === OnboardStep.CHAT) {
     return (
       <div className="widget-chat-container">
-        <WidgetContainer />
+        <WidgetContainer license={license} />
       </div>
     );
   }
