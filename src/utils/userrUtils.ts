@@ -1,6 +1,6 @@
 //get user data
 export const getUserData = () => {
-  const data = localStorage.getItem("userData");
+  const data = localStorage.getItem("nueraChatUserData");
   if (data) {
     return JSON.parse(data);
   }
@@ -9,5 +9,5 @@ export const getUserData = () => {
 
 //set user data
 export const storeUserData = (data: any) => {
-  localStorage.setItem("userData", JSON.stringify(data));
+  localStorage.setItem("nueraChatUserData", JSON.stringify(data));
 };

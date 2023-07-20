@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserData } from "./utils/userrUtils";
+import { getUserData, storeUserData } from "./utils/userrUtils";
 
 export enum OnboardStep {
   WELCOME = 0,
@@ -19,6 +19,7 @@ export const useUserData = () => {
     const data = getUserData();
 
     if (data?.name && data?.phone) {
+      storeUserData({ ...data, isFirstVisit: false });
       setUserData(data);
       setUserOnboardStep(OnboardStep.CHAT);
     }

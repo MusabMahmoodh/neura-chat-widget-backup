@@ -38,7 +38,7 @@ const UserFormContainer = ({ updatePage }) => {
       setErrors(errors);
     } else {
       setErrors({});
-      storeUserData(userData);
+      storeUserData({ ...userData, isFirstVisit: true });
       updatePage();
     }
   };
@@ -91,17 +91,6 @@ const UserFormContainer = ({ updatePage }) => {
           onChange={handleChange}
         />
         <div className="user-form-container-form-error">{errors.phone}</div>
-        <label className="user-form-container-form-label" htmlFor="inquiry">
-          Inquiry
-        </label>
-        <textarea
-          className="user-form-container-form-text-area"
-          id="inquiry"
-          name="inquiry"
-          placeholder="Please enter your inquiry here"
-          required
-          onChange={handleChange}
-        />
         <div className="user-form-container-form-btn" onClick={handleSubmission}>
           <img className="user-form-container-form-btn-icon" src={StartConverstionIcon} alt="chat" />
           <span className="user-form-container-form-btn-text">Start Chat</span>
