@@ -9,4 +9,5 @@ export interface CustomMessageModel {
   direction: DirectionType;
   position: PositionType;
   time?: string;
+  isRead?: boolean;
 }

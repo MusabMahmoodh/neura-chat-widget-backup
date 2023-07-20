@@ -39,6 +39,7 @@ export const useMessage = () => {
     sender: "remote" as SenderType,
     direction: "incoming" as DirectionType,
     position: "single" as PositionType,
+    isRead: true,
   };
 
   const [messages, setMessages] = useState<Array<CustomMessageModel>>([greeTingMessage]);
@@ -92,6 +93,7 @@ export const useMessage = () => {
       direction: "outgoing" as DirectionType,
       position: "single" as PositionType,
       time: getCurrentTime(),
+      isRead: true,
     };
     addMessage(newMessage);
     const res = await getResponse(message, session);
@@ -102,9 +104,20 @@ export const useMessage = () => {
       direction: "incoming" as DirectionType,
       position: "single" as PositionType,
       time: getCurrentTime(),
+      isRead: false, // only remote messages need to be marked as unread
     };
     addMessage(response);
     setIsLoadingResponse(false);
+  };
+  const markMessageAsRead = (id: string) => {
+    setMessages((messages) =>
+      messages.map((message) => {
+        if (message._id === id) {
+          return { ...message, isRead: true };
+        }
+        return message;
+      })
+    );
   };
 
   return {
@@ -116,5 +129,6 @@ export const useMessage = () => {
     resetSession,
     isSpeakerOn,
     toggleSpeaker,
+    markMessageAsRead,
   };
 };

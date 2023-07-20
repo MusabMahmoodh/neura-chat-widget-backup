@@ -1,5 +1,4 @@
 export const generateTextToVoice = (text: string, voice: any) => {
-  console.log("generateTextToVoice", text, voice);
   let speech = new SpeechSynthesisUtterance();
   speech.lang = "en-US";
   speech.text = text;

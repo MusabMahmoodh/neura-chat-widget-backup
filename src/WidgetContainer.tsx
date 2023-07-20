@@ -8,7 +8,8 @@ export const WidgetContainer: React.FC<{
   license?: string | null;
   greeting?: string;
 }> = ({ license = "", greeting = "", voices }) => {
-  const { messages, getApiResponse, resetSession, isLoadingResponse, isSpeakerOn, toggleSpeaker } = useMessage();
+  const { messages, getApiResponse, resetSession, isLoadingResponse, isSpeakerOn, toggleSpeaker, markMessageAsRead } =
+    useMessage();
   const { userData, updateAgent } = useUserData();
 
   const remoteName = useMemo(() => {
@@ -33,6 +34,7 @@ export const WidgetContainer: React.FC<{
       agent={userData.agent}
       updateAgent={updateAgent}
       voices={voices}
+      markMessageAsRead={markMessageAsRead}
     />
   );
 };
