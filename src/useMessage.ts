@@ -3,7 +3,7 @@ import { createSession, getResponse } from "./messageService";
 import { nanoid } from "nanoid";
 import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./types";
 import { stopVoice } from "./utils/converstionUtils";
-import { getUserData, storeUserData } from "./utils/userrUtils";
+import { getUserData } from "./utils/userrUtils";
 
 const getCurrentTime = () => {
   const now = new Date();

@@ -17,7 +17,7 @@ const MessageList = ({ agent, isSpeakerOn, messages, isLoadingNewMessage }) => {
     }
 
     scrollToBottom();
-  }, [messages, isSpeakerOn]);
+  }, [messages, isSpeakerOn, agent]);
 
   const scrollToBottom = () => {
     if (chatListRef.current) {
