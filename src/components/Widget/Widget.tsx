@@ -8,6 +8,7 @@ import MessageList from "../MessageList/MessageList";
 import "./Widget.scss";
 import SettingsContainer from "../Settings/SettingsContainer";
 export const Widget: React.FC<{
+  voices: Array<any>;
   isLoadingNewMessage: boolean;
   remoteName?: string;
   messages?: Array<CustomMessageModel>;
@@ -27,6 +28,7 @@ export const Widget: React.FC<{
   toggleMic,
   agent,
   updateAgent,
+  voices,
 }) => {
   const [showSettings, setShowSettings] = React.useState(false);
   return (
@@ -50,6 +52,7 @@ export const Widget: React.FC<{
         isSpeakerOn={isSpeakerOn}
         messages={messages}
         isLoadingNewMessage={isLoadingNewMessage}
+        voices={voices}
       />
       <ChatInput sendMessage={onSend} />
     </div>

@@ -10,11 +10,20 @@ const ChatWidget = () => {
   const [license, setLicense] = useState<string | null>(null);
   const { isDataFetching, userOnoardStep, setUserOnboardStep } = useUserData();
 
+  const [voices, setVoices] = useState<Array<any>>([]);
+
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const license = urlParams.get("license");
     setLicense(license);
+    window.speechSynthesis.addEventListener("voiceschanged", () => {
+      const voices: Array<any> = window.speechSynthesis.getVoices();
+      setVoices([...voices]);
+    });
+    return () => {
+      window.speechSynthesis.removeEventListener("voiceschanged", () => {});
+    };
   }, []);
   if (isDataFetching) {
     return <div className="widget-chat-container">Loading</div>;
@@ -29,7 +38,7 @@ const ChatWidget = () => {
   if (userOnoardStep === OnboardStep.CHAT) {
     return (
       <div className="widget-chat-container">
-        <WidgetContainer license={license} />
+        <WidgetContainer license={license} voices={voices} />
       </div>
     );
   }

@@ -6,18 +6,18 @@ import "./MessageList.scss";
 import TypeLoader from "../TypeLoader/TypeLoader";
 import ResponseComponent from "../ResponseComponent/ResponseComponent";
 import { generateTextToVoice } from "../../utils/converstionUtils";
-const MessageList = ({ agent, isSpeakerOn, messages, isLoadingNewMessage }) => {
+const MessageList = ({ voices, agent, isSpeakerOn, messages, isLoadingNewMessage }) => {
   const chatListRef = useRef(null);
 
   useEffect(() => {
     // only generate voice for remote messages
 
-    if (isSpeakerOn && messages.length > 0 && messages[messages.length - 1].sender === "remote") {
-      generateTextToVoice(messages[messages.length - 1].message, agent);
+    if (isSpeakerOn && messages.length > 1 && messages[messages.length - 1].sender === "remote") {
+      generateTextToVoice(messages[messages.length - 1].message, voices[agent]);
     }
 
     scrollToBottom();
-  }, [messages, isSpeakerOn, agent]);
+  }, [messages, isSpeakerOn, agent, voices]);
 
   const scrollToBottom = () => {
     if (chatListRef.current) {

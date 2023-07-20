@@ -4,9 +4,10 @@ import { useMessage } from "./useMessage";
 import { useUserData } from "./useUserData";
 
 export const WidgetContainer: React.FC<{
+  voices: Array<any>;
   license?: string | null;
   greeting?: string;
-}> = ({ license = "", greeting = "" }) => {
+}> = ({ license = "", greeting = "", voices }) => {
   const { messages, getApiResponse, resetSession, isLoadingResponse, isSpeakerOn, toggleSpeaker } = useMessage();
   const { userData, updateAgent } = useUserData();
 
@@ -31,6 +32,7 @@ export const WidgetContainer: React.FC<{
       toggleMic={toggleSpeaker}
       agent={userData.agent}
       updateAgent={updateAgent}
+      voices={voices}
     />
   );
 };
