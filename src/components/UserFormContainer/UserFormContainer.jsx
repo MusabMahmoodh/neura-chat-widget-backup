@@ -7,8 +7,9 @@ import "./UserFormContainer.scss";
 import { emailValidator, nameValidator, phoneValidator } from "../../utils/inputValidator";
 import { storeUserData } from "../../utils/userrUtils";
 import WavingHand from "../WavingHand/WavingHand";
+import AgentSelect from "../AgentSelect/AgentSelect";
 const UserFormContainer = ({ updatePage }) => {
-  const [userData, setUserData] = useState({ name: "", email: "", phone: "", inquiry: "" });
+  const [userData, setUserData] = useState({ name: "", email: "", phone: "", inquiry: "", agent: 1 });
   const [errors, setErrors] = useState({ name: "", email: "", phone: "", inquiry: "" });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -91,6 +92,22 @@ const UserFormContainer = ({ updatePage }) => {
           onChange={handleChange}
         />
         <div className="user-form-container-form-error">{errors.phone}</div>
+        <label className="user-form-container-form-label" htmlFor="phone">
+          Select agent to talk to
+        </label>
+        <div className="user-form-container-form-select">
+          <AgentSelect
+            agent={userData.agent}
+            toggleAgent={() =>
+              setUserData((pre) => {
+                return {
+                  ...pre,
+                  agent: pre.agent === 1 ? 2 : 1,
+                };
+              })
+            }
+          />
+        </div>
         <div className="user-form-container-form-btn" onClick={handleSubmission}>
           <img className="user-form-container-form-btn-icon" src={StartConverstionIcon} alt="chat" />
           <span className="user-form-container-form-btn-text">Start Chat</span>

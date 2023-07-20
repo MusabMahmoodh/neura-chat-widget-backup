@@ -1,0 +1,44 @@
+@import "../../variables.scss";
+
+.agent-select {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  position: relative;
+  border: soild 1px $border-color;
+  border-radius: 20px;
+  z-index: 9999;
+  background-color: $white;
+
+  .agent-select__agent {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .agent-select__agent-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: $primary-color;
+      margin-right: 10px;
+    }
+    .agent-select__agent-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: $primary-color;
+      margin-right: 10px;
+    }
+  }
+  .agent-select__agent--selected {
+    @extend .agent-select__agent;
+    background-color: $primary-color;
+    color: $white;
+    .agent-select__agent-icon {
+      background-color: $white;
+    }
+    border-radius: 10px;
+  }
+}

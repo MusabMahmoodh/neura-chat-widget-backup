@@ -65,6 +65,24 @@
         background-color: $white;
       }
     }
+
+    .user-form-container-form-select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid $border-color;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: $text-dark;
+      margin-bottom: 0.2rem;
+      background-color: $secondary-color;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        background-color: $white;
+      }
+    }
     .user-form-container-form-text-area {
       width: 100%;
       padding: 0.5rem;

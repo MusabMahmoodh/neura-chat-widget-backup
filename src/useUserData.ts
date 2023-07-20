@@ -11,9 +11,15 @@ export const useUserData = () => {
     name: "",
     email: "",
     phone: "",
+    agent: 1,
   });
   const [userOnoardStep, setUserOnboardStep] = useState(OnboardStep.WELCOME); // 0: not started, 1: started --> form, 2: completed --> to chat
   const [isDataFetching, setIsDataFetching] = useState(false);
+
+  const updateAgent = (agent: number) => {
+    setUserData((pre) => ({ ...pre, agent }));
+    storeUserData({ ...userData, agent });
+  };
   useEffect(() => {
     setIsDataFetching(true);
     const data = getUserData();
@@ -26,5 +32,5 @@ export const useUserData = () => {
     setIsDataFetching(false);
   }, []);
 
-  return { userData, isDataFetching, userOnoardStep, setUserOnboardStep };
+  return { userData, isDataFetching, userOnoardStep, setUserOnboardStep, updateAgent };
 };

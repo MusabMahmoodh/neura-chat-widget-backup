@@ -5,6 +5,8 @@ import ChatInput from "../ChatInput/ChatInput";
 import MessageList from "../MessageList/MessageList";
 
 import "./Widget.scss";
+import AgentSelect from "../AgentSelect/AgentSelect";
+import SettingsContainer from "../Settings/SettingsContainer";
 export const Widget: React.FC<{
   isLoadingNewMessage: boolean;
   remoteName?: string;
@@ -22,6 +24,15 @@ export const Widget: React.FC<{
         isSpeakerOn={isSpeakerOn}
         toggleMic={toggleMic}
       />
+      <SettingsContainer
+        isSpeakerOn={isSpeakerOn}
+        toggleMic={toggleMic}
+        updateAgent={(agent: string) => {
+          console.log(agent);
+        }}
+        selectedAgent={"agent1"}
+      />
+
       <MessageList isSpeakerOn={isSpeakerOn} messages={messages} isLoadingNewMessage={isLoadingNewMessage} />
       <ChatInput sendMessage={onSend} />
     </div>
