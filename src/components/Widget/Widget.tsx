@@ -28,7 +28,7 @@ export const Widget: React.FC<{
   agent,
   updateAgent,
 }) => {
-  const [showSettings, setShowSettings] = React.useState(true);
+  const [showSettings, setShowSettings] = React.useState(false);
   return (
     <div className="widget-container">
       <ConversationHeader
@@ -45,7 +45,12 @@ export const Widget: React.FC<{
         />
       )}
 
-      <MessageList isSpeakerOn={isSpeakerOn} messages={messages} isLoadingNewMessage={isLoadingNewMessage} />
+      <MessageList
+        agent={agent}
+        isSpeakerOn={isSpeakerOn}
+        messages={messages}
+        isLoadingNewMessage={isLoadingNewMessage}
+      />
       <ChatInput sendMessage={onSend} />
     </div>
   );
