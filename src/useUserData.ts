@@ -16,7 +16,8 @@ export const useUserData = () => {
   const [userOnoardStep, setUserOnboardStep] = useState(OnboardStep.WELCOME); // 0: not started, 1: started --> form, 2: completed --> to chat
   const [isDataFetching, setIsDataFetching] = useState(false);
 
-  const updateAgent = (agent: number) => {
+  const updateAgent = () => {
+    const agent = userData.agent === 1 ? 2 : 1;
     setUserData((pre) => ({ ...pre, agent }));
     storeUserData({ ...userData, agent });
   };

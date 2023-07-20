@@ -1,0 +1,23 @@
+.speaker-toggle-button {
+  // round button with border
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: #ccc;
+  }
+  // speaker icon
+  .speaker-toggle-button-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #ccc;
+    transition: all 0.3s ease-in-out;
+  }
+}

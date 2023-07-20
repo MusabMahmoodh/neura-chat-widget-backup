@@ -1,3 +1,4 @@
+import React from "react";
 import ConversationHeader from "../ConversationHeader/ConversationHeader";
 
 import { CustomMessageModel } from "../../types";
@@ -5,7 +6,6 @@ import ChatInput from "../ChatInput/ChatInput";
 import MessageList from "../MessageList/MessageList";
 
 import "./Widget.scss";
-import AgentSelect from "../AgentSelect/AgentSelect";
 import SettingsContainer from "../Settings/SettingsContainer";
 export const Widget: React.FC<{
   isLoadingNewMessage: boolean;
@@ -15,23 +15,35 @@ export const Widget: React.FC<{
   resetSession: () => void;
   isSpeakerOn: boolean;
   toggleMic: () => void;
-}> = ({ remoteName = "", messages = [], onSend, isLoadingNewMessage, resetSession, isSpeakerOn, toggleMic }) => {
+  agent: number;
+  updateAgent: (agent: number) => void;
+}> = ({
+  remoteName = "",
+  messages = [],
+  onSend,
+  isLoadingNewMessage,
+  resetSession,
+  isSpeakerOn,
+  toggleMic,
+  agent,
+  updateAgent,
+}) => {
+  const [showSettings, setShowSettings] = React.useState(true);
   return (
     <div className="widget-container">
       <ConversationHeader
         resetSession={resetSession}
         remoteName={remoteName}
-        isSpeakerOn={isSpeakerOn}
-        toggleMic={toggleMic}
+        toggleSettings={() => setShowSettings((pre) => !pre)}
       />
-      <SettingsContainer
-        isSpeakerOn={isSpeakerOn}
-        toggleMic={toggleMic}
-        updateAgent={(agent: string) => {
-          console.log(agent);
-        }}
-        selectedAgent={"agent1"}
-      />
+      {showSettings && (
+        <SettingsContainer
+          isSpeakerOn={isSpeakerOn}
+          toggleMic={toggleMic}
+          updateAgent={updateAgent}
+          selectedAgent={agent}
+        />
+      )}
 
       <MessageList isSpeakerOn={isSpeakerOn} messages={messages} isLoadingNewMessage={isLoadingNewMessage} />
       <ChatInput sendMessage={onSend} />

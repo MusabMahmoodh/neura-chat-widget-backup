@@ -2,51 +2,36 @@
 
 .settings-container {
   display: block;
-  position: relative;
-  border: soild 1px $border-color;
-  border-radius: 20px;
+
   z-index: 9999;
-  background-color: $white;
-  padding: 10px;
-  margin: 10px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-  .settings-container-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: solid 1px $border-color;
-    padding: 0;
-    .settings-container-header-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-    .settings-container-header__icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: $primary-color;
-      margin-right: 10px;
-    }
-  }
-  .settings-container-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  // add a background color like when modal is opened
+  background-color: $modal-background;
+  position: fixed;
+  top: $setting-top;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  .settings-wrapper {
+    border: soild 1px $border-color;
+    background-color: $white;
+    border-radius: 20px;
     padding: 10px;
-
-    .settings-container-body-item {
-      width: 100%;
-
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    .settings-container-header {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      padding: 0 10px;
-      flex-direction: column;
-      .settings-container-body__item-icon {
+      align-items: center;
+      border-bottom: solid 1px $border-color;
+      padding: 0;
+      .settings-container-header-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .settings-container-header__icon {
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -54,8 +39,32 @@
         margin-right: 10px;
       }
     }
-  }
-  &-hidden {
-    display: none;
+    .settings-container-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 10px;
+
+      .settings-container-body-item {
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 10px;
+        flex-direction: column;
+        .settings-container-body__item-icon {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: $primary-color;
+          margin-right: 10px;
+        }
+      }
+    }
+    &-hidden {
+      display: none;
+    }
   }
 }
