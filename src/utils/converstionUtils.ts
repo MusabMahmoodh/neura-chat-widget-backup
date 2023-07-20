@@ -5,12 +5,12 @@ export const generateTextToVoice = (text: string, agent: number) => {
   speech.volume = 1;
   speech.rate = 1;
   speech.pitch = 1;
-  window.speechSynthesis.addEventListener("voiceschanged", () => {
-    const voices = window.speechSynthesis.getVoices();
-    speech.voice = voices[agent];
+  // window.speechSynthesis.addEventListener("voiceschanged", () => {
+  const voices = window.speechSynthesis.getVoices();
+  speech.voice = voices[agent];
 
-    window.speechSynthesis.speak(speech);
-  });
+  window.speechSynthesis.speak(speech);
+  // });
 };
 
 export const stopVoice = () => {
