@@ -12,7 +12,7 @@ const MessageList = ({ agent, isSpeakerOn, messages, isLoadingNewMessage }) => {
   useEffect(() => {
     // only generate voice for remote messages
 
-    if (isSpeakerOn && messages.length > 1 && messages[messages.length - 1].sender === "remote") {
+    if (isSpeakerOn && messages.length > 0 && messages[messages.length - 1].sender === "remote") {
       generateTextToVoice(messages[messages.length - 1].message, agent);
     }
 
