@@ -5,6 +5,8 @@ export const generateTextToVoice = (text: string) => {
   speech.volume = 1;
   speech.rate = 1;
   speech.pitch = 1;
+  // speech.voice = window.speechSynthesis.getVoices()[1];
+
   window.speechSynthesis.speak(speech);
 };
 

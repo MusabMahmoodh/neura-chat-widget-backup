@@ -48,21 +48,22 @@
       }
 
       .widget-container-chat-list-item-avatarimg {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
-        background: $primary-color;
+        background: $text-white;
+        border: solid 1px $border-color;
         flex: 0 0 auto;
 
         .widget-container-chat-list-item-avatarimg-avatar {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           .widget-container-chat-list-item-avatarimg-img {
-            width: 20px;
-            height: 20px;
-            margin: 10px;
+            width: 40px;
+            height: 40px;
+
             object-fit: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
           }
         }
       }
