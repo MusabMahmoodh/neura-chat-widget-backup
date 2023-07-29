@@ -31,16 +31,25 @@ export const useMessage = () => {
   const userData = getUserData();
   const userName = userData?.name;
   const isFirstTime = userData?.isFirstVisit;
-  const greeTingMessage = {
-    _id: "1",
-    message: `👋 Hello **${userName}**! Welcome ${
-      !isFirstTime ? "back" : ""
-    } to Neura Chat! How can I assist you today? I'm here to help! 😊`,
-    sender: "remote" as SenderType,
-    direction: "incoming" as DirectionType,
-    position: "single" as PositionType,
-    isRead: true,
-  };
+  const greeTingMessage = userName
+    ? {
+        _id: "1",
+        message: `👋 Hello **${userName}**! Welcome ${
+          !isFirstTime ? "back" : ""
+        } to Neura Chat! How can I assist you today? I'm here to help! 😊`,
+        sender: "remote" as SenderType,
+        direction: "incoming" as DirectionType,
+        position: "single" as PositionType,
+        isRead: false,
+      }
+    : {
+        _id: "1",
+        message: `👋 Hello ! Welcome to Neura Chat! How can I assist you today? I'm here to help! 😊`,
+        sender: "remote" as SenderType,
+        direction: "incoming" as DirectionType,
+        position: "single" as PositionType,
+        isRead: false,
+      };
 
   const [messages, setMessages] = useState<Array<CustomMessageModel>>([greeTingMessage]);
   const [isSessionCreated, setIsSessionCreated] = useState<boolean>(false);

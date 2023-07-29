@@ -1,0 +1,33 @@
+@import "../../_variables.scss";
+.voice-to-voice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: #000000db;
+  .voice-to-voice-title {
+    color: $white;
+  }
+  .voice-to-voice-subtitle {
+    color: $text-light;
+  }
+  .voice-to-voice-animation {
+    margin: 50px;
+
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .voice-to-voice-message {
+    //classic font family
+    font-family: "Roboto", sans-serif;
+    color: $text-white-grey;
+    font-weight: 100;
+    font-size: smaller;
+    // max-width: 600px;
+  }
+}

@@ -1,0 +1,120 @@
+$size: 50vmin;
+$rotate-radius: 0.3em;
+
+.rainbow-container {
+  z-index: 1;
+  transform: rotate(0deg) translateZ(0);
+  transform-origin: center center;
+  width: 10em;
+  height: 10em;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  -webkit-animation: rainbow 3s infinite linear;
+  border-radius: 5em;
+  box-shadow: 0 0 3em 0.5em #2c116e, inset $rotate-radius 0 1em 2em #de66e4;
+  transform-style: preserve-3d;
+  perspective: 1em;
+}
+
+@keyframes rainbow {
+  0% {
+    transform: rotate(0deg) translateZ(0);
+    box-shadow: 0 0 3em 0.5em #2c116e, inset $rotate-radius 0 1em 0.2em #de66e4;
+  }
+
+  25% {
+    transform: rotate(90deg) translateZ(0);
+    box-shadow: 0 0 03em 0.5em #28126a, inset $rotate-radius 0 1em 0.2em #34ceaa;
+  }
+
+  50% {
+    transform: rotate(180deg) translateZ(0);
+    box-shadow: 0 0 03em 0.5em #28126a, inset $rotate-radius 0 1em 0.2em #19b3f5;
+  }
+
+  75% {
+    transform: rotate(270deg) translateZ(0);
+    box-shadow: 0 0 03em 0.5em #28126a, inset $rotate-radius 0 1em 0.2em #3d52ac;
+  }
+
+  100% {
+    transform: rotate(360deg) translateZ(0);
+    box-shadow: 0 0 03em 0.5em #28126a, inset $rotate-radius 0 1em 0.2em #de66e4;
+  }
+}
+
+.rainbow-container {
+  position: relative;
+
+  & > div {
+    position: absolute;
+    top: 5em;
+    left: 5em;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+  }
+}
+
+@mixin transform-rotate($ydeg: 0, $d3deg: 0) {
+  transform: rotateY($ydeg) skew(14deg) rotate3d(1.1, 1, 0.9, $d3deg);
+}
+
+@mixin rotate-animation($ydeg: 0) {
+  0% {
+    @include transform-rotate($ydeg, 0deg);
+  }
+
+  50% {
+    @include transform-rotate($ydeg, 180deg);
+  }
+
+  100% {
+    @include transform-rotate($ydeg, 360deg);
+  }
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+.green {
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(115, 213, 186, 0.8) 100%
+  );
+  @include transform-rotate();
+  animation: curve-rotate-green 6s infinite linear;
+}
+
+$pink-rotate: 180deg;
+.pink {
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(215, 115, 229, 0.8) 100%
+  );
+  @include transform-rotate($pink-rotate);
+  animation: curve-rotate-pink 3s infinite linear;
+}
+
+@include keyframes(curve-rotate-green) {
+  @include rotate-animation();
+}
+
+@include keyframes(curve-rotate-pink) {
+  @include rotate-animation(180deg);
+}

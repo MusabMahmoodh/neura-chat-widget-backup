@@ -7,7 +7,8 @@ export const WidgetContainer: React.FC<{
   voices: Array<any>;
   license?: string | null;
   greeting?: string;
-}> = ({ license = "", greeting = "", voices }) => {
+  switchToVoice: () => void;
+}> = ({ license = "", greeting = "", voices, switchToVoice }) => {
   const { messages, getApiResponse, resetSession, isLoadingResponse, isSpeakerOn, toggleSpeaker, markMessageAsRead } =
     useMessage();
   const { userData, updateAgent } = useUserData();
@@ -23,18 +24,20 @@ export const WidgetContainer: React.FC<{
   }, [license]);
 
   return (
-    <Widget
-      isLoadingNewMessage={isLoadingResponse}
-      remoteName={remoteName}
-      messages={messages}
-      onSend={getApiResponse}
-      resetSession={resetSession}
-      isSpeakerOn={isSpeakerOn}
-      toggleMic={toggleSpeaker}
-      agent={userData.agent}
-      updateAgent={updateAgent}
-      voices={voices}
-      markMessageAsRead={markMessageAsRead}
-    />
+    <>
+      <Widget
+        isLoadingNewMessage={isLoadingResponse}
+        remoteName={remoteName}
+        messages={messages}
+        onSend={getApiResponse}
+        resetSession={resetSession}
+        isSpeakerOn={isSpeakerOn}
+        toggleMic={toggleSpeaker}
+        agent={userData.agent}
+        updateAgent={updateAgent}
+        voices={voices}
+        markMessageAsRead={markMessageAsRead}
+      />
+    </>
   );
 };
