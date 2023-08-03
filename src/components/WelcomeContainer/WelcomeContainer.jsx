@@ -1,14 +1,18 @@
 import React from "react";
 
 import LogoImg from "../../assets/logo.svg";
+import AiEyeLogoImg from "../../assets/AIeye.png";
 import StartConverstionIcon from "../../assets/send.svg";
 import "./WelcomeContainer.scss";
 import WavingHand from "../WavingHand/WavingHand";
+import { getBot } from "../../messageService";
+import { BOT } from "../../constants";
 
 const WelcomeContainer = ({ updatePage }) => {
+  const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
   return (
     <div className="welcome-container">
-      <img src={LogoImg} className="welcome-container-img" alt="welcome" />
+      <img src={logo} className="welcome-container-img" alt="welcome" />
       <div className="welcome-container-title">
         Hi there <WavingHand />
       </div>
