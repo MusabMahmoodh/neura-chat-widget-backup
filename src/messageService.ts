@@ -1,4 +1,6 @@
-const getApi = () => {
+import { BOT } from "./constants";
+
+export const getApi = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const client = urlParams.get("client");
@@ -8,6 +10,19 @@ const getApi = () => {
     return "https://ai-eye-chatbot.ascii.ai";
   } else {
     return "https://esoft-demo.ascii.ai";
+  }
+};
+
+export const getBot = () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const client = urlParams.get("client");
+  if (client === "esoft") {
+    return BOT.ESOFT;
+  } else if (client === "aieye") {
+    return BOT.AIEYE;
+  } else {
+    return BOT.ESOFT;
   }
 };
 

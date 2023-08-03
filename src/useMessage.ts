@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { createSession, getResponse } from "./messageService";
+import { createSession, getBot, getResponse } from "./messageService";
 import { nanoid } from "nanoid";
 import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./types";
 import { stopVoice } from "./utils/converstionUtils";
 import { getUserData } from "./utils/userrUtils";
+import { BOT } from "./constants";
 
 const getCurrentTime = () => {
   const now = new Date();
@@ -26,30 +27,58 @@ const getCurrentTime = () => {
 
   return `${hours}:${minutes} ${meridiem}`;
 };
+const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
+  const client = getBot();
+  let greeTingMessage;
+  if (client === BOT.AIEYE) {
+    greeTingMessage = userName
+      ? {
+          _id: "1",
+          message: `👋 Hello **${userName}**! Welcome ${
+            !isFirstTime ? "back" : ""
+          }  to the Artificial Intelligence Fundamentals and Applications Program of the AI Club! I am your Teaching Assistant Robot.How can I assist you?`,
+          sender: "remote" as SenderType,
+          direction: "incoming" as DirectionType,
+          position: "single" as PositionType,
+          isRead: false,
+        }
+      : {
+          _id: "1",
+          message: `👋 Hello ! Welcometo the Artificial Intelligence Fundamentals and Applications Program of the AI Club! I am your Teaching Assistant Robot developed based on the most cutting edge artificial intelligence technology. How can I assist you?`,
+          sender: "remote" as SenderType,
+          direction: "incoming" as DirectionType,
+          position: "single" as PositionType,
+          isRead: false,
+        };
+  } else {
+    greeTingMessage = userName
+      ? {
+          _id: "1",
+          message: `👋 Hello **${userName}**! Welcome ${
+            !isFirstTime ? "back" : ""
+          } to Neura Chat! How can I assist you today? I'm here to help! 😊`,
+          sender: "remote" as SenderType,
+          direction: "incoming" as DirectionType,
+          position: "single" as PositionType,
+          isRead: false,
+        }
+      : {
+          _id: "1",
+          message: `👋 Hello ! Welcome to Neura Chat! How can I assist you today? I'm here to help! 😊`,
+          sender: "remote" as SenderType,
+          direction: "incoming" as DirectionType,
+          position: "single" as PositionType,
+          isRead: false,
+        };
+  }
 
+  return greeTingMessage;
+};
 export const useMessage = () => {
   const userData = getUserData();
   const userName = userData?.name;
   const isFirstTime = userData?.isFirstVisit;
-  const greeTingMessage = userName
-    ? {
-        _id: "1",
-        message: `👋 Hello **${userName}**! Welcome ${
-          !isFirstTime ? "back" : ""
-        } to Neura Chat! How can I assist you today? I'm here to help! 😊`,
-        sender: "remote" as SenderType,
-        direction: "incoming" as DirectionType,
-        position: "single" as PositionType,
-        isRead: false,
-      }
-    : {
-        _id: "1",
-        message: `👋 Hello ! Welcome to Neura Chat! How can I assist you today? I'm here to help! 😊`,
-        sender: "remote" as SenderType,
-        direction: "incoming" as DirectionType,
-        position: "single" as PositionType,
-        isRead: false,
-      };
+  const greeTingMessage = getGreeTingMessage(userName, isFirstTime);
 
   const [messages, setMessages] = useState<Array<CustomMessageModel>>([greeTingMessage]);
   const [isSessionCreated, setIsSessionCreated] = useState<boolean>(false);
