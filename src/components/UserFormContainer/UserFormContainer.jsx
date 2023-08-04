@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import LogoIcon from "../../assets/logo.svg";
+import LogoImg from "../../assets/logo.svg";
+import AiEyeLogoImg from "../../assets/AIeye.png";
 import StartConverstionIcon from "../../assets/send.svg";
 
 import "./UserFormContainer.scss";
@@ -8,6 +9,8 @@ import { emailValidator, nameValidator, phoneValidator } from "../../utils/input
 import { storeUserData } from "../../utils/userrUtils";
 import WavingHand from "../WavingHand/WavingHand";
 import AgentSelect from "../AgentSelect/AgentSelect";
+import { getBot } from "../../messageService";
+import { BOT } from "../../constants";
 const UserFormContainer = ({ updatePage }) => {
   const [userData, setUserData] = useState({ name: "", email: "", phone: "", inquiry: "", agent: 1 });
   const [errors, setErrors] = useState({ name: "", email: "", phone: "", inquiry: "" });
@@ -15,6 +18,7 @@ const UserFormContainer = ({ updatePage }) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
+  const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
   const validate = () => {
     let errors = {};
     const nameValidation = nameValidator(userData.name);
@@ -46,7 +50,7 @@ const UserFormContainer = ({ updatePage }) => {
 
   return (
     <div className="user-form-container">
-      <img src={LogoIcon} className="user-form-container-img" alt="logo" />
+      <img src={logo} className="user-form-container-img" alt="logo" />
       <div className="user-form-container-title">
         Hi there <WavingHand />
       </div>

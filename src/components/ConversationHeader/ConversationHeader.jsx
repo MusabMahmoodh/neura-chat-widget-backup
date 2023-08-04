@@ -9,12 +9,13 @@ import { BOT } from "../../constants";
 
 const ConversationHeader = ({ remoteName, resetSession, toggleSettings }) => {
   const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
+  const titleName = getBot() === BOT.AIEYE ? "AI Teaching Assistant" : "Esoft Chat Bot";
   return (
     <div className="conversation-header">
       <div className="conversation-header-data">
         <img src={logo} alt={remoteName} className="conversation-header-avatar" />
         <div className="conversation-header-content">
-          <p className="conversation-header-content-vendor-name">Esoft Chat Bot</p>
+          <p className="conversation-header-content-vendor-name">{titleName}</p>
           <p className="conversation-header-content-subtitle">Hi there, let's start a conversation</p>
         </div>
       </div>
