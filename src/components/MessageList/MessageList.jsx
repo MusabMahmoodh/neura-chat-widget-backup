@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { createRef, useEffect } from "react";
 import BoyBotIcon from "../../assets/bot-boy.svg";
 import GirlBotIcon from "../../assets/bot-girl.svg";
 
@@ -7,7 +7,7 @@ import TypeLoader from "../TypeLoader/TypeLoader";
 import ResponseComponent from "../ResponseComponent/ResponseComponent";
 import { generateTextToVoice } from "../../utils/converstionUtils";
 const MessageList = ({ voices, agent, isSpeakerOn, messages, isLoadingNewMessage, markMessageAsRead }) => {
-  const chatListRef = useRef(null);
+  const chatListRef = createRef();
 
   useEffect(() => {
     // only generate voice for remote messages
@@ -22,18 +22,13 @@ const MessageList = ({ voices, agent, isSpeakerOn, messages, isLoadingNewMessage
       markMessageAsRead(messages[messages.length - 1]._id);
     }
 
-    scrollToBottom();
-  }, [messages, isSpeakerOn, agent, voices, markMessageAsRead]);
-
-  const scrollToBottom = () => {
     if (chatListRef.current) {
-      const { scrollHeight, clientHeight } = chatListRef.current;
-      chatListRef.current.scrollTop = scrollHeight - clientHeight;
+      chatListRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }, [messages, isSpeakerOn, agent, voices, markMessageAsRead, chatListRef]);
 
   return (
-    <div ref={chatListRef} className="widget-container-chat">
+    <div className="widget-container-chat">
       <ul className="widget-container-chat-list">
         {messages.map((message) => {
           const isRemoteMessage = message.sender === "remote";
@@ -99,6 +94,7 @@ const MessageList = ({ voices, agent, isSpeakerOn, messages, isLoadingNewMessage
             </div>
           </li>
         )}
+        <li class="widget-container-chat-list-item widget-container-chat-list-item--left" ref={chatListRef} />
       </ul>
     </div>
   );
