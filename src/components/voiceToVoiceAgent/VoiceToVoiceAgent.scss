@@ -22,6 +22,22 @@
     align-items: center;
     justify-content: center;
   }
+  .voice-to-voice-stop-speak-btn {
+    border: 1px solid $white;
+    background: none;
+    padding: 0.5rem 3rem;
+    margin-left: 0.1rem;
+    cursor: pointer;
+    color: $white;
+    border-radius: 5px;
+    font-weight: 500;
+    margin: 20px;
+    //add hover effect
+    &:hover {
+      background: $white;
+      color: $text-dark;
+    }
+  }
   .voice-to-voice-message {
     //classic font family
     font-family: "Roboto", sans-serif;

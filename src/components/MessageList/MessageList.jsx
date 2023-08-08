@@ -86,7 +86,7 @@ const MessageList = ({ voices, agent, isSpeakerOn, messages, isLoadingNewMessage
             </div>
             <div className="widget-container-chat-list-item-text-wrapper">
               <div className="widget-container-chat-list-item-text widget-container-chat-list-item-text--processing">
-                <h6 className="widget-container-chat-primaryText">Typing</h6>
+                <h6 className="widget-container-chat-primaryText">{isSpeakerOn ? "Thinking" : "Typing"}</h6>
                 <div className="widget-container-chat-list-item-text--processing--animation">
                   <TypeLoader />
                 </div>

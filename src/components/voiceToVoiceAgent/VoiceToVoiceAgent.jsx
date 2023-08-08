@@ -5,7 +5,7 @@ import "./VoiceToVoiceAgent.scss";
 import VoiceAgentMic from "../VoiceAgentMic/VoiceAgentMic";
 import { useMessage } from "../../useMessage";
 import { useUserData } from "../../useUserData";
-import { generateTextToVoice } from "../../utils/converstionUtils";
+import { generateTextToVoice, stopVoice } from "../../utils/converstionUtils";
 import Processing from "../Processing/Processing";
 import TypeWriter from "../TypeWriter/TypeWriter";
 
@@ -67,6 +67,12 @@ const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
+  const stopSpeaking = () => {
+    stopVoice();
+    setIsReplying(false);
+    setIsThinking(false);
+  };
+
   return (
     <div className="voice-to-voice-container">
       <div className="voice-to-voice-title">Hey, How can I help you this afternoon?</div>
@@ -77,21 +83,30 @@ const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
         ) : isThinking && !isReplying ? (
           <Processing />
         ) : !isThinking && isReplying ? (
-          <Siriwave color="#6adc92" theme="ios" />
+          <>
+            <Siriwave color="#6adc92" theme="ios" />
+            <button className="voice-to-voice-stop-speak-btn" onClick={stopSpeaking}>
+              Stop Speaking
+            </button>
+          </>
         ) : (
-          <div onClick={SpeechRecognition.startListening}>
-            <VoiceAgentMic />
-          </div>
+          <>
+            <div onClick={SpeechRecognition.startListening}>
+              <VoiceAgentMic />
+            </div>
+          </>
         )}
       </div>
-
-      {(isThinking && !isReplying) || isReplying ? (
+      <div className="voice-to-voice-message">
+        <TypeWriter text={messages[messages.length - 1].message} />
+      </div>
+      {/* {(isThinking && !isReplying) || isReplying ? (
         <div className="voice-to-voice-message">
           <TypeWriter text={messages[messages.length - 1].message} />
         </div>
       ) : (
         <div className="voice-to-voice-message"></div>
-      )}
+      )} */}
     </div>
   );
 };
