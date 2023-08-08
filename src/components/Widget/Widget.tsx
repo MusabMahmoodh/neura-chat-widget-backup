@@ -39,6 +39,8 @@ export const Widget: React.FC<{
         resetSession={resetSession}
         remoteName={remoteName}
         toggleSettings={() => setShowSettings((pre) => !pre)}
+        isSpeakerOn={isSpeakerOn}
+        toggleMic={toggleMic}
       />
       {showSettings && (
         <SettingsContainer

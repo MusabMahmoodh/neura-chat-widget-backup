@@ -1,6 +1,5 @@
 import React from "react";
 import AgentSelect from "../AgentSelect/AgentSelect";
-import SpeakerToggleButton from "../SpeakerToggle/SpeakerToggleButton";
 
 import "./SettingsContainer.scss";
 
@@ -18,12 +17,6 @@ const SettingsContainer = ({ selectedAgent, updateAgent, isSpeakerOn, toggleMic 
             <p className="settings-container-body-item-title">Select Agent</p>
             <div className="settings-container-body-item-select">
               <AgentSelect agent={selectedAgent} toggleAgent={updateAgent} />
-            </div>
-          </div>
-          <div className="settings-container-body-item">
-            <p className="settings-container-body-item-title">Turn on/off Mic</p>
-            <div className="settings-container-body-item-toggle">
-              <SpeakerToggleButton isSpeakerOn={isSpeakerOn} toggleMic={toggleMic} />
             </div>
           </div>
         </div>

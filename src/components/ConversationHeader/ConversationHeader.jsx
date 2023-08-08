@@ -6,8 +6,9 @@ import "./ConversationHeader.scss";
 import SettingButton from "../SettingBtn/SettingBtn";
 import { getBot } from "../../messageService";
 import { BOT } from "../../constants";
+import SpeakerToggleButton from "../SpeakerToggle/SpeakerToggleButton";
 
-const ConversationHeader = ({ remoteName, resetSession, toggleSettings }) => {
+const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeakerOn, toggleMic }) => {
   const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
   const titleName = getBot() === BOT.AIEYE ? "AI Teaching Assistant" : "Esoft Chat Bot";
   return (
@@ -19,7 +20,12 @@ const ConversationHeader = ({ remoteName, resetSession, toggleSettings }) => {
           <p className="conversation-header-content-subtitle">Hi there, let's start a conversation</p>
         </div>
       </div>
+
       <div className="conversation-header-actions">
+        <div className="conversation-header-action-btn">
+          <SpeakerToggleButton isSpeakerOn={isSpeakerOn} toggleMic={toggleMic} />
+        </div>
+
         <div className="conversation-header-action-btn">
           <SettingButton toggleSettings={toggleSettings} />
         </div>
