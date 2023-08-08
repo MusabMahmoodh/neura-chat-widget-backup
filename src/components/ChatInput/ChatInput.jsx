@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import MicIcon from "../../assets/mic.svg";
 import TrashIcon from "../../assets/trash.svg";
@@ -51,6 +51,17 @@ const ChatInput = ({ sendMessage }) => {
     }
   };
 
+  const msgRef = createRef();
+  useEffect(() => {
+    if (msgRef.current) {
+      msgRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+    }
+  }, [msgRef, transcript]);
+
   return (
     <div className="chat-input">
       {listening ? (
@@ -61,7 +72,10 @@ const ChatInput = ({ sendMessage }) => {
           <div className="chat-input-recording-placeholder">
             <div className="chat-input-recording-placeholder-dot"></div>
             <div className="chat-input-recording-placeholder-transcript">
-              {transcript} <span className="blink">|</span>
+              {transcript}{" "}
+              <span className="blink" ref={msgRef}>
+                |
+              </span>
             </div>
           </div>
           {transcript.trim() ? (
