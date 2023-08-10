@@ -29,7 +29,7 @@ export const useUserData = () => {
     setIsDataFetching(true);
     const data = getUserData();
 
-    if (data?.name && data?.phone) {
+    if (data?.name) {
       storeUserData({ ...data, isFirstVisit: false });
       setUserData(data);
       if (voiceOnly) {
