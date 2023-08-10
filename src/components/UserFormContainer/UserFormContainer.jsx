@@ -18,7 +18,8 @@ const UserFormContainer = ({ updatePage }) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
-  const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
+  const bot = getBot();
+  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
   const validate = () => {
     let errors = {};
     const nameValidation = nameValidator(userData.name);
@@ -27,10 +28,10 @@ const UserFormContainer = ({ updatePage }) => {
     if (!nameValidation.isValid) {
       errors.name = nameValidation.message;
     }
-    if (!emailValidation.isValid) {
+    if (bot !== BOT.AIEYE && !emailValidation.isValid) {
       errors.email = emailValidation.message;
     }
-    if (!phoneValidation.isValid) {
+    if (bot !== BOT.AIEYE && !phoneValidation.isValid) {
       errors.phone = phoneValidation.message;
     }
     return errors;
@@ -39,6 +40,7 @@ const UserFormContainer = ({ updatePage }) => {
   const handleSubmission = (e) => {
     e.preventDefault();
     const errors = validate();
+
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
     } else {
@@ -48,18 +50,22 @@ const UserFormContainer = ({ updatePage }) => {
     }
   };
 
+  const welcomeMessage =
+    bot === BOT.AIEYE ? "What name would you prefer to be called by?" : "Need help? Let's start a conversation!";
   return (
     <div className="user-form-container">
       <img src={logo} className="user-form-container-img" alt="logo" />
       <div className="user-form-container-title">
         Hi there <WavingHand />
       </div>
-      <div className="user-form-container-subtitle">Need help? Let's start a conversation!</div>
+      <div className="user-form-container-subtitle">{welcomeMessage}</div>
 
       <form className="user-form-container-form">
-        <label className="user-form-container-form-label" htmlFor="name">
-          Name *
-        </label>
+        {bot !== BOT.AIEYE && (
+          <label className="user-form-container-form-label" htmlFor="name">
+            Name *
+          </label>
+        )}
         <input
           className="user-form-container-form-input"
           type="text"
@@ -70,35 +76,39 @@ const UserFormContainer = ({ updatePage }) => {
           onChange={handleChange}
         />
         <div className="user-form-container-form-error">{errors.name}</div>
-        <label className="user-form-container-form-label" htmlFor="email">
-          Email *
-        </label>
-        <input
-          className="user-form-container-form-input"
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          required
-          onChange={handleChange}
-        />
-        <div className="user-form-container-form-error">{errors.email}</div>
-        <label className="user-form-container-form-label" htmlFor="phone">
-          Phone *
-        </label>
-        <input
-          className="user-form-container-form-input"
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="Phone"
-          required
-          onChange={handleChange}
-        />
-        <div className="user-form-container-form-error">{errors.phone}</div>
-        <label className="user-form-container-form-label" htmlFor="phone">
-          Select agent to talk to
-        </label>
+        {bot !== BOT.AIEYE && (
+          <>
+            <label className="user-form-container-form-label" htmlFor="email">
+              Email *
+            </label>
+            <input
+              className="user-form-container-form-input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+              onChange={handleChange}
+            />
+            <div className="user-form-container-form-error">{errors.email}</div>
+            <label className="user-form-container-form-label" htmlFor="phone">
+              Phone *
+            </label>
+            <input
+              className="user-form-container-form-input"
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Phone"
+              required
+              onChange={handleChange}
+            />
+            <div className="user-form-container-form-error">{errors.phone}</div>
+            <label className="user-form-container-form-label" htmlFor="phone">
+              Select agent to talk to
+            </label>
+          </>
+        )}
         <div className="user-form-container-form-select">
           <AgentSelect
             agent={userData.agent}
