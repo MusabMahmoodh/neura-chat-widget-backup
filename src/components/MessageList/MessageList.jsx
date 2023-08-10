@@ -7,6 +7,8 @@ import TypeLoader from "../TypeLoader/TypeLoader";
 import ResponseComponent from "../ResponseComponent/ResponseComponent";
 import { generateTextToVoice } from "../../utils/converstionUtils";
 import WeekSelect from "../WeekSelect/WeekSelect";
+import { getBot } from "../../messageService";
+import { BOT } from "../../constants";
 const MessageList = ({
   voices,
   agent,
@@ -18,6 +20,8 @@ const MessageList = ({
   week,
 }) => {
   const chatListRef = createRef();
+
+  const bot = getBot();
 
   useEffect(() => {
     // only generate voice for remote messages
@@ -39,9 +43,11 @@ const MessageList = ({
 
   return (
     <div className="widget-container-chat">
-      <div className="widget-container-chat-week-select">
-        <WeekSelect onUpdate={updateWeek} value={week} />
-      </div>
+      {bot === BOT.AIEYE && (
+        <div className="widget-container-chat-week-select">
+          <WeekSelect onUpdate={updateWeek} value={week} />
+        </div>
+      )}
       <ul className="widget-container-chat-list">
         {messages.map((message) => {
           const isRemoteMessage = message.sender === "remote";
