@@ -6,7 +6,17 @@ import "./MessageList.scss";
 import TypeLoader from "../TypeLoader/TypeLoader";
 import ResponseComponent from "../ResponseComponent/ResponseComponent";
 import { generateTextToVoice } from "../../utils/converstionUtils";
-const MessageList = ({ voices, agent, isSpeakerOn, messages, isLoadingNewMessage, markMessageAsRead }) => {
+import WeekSelect from "../WeekSelect/WeekSelect";
+const MessageList = ({
+  voices,
+  agent,
+  isSpeakerOn,
+  messages,
+  isLoadingNewMessage,
+  markMessageAsRead,
+  updateWeek,
+  week,
+}) => {
   const chatListRef = createRef();
 
   useEffect(() => {
@@ -29,6 +39,9 @@ const MessageList = ({ voices, agent, isSpeakerOn, messages, isLoadingNewMessage
 
   return (
     <div className="widget-container-chat">
+      <div className="widget-container-chat-week-select">
+        <WeekSelect onUpdate={updateWeek} value={week} />
+      </div>
       <ul className="widget-container-chat-list">
         {messages.map((message) => {
           const isRemoteMessage = message.sender === "remote";

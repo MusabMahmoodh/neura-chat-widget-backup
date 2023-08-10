@@ -85,6 +85,8 @@ export const useMessage = () => {
   const [isLoadingResponse, setIsLoadingResponse] = useState<boolean>(false);
   const [session, setSession] = useState<string>("");
   const [isSpeakerOn, setIsSpeakerOn] = useState<boolean>(false);
+  // only for AIeye
+  const [week, setWeek] = useState<number>(18);
 
   const toggleSpeaker = () => {
     setIsSpeakerOn((pre) => !pre);
@@ -158,6 +160,14 @@ export const useMessage = () => {
     );
   };
 
+  const updateWeek = (week: number) => {
+    if (week > 18) {
+      setWeek(18);
+      return;
+    }
+    setWeek(week);
+  };
+
   return {
     messages,
     getApiResponse,
@@ -168,5 +178,7 @@ export const useMessage = () => {
     isSpeakerOn,
     toggleSpeaker,
     markMessageAsRead,
+    updateWeek,
+    week,
   };
 };

@@ -9,8 +9,17 @@ export const WidgetContainer: React.FC<{
   greeting?: string;
   switchToVoice: () => void;
 }> = ({ license = "", greeting = "", voices, switchToVoice }) => {
-  const { messages, getApiResponse, resetSession, isLoadingResponse, isSpeakerOn, toggleSpeaker, markMessageAsRead } =
-    useMessage();
+  const {
+    messages,
+    getApiResponse,
+    resetSession,
+    isLoadingResponse,
+    isSpeakerOn,
+    toggleSpeaker,
+    markMessageAsRead,
+    updateWeek,
+    week,
+  } = useMessage();
   const { userData, updateAgent } = useUserData();
 
   const remoteName = useMemo(() => {
@@ -37,6 +46,8 @@ export const WidgetContainer: React.FC<{
         updateAgent={updateAgent}
         voices={voices}
         markMessageAsRead={markMessageAsRead}
+        updateWeek={updateWeek}
+        week={week}
       />
     </>
   );

@@ -1,0 +1,46 @@
+@import "../../variables.scss";
+.neura-chat-week-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //   .neura-chat-week-select-label {
+  //     font-size: 1rem;
+  //     font-weight: 400;
+  //     color: $text-dark;
+
+  //     width: 70px;
+
+  //     border: 1px solid $border-color;
+  //     border-radius: 0.5rem;
+  //     font-size: 1rem;
+  //     font-weight: 400;
+  //     color: $text-dark;
+  //     margin-bottom: 0.2rem;
+  //     background-color: $secondary-color;
+  //     text-align: center;
+  //   }
+  .neura-chat-week-select-input {
+    width: 70px;
+    padding: 0.2rem;
+    border: 1px solid $border-color;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $text-dark;
+    margin-bottom: 0.2rem;
+    background-color: $secondary-color;
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      background-color: $white;
+    }
+  }
+  .neura-chat-week-select-btn {
+    outline: none;
+    border: none;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

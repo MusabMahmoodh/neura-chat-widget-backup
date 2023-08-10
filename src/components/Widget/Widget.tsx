@@ -19,6 +19,8 @@ export const Widget: React.FC<{
   agent: number;
   updateAgent: (agent: number) => void;
   markMessageAsRead: (messageId: string) => void;
+  updateWeek: (week: number) => void;
+  week: number;
 }> = ({
   remoteName = "",
   messages = [],
@@ -31,6 +33,8 @@ export const Widget: React.FC<{
   updateAgent,
   voices,
   markMessageAsRead,
+  updateWeek,
+  week,
 }) => {
   const [showSettings, setShowSettings] = React.useState(false);
   return (
@@ -58,6 +62,8 @@ export const Widget: React.FC<{
         isLoadingNewMessage={isLoadingNewMessage}
         voices={voices}
         markMessageAsRead={markMessageAsRead}
+        updateWeek={updateWeek}
+        week={week}
       />
       <ChatInput sendMessage={onSend} />
     </div>

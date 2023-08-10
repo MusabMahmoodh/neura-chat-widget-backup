@@ -3,6 +3,13 @@
   flex: 1;
   max-height: $chat-message-list-height;
   padding-bottom: 30px;
+  position: relative;
+  .widget-container-chat-week-select {
+    position: absolute;
+    top: 0.1rem;
+    right: 0;
+    z-index: 1;
+  }
   .widget-container-chat-list {
     height: 100%;
     overflow: scroll;
