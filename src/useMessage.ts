@@ -36,7 +36,7 @@ const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
           _id: "1",
           message: `👋 Hello **${userName}**! Welcome ${
             !isFirstTime ? "back" : ""
-          }  to the Artificial Intelligence Fundamentals and Applications Program of the AI Club! I am your Teaching Assistant Robot.How can I assist you?`,
+          }  to the Artificial Intelligence Fundamentals and Applications Program of the AI Club! I am your Teaching Assistant Robot. How can I assist you?`,
           sender: "remote" as SenderType,
           direction: "incoming" as DirectionType,
           position: "single" as PositionType,

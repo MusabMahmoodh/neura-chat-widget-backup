@@ -10,7 +10,7 @@ import SpeakerToggleButton from "../SpeakerToggle/SpeakerToggleButton";
 
 const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeakerOn, toggleMic }) => {
   const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
-  const titleName = getBot() === BOT.AIEYE ? "AI Teaching Assistant" : "Esoft Chat Bot";
+  const titleName = getBot() === BOT.AIEYE ? "AI Teaching Assistant Robot" : "Esoft Chat Bot";
   return (
     <div className="conversation-header">
       <div className="conversation-header-data">

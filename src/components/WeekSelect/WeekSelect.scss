@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 .neura-chat-week-select {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   //   .neura-chat-week-select-label {
   //     font-size: 1rem;
@@ -19,6 +19,27 @@
   //     background-color: $secondary-color;
   //     text-align: center;
   //   }
+  .neura-chat-week-select--container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: $white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    button {
+      outline: none;
+      border: solid 1px $border-color;
+      width: 70px;
+      background-color: $secondary-color;
+      border-radius: 0.5rem;
+      padding: 0.2rem;
+      margin: 0.2rem;
+      &:hover {
+        background-color: $primary-color;
+      }
+    }
+  }
   .neura-chat-week-select-input {
     width: 70px;
     padding: 0.2rem;
