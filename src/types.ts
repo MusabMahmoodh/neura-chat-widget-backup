@@ -10,4 +10,5 @@ export interface CustomMessageModel {
   position: PositionType;
   time?: string;
   isRead?: boolean;
+  isWeekSelectedConfirm?: boolean;
 }

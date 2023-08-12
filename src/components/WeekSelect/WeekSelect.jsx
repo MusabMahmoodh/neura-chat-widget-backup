@@ -2,23 +2,35 @@ import React from "react";
 import WeekSelectIconActive from "../../assets/WeekSelectOn.svg";
 import WeekSelectIconOff from "../../assets/WeekSelectoff.svg";
 import "./WeekSelect.scss";
+import { nanoid } from "nanoid";
+
 // create an input field that allows numbers from 1 to 18
 
 const weeks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-const WeekSelect = ({ onUpdate, value }) => {
+const WeekSelect = ({ sendMessage, onUpdate, value }) => {
   const [showInput, setShowInput] = React.useState(false);
   const toggleInput = () => {
     setShowInput((pre) => !pre);
+  };
+
+  const weekSelectedMessage = {
+    _id: nanoid(),
+    message: `Thank you very much. How may I help you today?`,
+    sender: "remote",
+    direction: "incoming",
+    position: "single",
+    isRead: false,
+    isWeekSelectedConfirm: true,
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
 
     onUpdate(e.target.value);
-    // wait for 1 second and hide the input
     setTimeout(() => {
       setShowInput(false);
     }, 500);
+    sendMessage(weekSelectedMessage);
   };
   console.log(value);
   return (

@@ -18,6 +18,7 @@ const MessageList = ({
   markMessageAsRead,
   updateWeek,
   week,
+  sendMessage,
 }) => {
   const chatListRef = createRef();
 
@@ -45,7 +46,7 @@ const MessageList = ({
     <div className="widget-container-chat">
       {bot === BOT.AIEYE && (
         <div className="widget-container-chat-week-select">
-          <WeekSelect onUpdate={updateWeek} value={week} />
+          <WeekSelect sendMessage={sendMessage} onUpdate={updateWeek} value={week} />
         </div>
       )}
       <ul className="widget-container-chat-list">
@@ -113,7 +114,7 @@ const MessageList = ({
             </div>
           </li>
         )}
-        <li class="widget-container-chat-list-item widget-container-chat-list-item--left" ref={chatListRef} />
+        <li className="widget-container-chat-list-item widget-container-chat-list-item--left" ref={chatListRef} />
       </ul>
     </div>
   );

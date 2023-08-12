@@ -171,6 +171,7 @@ export const useMessage = () => {
   };
 
   return {
+    addMessage,
     messages,
     getApiResponse,
     session,

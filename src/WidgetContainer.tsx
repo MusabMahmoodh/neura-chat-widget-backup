@@ -19,6 +19,7 @@ export const WidgetContainer: React.FC<{
     markMessageAsRead,
     updateWeek,
     week,
+    addMessage,
   } = useMessage();
   const { userData, updateAgent } = useUserData();
 
@@ -48,6 +49,7 @@ export const WidgetContainer: React.FC<{
         markMessageAsRead={markMessageAsRead}
         updateWeek={updateWeek}
         week={week}
+        addMessage={addMessage}
       />
     </>
   );
