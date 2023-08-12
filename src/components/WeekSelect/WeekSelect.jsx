@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 
 const weeks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 const WeekSelect = ({ sendMessage, onUpdate, value }) => {
+  const [isFirstTime, setIsFirstTime] = React.useState(true);
   const [showInput, setShowInput] = React.useState(false);
   const toggleInput = () => {
     setShowInput((pre) => !pre);
@@ -30,7 +31,10 @@ const WeekSelect = ({ sendMessage, onUpdate, value }) => {
     setTimeout(() => {
       setShowInput(false);
     }, 500);
-    sendMessage(weekSelectedMessage);
+    if (isFirstTime) {
+      sendMessage(weekSelectedMessage);
+      setIsFirstTime(false);
+    }
   };
   console.log(value);
   return (
