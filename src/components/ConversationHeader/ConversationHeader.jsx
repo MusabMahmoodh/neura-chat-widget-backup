@@ -8,6 +8,7 @@ import SettingButton from "../SettingBtn/SettingBtn";
 import { getBot } from "../../messageService";
 import { BOT } from "../../constants";
 import SpeakerToggleButton from "../SpeakerToggle/SpeakerToggleButton";
+import { stopVoice } from "../../utils/converstionUtils";
 
 const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeakerOn, toggleMic }) => {
   const { listening } = useSpeechRecognition();
@@ -20,6 +21,11 @@ const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeake
       : listening
       ? "Talk to robot teacher"
       : "Text with robot teacher";
+
+  const resetChat = () => {
+    resetSession();
+    stopVoice();
+  };
   return (
     <div className="conversation-header">
       <div className="conversation-header-data">
@@ -38,7 +44,7 @@ const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeake
         <div className="conversation-header-action-btn">
           <SettingButton toggleSettings={toggleSettings} />
         </div>
-        <button className="conversation-header-action-btn" onClick={resetSession}>
+        <button className="conversation-header-action-btn" onClick={resetChat}>
           <img src={ResetIcon} width="20px" alt="Refresh" className="action-icon" />
         </button>
       </div>
