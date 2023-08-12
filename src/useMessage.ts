@@ -27,6 +27,7 @@ const getCurrentTime = () => {
 
   return `${hours}:${minutes} ${meridiem}`;
 };
+
 const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
   const client = getBot();
   let greeTingMessage;
@@ -36,7 +37,7 @@ const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
           _id: "1",
           message: `👋 Hello **${userName}**! Welcome ${
             !isFirstTime ? "back" : ""
-          }  to the Artificial Intelligence Fundamentals and Applications Program of the AI Club! I am your Teaching Assistant Robot. How can I assist you?`,
+          }.  I am your Teaching Assistant Robot. Would you please click on ⚃ and select the week number.`,
           sender: "remote" as SenderType,
           direction: "incoming" as DirectionType,
           position: "single" as PositionType,
@@ -44,7 +45,7 @@ const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
         }
       : {
           _id: "1",
-          message: `👋 Hello ! Welcometo the Artificial Intelligence Fundamentals and Applications Program of the AI Club! I am your Teaching Assistant Robot developed based on the most cutting edge artificial intelligence technology. How can I assist you?`,
+          message: `👋 Hello ! I am your Teaching Assistant Robot. Would you please click on ⚃ and select the week number.`,
           sender: "remote" as SenderType,
           direction: "incoming" as DirectionType,
           position: "single" as PositionType,
@@ -74,6 +75,7 @@ const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
 
   return greeTingMessage;
 };
+
 export const useMessage = () => {
   const userData = getUserData();
   const userName = userData?.name;

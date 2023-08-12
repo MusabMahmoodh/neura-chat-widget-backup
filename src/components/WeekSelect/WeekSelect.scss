@@ -22,12 +22,20 @@
   .neura-chat-week-select--container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    background-color: $white;
+    // justify-content: space-between;
+    // flex-direction: column;
+    flex-wrap: wrap;
+    background-color: $modal-background;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    button {
+    margin: 0 0 0 20px;
+    //set max height to max mobile height
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    .neura-chat-week-select-btn {
+      outline: none;
+      border: none;
       outline: none;
       border: solid 1px $border-color;
       width: 70px;
@@ -35,8 +43,15 @@
       border-radius: 0.5rem;
       padding: 0.2rem;
       margin: 0.2rem;
+      cursor: pointer;
       &:hover {
         background-color: $primary-color;
+        color: $white;
+      }
+      &--selected {
+        @extend .neura-chat-week-select-btn;
+        background-color: $primary-color;
+        color: $white;
       }
     }
   }
@@ -54,6 +69,12 @@
       outline: none;
       border-color: $primary-color;
       background-color: $white;
+      color: $text-light;
+    }
+    &--selected {
+      background-color: $white;
+      border-color: $primary-color;
+      color: $text-light;
     }
   }
   .neura-chat-week-select-btn {

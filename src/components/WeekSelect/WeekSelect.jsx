@@ -13,15 +13,28 @@ const WeekSelect = ({ onUpdate, value }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
+
     onUpdate(e.target.value);
+    // wait for 1 second and hide the input
+    setTimeout(() => {
+      setShowInput(false);
+    }, 500);
   };
+  console.log(value);
   return (
     <div className="neura-chat-week-select">
       {/* Add a button to show and hide input */}
       {showInput ? (
         <div className="neura-chat-week-select--container">
           {weeks.map((week) => (
-            <button className="neura-chat-week-select--btn" key={week} value={week} onClick={handleUpdate}>
+            <button
+              className={
+                Number(week) === Number(value) ? `neura-chat-week-select-btn--selected` : `neura-chat-week-select-btn`
+              }
+              key={week}
+              value={week}
+              onClick={handleUpdate}
+            >
               Week-{week}
             </button>
           ))}

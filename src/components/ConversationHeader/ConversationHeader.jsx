@@ -1,4 +1,5 @@
 import React from "react";
+import { useSpeechRecognition } from "react-speech-recognition";
 import ResetIcon from "../../assets/reset.svg";
 import LogoImg from "../../assets/logo.svg";
 import AiEyeLogoImg from "../../assets/AIeye.png";
@@ -9,15 +10,23 @@ import { BOT } from "../../constants";
 import SpeakerToggleButton from "../SpeakerToggle/SpeakerToggleButton";
 
 const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeakerOn, toggleMic }) => {
-  const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
-  const titleName = getBot() === BOT.AIEYE ? "AI Teaching Assistant Robot" : "Esoft Chat Bot";
+  const { listening } = useSpeechRecognition();
+  const bot = getBot();
+  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
+  const titleName = bot === BOT.AIEYE ? "AI Teaching Assistant Robot" : "Esoft Chat Bot";
+  const subtitle =
+    bot !== BOT.AIEYE
+      ? "Hi there, let's start a conversation"
+      : listening
+      ? "Talk to robot teacher"
+      : "Text with robot teacher";
   return (
     <div className="conversation-header">
       <div className="conversation-header-data">
         <img src={logo} alt={remoteName} className="conversation-header-avatar" />
         <div className="conversation-header-content">
           <p className="conversation-header-content-vendor-name">{titleName}</p>
-          <p className="conversation-header-content-subtitle">Hi there, let's start a conversation</p>
+          <p className="conversation-header-content-subtitle">{subtitle}</p>
         </div>
       </div>
 
