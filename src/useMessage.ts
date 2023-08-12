@@ -37,7 +37,7 @@ const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
           _id: "1",
           message: `👋 Hello **${userName}**! Welcome ${
             !isFirstTime ? "back" : ""
-          }.  I am your Teaching Assistant Robot. Would you please click on ⚃ and select the week number.`,
+          }.  I am your Teaching Assistant Robot. Would you please click on ☀️ and select the week number.`,
           sender: "remote" as SenderType,
           direction: "incoming" as DirectionType,
           position: "single" as PositionType,
@@ -45,7 +45,7 @@ const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
         }
       : {
           _id: "1",
-          message: `👋 Hello ! I am your Teaching Assistant Robot. Would you please click on ⚃ and select the week number.`,
+          message: `👋 Hello ! I am your Teaching Assistant Robot. Would you please click on ☀️ and select the week number.`,
           sender: "remote" as SenderType,
           direction: "incoming" as DirectionType,
           position: "single" as PositionType,
