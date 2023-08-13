@@ -7,6 +7,13 @@
   height: 100vh;
   width: 100%;
   background: #000000db;
+  position: relative;
+  .voice-to-voices-week-select {
+    position: absolute;
+    top: 5rem;
+    right: 2rem;
+    z-index: 1;
+  }
   .voice-to-voice-title {
     color: $white;
   }

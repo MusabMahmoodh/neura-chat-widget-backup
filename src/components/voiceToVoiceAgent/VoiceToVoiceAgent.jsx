@@ -8,10 +8,13 @@ import { useUserData } from "../../useUserData";
 import { generateTextToVoice, stopVoice } from "../../utils/converstionUtils";
 import Processing from "../Processing/Processing";
 import TypeWriter from "../TypeWriter/TypeWriter";
+import { BOT } from "../../constants";
+import { getBot } from "../../messageService";
+import WeekSelect from "../WeekSelect/WeekSelect";
 
 const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
-  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead } = useMessage();
+  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, updateWeek, week, addMessage } = useMessage();
   const { userData } = useUserData();
   const agent = userData.agent;
 
@@ -72,9 +75,14 @@ const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
     setIsReplying(false);
     setIsThinking(false);
   };
-
+  const bot = getBot();
   return (
     <div className="voice-to-voice-container">
+      {bot === BOT.AIEYE && (
+        <div className="voice-to-voices-week-select">
+          <WeekSelect sendMessage={addMessage} onUpdate={updateWeek} value={week} />
+        </div>
+      )}
       <div className="voice-to-voice-title">Hey, How can I help you this afternoon?</div>
       <div className="voice-to-voice-subtitle">Click on the mic to start talking</div>
       <div className="voice-to-voice-animation">
