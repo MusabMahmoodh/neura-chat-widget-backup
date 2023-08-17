@@ -7,9 +7,11 @@ export const generateTextToVoice = async (text: string, voice: any) => {
 
   //remve 👋,😊
   const filteredText3 = filteredText2.replace("👋", "");
-  const filteredText4 = filteredText3.replace("😊", "");
+  const filteredText40 = filteredText3.replace("☀️", "sun in the top right corner");
+  const filteredText4 = filteredText40.replace("😊", "");
 
-  let speech = new SpeechSynthesisUtterance();
+  const speech = new SpeechSynthesisUtterance();
+
   speech.lang = "en-US";
   speech.text = filteredText4;
   speech.volume = 1;
@@ -17,7 +19,6 @@ export const generateTextToVoice = async (text: string, voice: any) => {
   speech.pitch = 1;
 
   speech.voice = voice;
-
   window.speechSynthesis.speak(speech);
 };
 

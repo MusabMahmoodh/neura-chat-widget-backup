@@ -9,6 +9,7 @@ import VoiceToVoiceAgent from "../voiceToVoiceAgent/VoiceToVoiceAgent";
 
 const ChatWidget = () => {
   const [license, setLicense] = useState<string | null>(null);
+  const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
   const { isDataFetching, userOnoardStep, setUserOnboardStep } = useUserData();
 
   const updatePage = () => {
@@ -30,14 +31,18 @@ const ChatWidget = () => {
     const license = urlParams.get("license");
 
     setLicense(license);
-    window.speechSynthesis.addEventListener("voiceschanged", () => {
-      const voices: Array<any> = window.speechSynthesis.getVoices();
+    window.speechSynthesis.addEventListener("voiceschanged", async () => {
+      const voices: Array<any> = await window.speechSynthesis.getVoices();
       setVoices([...voices]);
+      setIsAppLoaded(true);
     });
     return () => {
       window.speechSynthesis.removeEventListener("voiceschanged", () => {});
     };
   }, []);
+  if (!isAppLoaded) {
+    return <div className="widget-chat-container">Loading</div>;
+  }
   if (isDataFetching) {
     return <div className="widget-chat-container">Loading</div>;
   }
