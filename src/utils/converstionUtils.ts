@@ -18,8 +18,15 @@ export const generateTextToVoice = async (text: string, voice: any) => {
   speech.rate = 1;
   speech.pitch = 1;
 
-  speech.voice = voice;
-  window.speechSynthesis.speak(speech);
+  if (voice) {
+    speech.voice = voice;
+  }
+
+  try {
+    window.speechSynthesis.speak(speech);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const stopVoice = () => {

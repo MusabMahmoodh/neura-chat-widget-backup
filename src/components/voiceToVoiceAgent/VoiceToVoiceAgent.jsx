@@ -51,13 +51,17 @@ const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
     // only generate voice for remote messages
     const talk = async () => {
       if (
-        messages.length > 1 &&
+        messages.length > 0 &&
         messages[messages.length - 1].sender === "remote" &&
         messages[messages.length - 1].isRead === false
       ) {
         setIsThinking(false);
         setIsReplying(true);
         markMessageAsRead(messages[messages.length - 1]._id);
+        // if  messages.length === 1 then wait for 2 seconds
+        if (messages.length === 1) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
         await generateTextToVoice(messages[messages.length - 1].message, voices[agent]);
 
         setIsReplying(false);
