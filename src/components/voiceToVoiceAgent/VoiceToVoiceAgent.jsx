@@ -51,7 +51,7 @@ const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
     // only generate voice for remote messages
     const talk = async () => {
       if (
-        messages.length > 0 &&
+        messages.length > 1 &&
         messages[messages.length - 1].sender === "remote" &&
         messages[messages.length - 1].isRead === false
       ) {
