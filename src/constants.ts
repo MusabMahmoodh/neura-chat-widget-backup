@@ -3,6 +3,8 @@ export const BOT = {
   ESOFT: "https://esoft-demo.ascii.ai",
 };
 
+export const AVATR_BE = "http://localhost:5000";
+
 export const AIEYE_WEEK_API = {
   1: "https://ai-eye-chatbot.ascii.ai",
   2: "https://ai-eye-chatbot.ascii.ai",
