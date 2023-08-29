@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, useTexture, Loader, Environment, useFBX, useAnimations, OrthographicCamera } from "@react-three/drei";
 import { MeshStandardMaterial } from "three/src/materials/MeshStandardMaterial";
-
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { LinearEncoding, sRGBEncoding } from "three/src/constants";
 import { LineBasicMaterial, MeshPhysicalMaterial, Vector2 } from "three";
 import ReactAudioPlayer from "react-audio-player";
@@ -12,6 +12,11 @@ import blinkData from "./blendDataBlink.json";
 import "./styles.css";
 import * as THREE from "three";
 import axios from "axios";
+import { useMessage } from "../../useMessage";
+import { useUserData } from "../../useUserData";
+import ReactSiriwave from "react-siriwave";
+import Processing from "../Processing/Processing";
+import VoiceAgentMic from "../VoiceAgentMic/VoiceAgentMic";
 const _ = require("lodash");
 
 const host = "http://localhost:5000";
@@ -191,6 +196,9 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
         console.error(err);
         setSpeak(false);
       });
+    // .finally(() => {
+    //   setIsThinking(false);
+    // });
   }, [speak]);
 
   let idleFbx = useFBX("/idle.fbx");
@@ -228,7 +236,6 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
   // Play animation clips when available
   useEffect(() => {
     if (playing === false) return;
-
     _.each(clips, (clip) => {
       let clipAction = mixer.clipAction(clip);
       clipAction.setLoop(THREE.LoopOnce);
@@ -252,7 +259,15 @@ function makeSpeech(text) {
 }
 
 const STYLES = {
-  area: { position: "absolute", bottom: "10px", left: "10px", zIndex: 500 },
+  wrapper: { position: "relative", width: "100%", height: "100vh", overflow: "hidden" },
+  area: { position: "absolute", width: "100%", bottom: "0", zIndex: 500 },
+  anims: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "200px",
+  },
   text: {
     margin: "0px",
     width: "300px",
@@ -275,6 +290,15 @@ const STYLES = {
 };
 
 function TalkingAvatar() {
+  const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, updateWeek, week, addMessage } = useMessage();
+  const { userData } = useUserData();
+  const agent = userData.agent;
+
+  const [isReplying, setIsReplying] = useState(false);
+  const [isThinking, setIsThinking] = useState(false);
+
+  // ************
   const audioPlayer = useRef();
 
   const [speak, setSpeak] = useState(false);
@@ -297,20 +321,93 @@ function TalkingAvatar() {
     setPlaying(true);
   }
 
+  useEffect(() => {
+    const listen = async () => {
+      if (!listening) {
+        setIsReplying(false);
+        setIsThinking(true);
+        SpeechRecognition.stopListening();
+        if (transcript.trim() !== "") {
+          await getApiResponse(transcript);
+        }
+        setIsThinking(false);
+        resetTranscript();
+      } else {
+        console.log("listening", listening);
+      }
+    };
+    listen();
+
+    setInterval(() => {
+      if (window.speechSynthesis.speaking) {
+        setIsReplying(true);
+      } else {
+        setIsReplying(false);
+      }
+    }, 500);
+    // eslint-disable-next-line
+  }, [listening]);
+  useEffect(() => {
+    // only generate voice for remote messages
+    const talk = async () => {
+      if (
+        messages.length > 1 &&
+        messages[messages.length - 1].sender === "remote" &&
+        messages[messages.length - 1].isRead === false
+      ) {
+        setIsThinking(false);
+        setIsReplying(true);
+        setText(messages[messages.length - 1].message);
+        markMessageAsRead(messages[messages.length - 1]._id);
+        // if  messages.length === 1 then wait for 2 seconds
+        if (messages.length === 1) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+        setSpeak(true);
+      }
+    };
+    talk();
+  }, [messages, isSpeakerOn, agent, markMessageAsRead]);
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+  const stopSpeaking = () => {
+    setText("");
+    setSpeak(false);
+    setIsReplying(false);
+    setIsThinking(false);
+  };
   return (
-    <div className="full">
+    <div style={STYLES.wrapper}>
       <div style={STYLES.area}>
-        <textarea
-          rows={4}
-          type="text"
-          style={STYLES.text}
-          value={text}
-          onChange={(e) => setText(e.target.value.substring(0, 200))}
-        />
-        <button onClick={() => setSpeak(true)} style={STYLES.speak}>
-          {" "}
-          {speak ? "Running..." : "Speak"}
-        </button>
+        {!speak ? (
+          <div style={STYLES.anims}>
+            {!isThinking && !isReplying && listening ? (
+              <ReactSiriwave color="#6adc92" theme="ios9" />
+            ) : isThinking && !isReplying ? (
+              <Processing />
+            ) : !isThinking && isReplying ? (
+              <>
+                <ReactSiriwave color="#6adc92" theme="ios" />
+                <button className="voice-to-voice-stop-speak-btn" onClick={stopSpeaking}>
+                  Stop Speaking
+                </button>
+              </>
+            ) : (
+              <>
+                <div onClick={SpeechRecognition.startListening}>
+                  <VoiceAgentMic />
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          <div style={STYLES.anims}>
+            <ReactSiriwave color="#6adc92" theme="ios" />
+          </div>
+        )}
       </div>
 
       <ReactAudioPlayer src={audioSource} ref={audioPlayer} onEnded={playerEnded} onCanPlayThrough={playerReady} />
@@ -344,6 +441,7 @@ function TalkingAvatar() {
             text={text}
             setAudioSource={setAudioSource}
             playing={playing}
+            setIsReplying={setIsReplying}
           />
         </Suspense>
       </Canvas>
@@ -356,9 +454,9 @@ function Bg() {
   const texture = useTexture("/images/bg.webp");
 
   return (
-    <mesh position={[0, 1.5, -2]} scale={[0.8, 0.8, 0.8]}>
+    <mesh position={[0, 1.5, -2]} scale={[1, 1, 1]}>
       <planeBufferGeometry />
-      <meshBasicMaterial map={texture} />
+      {/* <meshBasicMaterial map={texture} /> */}
     </mesh>
   );
 }

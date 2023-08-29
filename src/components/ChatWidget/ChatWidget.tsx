@@ -6,6 +6,7 @@ import WelcomeContainer from "../WelcomeContainer/WelcomeContainer";
 import UserFormContainer from "../UserFormContainer/UserFormContainer";
 import { OnboardStep, useUserData } from "../../useUserData";
 import VoiceToVoiceAgent from "../voiceToVoiceAgent/VoiceToVoiceAgent";
+import TalkingAvatar from "../AvatarChat/TalkingAvatar";
 
 const ChatWidget = () => {
   const [license, setLicense] = useState<string | null>(null);
@@ -16,8 +17,12 @@ const ChatWidget = () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const voiceOnly = urlParams.get("voiceOnly");
-    if (voiceOnly) {
+    const avatarChat = urlParams.get("avatarChat");
+
+    if (voiceOnly === "1") {
       setUserOnboardStep(OnboardStep.VOICE_ONLY);
+    } else if (avatarChat === "1") {
+      setUserOnboardStep(OnboardStep.AVATAR_CHAT);
     } else {
       setUserOnboardStep(OnboardStep.CHAT);
     }
@@ -40,12 +45,12 @@ const ChatWidget = () => {
       window.speechSynthesis.removeEventListener("voiceschanged", () => {});
     };
   }, []);
-  if (!isAppLoaded) {
-    return <div className="widget-chat-container">Loading</div>;
-  }
-  if (isDataFetching) {
-    return <div className="widget-chat-container">Loading</div>;
-  }
+  // if (!isAppLoaded) {
+  //   return <div className="widget-chat-container">Loading</div>;
+  // }
+  // if (isDataFetching) {
+  //   return <div className="widget-chat-container">Loading</div>;
+  // }
 
   if (userOnoardStep === OnboardStep.FORM_FILLING) {
     return (
@@ -70,6 +75,9 @@ const ChatWidget = () => {
     return <VoiceToVoiceAgent voices={voices} switchToChat={() => setUserOnboardStep(OnboardStep.CHAT)} />;
   }
 
+  if (userOnoardStep === OnboardStep.AVATAR_CHAT) {
+    return <TalkingAvatar />;
+  }
   return (
     <div className="widget-chat-container">
       <WelcomeContainer updatePage={() => setUserOnboardStep(OnboardStep.FORM_FILLING)} />
