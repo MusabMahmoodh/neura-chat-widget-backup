@@ -12,6 +12,7 @@ export const AIEYE_WEEK_API = {
   4: "https://ai-eye-chatbot.ascii.ai",
 };
 
+export const TALKING_AVATAR_BE = "https://robin.ascii.ai";
 export const AIEY_WEEK = {
   Week_1: 1,
   Week_2: 2,

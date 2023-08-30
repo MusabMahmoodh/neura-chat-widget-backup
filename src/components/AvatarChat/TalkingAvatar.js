@@ -17,9 +17,10 @@ import { useUserData } from "../../useUserData";
 import ReactSiriwave from "react-siriwave";
 import Processing from "../Processing/Processing";
 import VoiceAgentMic from "../VoiceAgentMic/VoiceAgentMic";
+import { TALKING_AVATAR_BE } from "../../constants";
 const _ = require("lodash");
 
-const host = "http://localhost:5000";
+const host = TALKING_AVATAR_BE;
 
 function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) {
   let gltf = useGLTF(avatar_url);
@@ -451,12 +452,12 @@ function TalkingAvatar() {
 }
 
 function Bg() {
-  const texture = useTexture("/images/bg.webp");
+  const texture = useTexture("/images/bg3.webp");
 
   return (
-    <mesh position={[0, 1.5, -2]} scale={[1, 1, 1]}>
+    <mesh position={[0, 1.5, -2]} scale={[0.8, 0.8, 0.8]}>
       <planeBufferGeometry />
-      {/* <meshBasicMaterial map={texture} /> */}
+      <meshBasicMaterial map={texture} />
     </mesh>
   );
 }
