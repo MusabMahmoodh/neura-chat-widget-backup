@@ -10,8 +10,8 @@ import TalkingAvatar from "../AvatarChat/TalkingAvatar";
 
 const ChatWidget = () => {
   const [license, setLicense] = useState<string | null>(null);
-  const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
-  const { isDataFetching, userOnoardStep, setUserOnboardStep } = useUserData();
+  // const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
+  const { userOnoardStep, setUserOnboardStep } = useUserData();
 
   const updatePage = () => {
     const queryString = window.location.search;
@@ -39,7 +39,7 @@ const ChatWidget = () => {
     window.speechSynthesis.addEventListener("voiceschanged", async () => {
       const voices: Array<any> = await window.speechSynthesis.getVoices();
       setVoices([...voices]);
-      setIsAppLoaded(true);
+      // setIsAppLoaded(true);
     });
     return () => {
       window.speechSynthesis.removeEventListener("voiceschanged", () => {});

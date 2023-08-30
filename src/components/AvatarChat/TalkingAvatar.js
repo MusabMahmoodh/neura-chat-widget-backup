@@ -174,7 +174,7 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
   });
 
   const [clips, setClips] = useState([]);
-  const mixer = useMemo(() => new THREE.AnimationMixer(gltf.scene), []);
+  const mixer = useMemo(() => new THREE.AnimationMixer(gltf.scene), [gltf.scene]);
 
   useEffect(() => {
     if (speak === false) return;
@@ -200,7 +200,7 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
     // .finally(() => {
     //   setIsThinking(false);
     // });
-  }, [speak]);
+  }, [speak, morphTargetDictionaryBody, morphTargetDictionaryLowerTeeth, setAudioSource, setSpeak, text]);
 
   let idleFbx = useFBX("/idle.fbx");
   let { clips: idleClips } = useAnimations(idleFbx.animations);
@@ -232,7 +232,7 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
     let blinkClip = createAnimation(blinkData, morphTargetDictionaryBody, "HG_Body");
     let blinkAction = mixer.clipAction(blinkClip);
     blinkAction.play();
-  }, []);
+  }, [idleClips, mixer, morphTargetDictionaryBody]);
 
   // Play animation clips when available
   useEffect(() => {
@@ -242,7 +242,7 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
       clipAction.setLoop(THREE.LoopOnce);
       clipAction.play();
     });
-  }, [playing]);
+  }, [playing, clips, mixer]);
 
   useFrame((state, delta) => {
     mixer.update(delta);
@@ -292,7 +292,7 @@ const STYLES = {
 
 function TalkingAvatar() {
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
-  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, updateWeek, week, addMessage } = useMessage();
+  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead } = useMessage();
   const { userData } = useUserData();
   const agent = userData.agent;
 
