@@ -87,6 +87,7 @@ export const useMessage = () => {
   const [isLoadingResponse, setIsLoadingResponse] = useState<boolean>(false);
   const [session, setSession] = useState<string>("");
   const [isSpeakerOn, setIsSpeakerOn] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   // only for AIeye
   const [week, setWeek] = useState<number>(18);
 
@@ -99,11 +100,13 @@ export const useMessage = () => {
 
   const generateSession = async () => {
     setIsSessionCreated(true);
+    setIsError(false);
     const sessionId = nanoid();
     try {
       await createSession(sessionId);
     } catch (e) {
       console.log(e);
+      setIsError(true);
     }
 
     setSession(sessionId);
@@ -138,17 +141,23 @@ export const useMessage = () => {
       isRead: true,
     };
     addMessage(newMessage);
-    const res = await getResponse(message, session);
-    const response = {
-      _id: nanoid(),
-      message: `${res}`,
-      sender: "remote" as SenderType,
-      direction: "incoming" as DirectionType,
-      position: "single" as PositionType,
-      time: getCurrentTime(),
-      isRead: false, // only remote messages need to be marked as unread
-    };
-    addMessage(response);
+    try {
+      const res = await getResponse(message, session);
+      const response = {
+        _id: nanoid(),
+        message: `${res}`,
+        sender: "remote" as SenderType,
+        direction: "incoming" as DirectionType,
+        position: "single" as PositionType,
+        time: getCurrentTime(),
+        isRead: false, // only remote messages need to be marked as unread
+      };
+      addMessage(response);
+    } catch (e) {
+      console.log(e);
+      setIsError(true);
+    }
+
     setIsLoadingResponse(false);
   };
   const markMessageAsRead = (id: string) => {
@@ -183,5 +192,6 @@ export const useMessage = () => {
     markMessageAsRead,
     updateWeek,
     week,
+    isError,
   };
 };

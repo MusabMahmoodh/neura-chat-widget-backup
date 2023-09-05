@@ -9,18 +9,19 @@ import ReactAudioPlayer from "react-audio-player";
 
 import createAnimation from "./converter";
 import blinkData from "./blendDataBlink.json";
-import "./styles.css";
+import "./styles.scss";
 import * as THREE from "three";
 import axios from "axios";
 import { useMessage } from "../../useMessage";
 import { useUserData } from "../../useUserData";
-import ReactSiriwave from "react-siriwave";
-import Processing from "../Processing/Processing";
-import VoiceAgentMic from "../VoiceAgentMic/VoiceAgentMic";
-import { TALKING_AVATAR_BE } from "../../constants";
+import AvatarMic from "./AvatarMic";
+import AvatarResponseProcess from "./AvatarResponseProcess";
+import AvatarListeningProcess from "./AvatarListeningProcess";
+import ErrorModal from "../ErrorModal/ErrorModal";
+import { AVATR_BE } from "../../constants";
 const _ = require("lodash");
 
-const host = TALKING_AVATAR_BE;
+const host = AVATR_BE;
 
 function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) {
   let gltf = useGLTF(avatar_url);
@@ -292,7 +293,7 @@ const STYLES = {
 
 function TalkingAvatar() {
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
-  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead } = useMessage();
+  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, isError } = useMessage();
   const { userData } = useUserData();
   const agent = userData.agent;
 
@@ -382,16 +383,17 @@ function TalkingAvatar() {
   };
   return (
     <div style={STYLES.wrapper}>
+      {isError && <ErrorModal />}
       <div style={STYLES.area}>
         {!speak ? (
           <div style={STYLES.anims}>
             {!isThinking && !isReplying && listening ? (
-              <ReactSiriwave color="#6adc92" theme="ios9" />
+              <AvatarListeningProcess />
             ) : isThinking && !isReplying ? (
-              <Processing />
+              <AvatarListeningProcess />
             ) : !isThinking && isReplying ? (
               <>
-                <ReactSiriwave color="#6adc92" theme="ios" />
+                <AvatarResponseProcess />
                 <button className="voice-to-voice-stop-speak-btn" onClick={stopSpeaking}>
                   Stop Speaking
                 </button>
@@ -399,14 +401,14 @@ function TalkingAvatar() {
             ) : (
               <>
                 <div onClick={SpeechRecognition.startListening}>
-                  <VoiceAgentMic />
+                  <AvatarMic />
                 </div>
               </>
             )}
           </div>
         ) : (
           <div style={STYLES.anims}>
-            <ReactSiriwave color="#6adc92" theme="ios" />
+            <AvatarResponseProcess />
           </div>
         )}
       </div>
@@ -452,10 +454,10 @@ function TalkingAvatar() {
 }
 
 function Bg() {
-  const texture = useTexture("/images/bg3.webp");
+  const texture = useTexture("/images/bg.webp");
 
   return (
-    <mesh position={[0, 1.5, -2]} scale={[0.8, 0.8, 0.8]}>
+    <mesh position={[0, 1.5, -2]} scale={[0.9, 0.9, 0.9]}>
       <planeBufferGeometry />
       <meshBasicMaterial map={texture} />
     </mesh>

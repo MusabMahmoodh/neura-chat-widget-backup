@@ -37,20 +37,6 @@ export const createSession = async (sessionId: string) => {
 };
 
 export const getResponse = async (message: string, session: string) => {
-  // const response = await fetch(`${getApi()}/generate?session_id=${session}`, {
-  //   method: "POST",
-  //   headers: {
-  //     accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     user_input: message,
-  //   }),
-  // });
-
-  // const data = await response.json();
-  // return data.generated;
-
   // mock api response with delay
   return new Promise((resolve) => {
     setTimeout(() => {

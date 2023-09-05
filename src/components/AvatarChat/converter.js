@@ -1,11 +1,4 @@
-import {
-  AnimationClip,
-  // BooleanKeyframeTrack,
-  // ColorKeyframeTrack,
-  NumberKeyframeTrack,
-  // Vector3,
-  // VectorKeyframeTrack
-} from "three";
+import { AnimationClip, NumberKeyframeTrack } from "three";
 
 var fps = 60;
 
@@ -64,7 +57,6 @@ function createAnimation(recordedData, morphTargetDictionary, bodyPart) {
 
     let tracks = [];
 
-    // let flag = false;
     //create morph animation
     Object.entries(recordedData[0].blendshapes).forEach(([key, value]) => {
       if (!(modifiedKey(key) in morphTargetDictionary)) {
