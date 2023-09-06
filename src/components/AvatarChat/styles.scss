@@ -200,7 +200,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 300px;
   height: 100vh;
   background: #202123b2;
   z-index: 9999;
@@ -217,27 +217,26 @@ canvas {
   }
   &-body {
     height: calc(100vh - 200px);
-    overflow-y: auto;
-    &-item {
-      height: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-bottom: 1px solid #ffffff40;
-      cursor: pointer;
-      &:hover {
-        background: #ffffff40;
-      }
-      &-img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-      }
-      &-name {
-        font-size: 1.2rem;
-        color: white;
-      }
+    max-height: calc(100vh - 200px);
+    padding: 10px;
+
+    overflow-y: scroll;
+    //customize scroll bar
+    &::-webkit-scrollbar {
+      width: 10px;
     }
+    &::-webkit-scrollbar-track {
+      background: #ffffff40;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #ffffff40;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #ffffff80;
+    }
+    color: #ffffff80;
   }
   &-footer {
     height: 100px;

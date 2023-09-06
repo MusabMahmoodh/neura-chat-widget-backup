@@ -20,11 +20,12 @@ import AvatarListeningProcess from "./AvatarListeningProcess";
 import ErrorModal from "../ErrorModal/ErrorModal";
 import { AVATR_BE } from "../../constants";
 import SideBar from "./SideBar";
+import { replacePythonCodeWithText } from "../../utils/textUtils";
 const _ = require("lodash");
 
 const host = AVATR_BE;
 
-function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) {
+function Avatar({ setTextToShow, avatar_url, speak, setSpeak, text, setAudioSource, playing }) {
   let gltf = useGLTF(avatar_url);
   let morphTargetDictionaryBody = null;
   let morphTargetDictionaryLowerTeeth = null;
@@ -180,9 +181,10 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
 
   useEffect(() => {
     if (speak === false) return;
-
-    makeSpeech(text)
+    const textWithoutPythonMarkDown = replacePythonCodeWithText(text);
+    makeSpeech(textWithoutPythonMarkDown)
       .then((response) => {
+        setTextToShow(text);
         let { blendData, filename } = response.data;
 
         let newClips = [
@@ -202,7 +204,15 @@ function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) 
     // .finally(() => {
     //   setIsThinking(false);
     // });
-  }, [speak, morphTargetDictionaryBody, morphTargetDictionaryLowerTeeth, setAudioSource, setSpeak, text]);
+  }, [
+    setTextToShow,
+    speak,
+    morphTargetDictionaryBody,
+    morphTargetDictionaryLowerTeeth,
+    setAudioSource,
+    setSpeak,
+    text,
+  ]);
 
   let idleFbx = useFBX("/idle.fbx");
   let { clips: idleClips } = useAnimations(idleFbx.animations);
@@ -301,6 +311,8 @@ function TalkingAvatar() {
   const [isReplying, setIsReplying] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
 
+  const [textToShow, setTextToShow] = useState(messages[messages.length - 1].message);
+
   // ************
   const audioPlayer = useRef();
 
@@ -361,6 +373,7 @@ function TalkingAvatar() {
         setIsThinking(false);
         setIsReplying(true);
         setText(messages[messages.length - 1].message);
+        setTextToShow("");
         markMessageAsRead(messages[messages.length - 1]._id);
         // if  messages.length === 1 then wait for 2 seconds
         if (messages.length === 1) {
@@ -381,10 +394,11 @@ function TalkingAvatar() {
     setSpeak(false);
     setIsReplying(false);
     setIsThinking(false);
+    setTextToShow("");
   };
   return (
     <div style={STYLES.wrapper}>
-      <SideBar />
+      <SideBar message={textToShow} />
       {isError && <ErrorModal />}
       <div style={STYLES.area}>
         {!speak ? (
@@ -447,6 +461,7 @@ function TalkingAvatar() {
             setAudioSource={setAudioSource}
             playing={playing}
             setIsReplying={setIsReplying}
+            setTextToShow={setTextToShow}
           />
         </Suspense>
       </Canvas>
