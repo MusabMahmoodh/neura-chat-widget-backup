@@ -19,6 +19,7 @@ import AvatarResponseProcess from "./AvatarResponseProcess";
 import AvatarListeningProcess from "./AvatarListeningProcess";
 import ErrorModal from "../ErrorModal/ErrorModal";
 import { AVATR_BE } from "../../constants";
+import SideBar from "./SideBar";
 const _ = require("lodash");
 
 const host = AVATR_BE;
@@ -383,6 +384,7 @@ function TalkingAvatar() {
   };
   return (
     <div style={STYLES.wrapper}>
+      <SideBar />
       {isError && <ErrorModal />}
       <div style={STYLES.area}>
         {!speak ? (

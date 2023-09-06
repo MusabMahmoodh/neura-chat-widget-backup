@@ -5,6 +5,7 @@ import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./t
 import { stopVoice } from "./utils/converstionUtils";
 import { getUserData } from "./utils/userrUtils";
 import { BOT } from "./constants";
+import fingerprint from "./utils/fingerprintUtils";
 
 const getCurrentTime = () => {
   const now = new Date();
@@ -92,6 +93,7 @@ export const useMessage = () => {
   const [isError, setIsError] = useState<boolean>(false);
   // only for AIeye
   const [week, setWeek] = useState<number>(5);
+  const devaiceFingerprint = fingerprint;
 
   const toggleSpeaker = () => {
     setIsSpeakerOn((pre) => !pre);

@@ -195,3 +195,69 @@ canvas {
     }
   }
 }
+
+.avatar-chat-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: #202123b2;
+  z-index: 9999;
+  &-header {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ffffff40;
+    &-title {
+      font-size: 1.5rem;
+      color: white;
+    }
+  }
+  &-body {
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    &-item {
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid #ffffff40;
+      cursor: pointer;
+      &:hover {
+        background: #ffffff40;
+      }
+      &-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
+      &-name {
+        font-size: 1.2rem;
+        color: white;
+      }
+    }
+  }
+  &-footer {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ffffff40;
+    &-button {
+      width: 120px;
+      height: 50px;
+      border-radius: 40px;
+      background: #293dce40;
+      border: solid #293dce 2px;
+      color: white;
+
+      outline: none;
+      cursor: pointer;
+      &:hover {
+        background: #293dce80;
+      }
+    }
+  }
+}

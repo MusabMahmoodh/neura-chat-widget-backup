@@ -41,10 +41,23 @@ export const createSession = async (sessionId: string, week?: number) => {
 };
 
 export const getResponse = async (message: string, session: string) => {
-  // mock api response with delay
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve("This is a mocked response");
-    }, 1000);
+  const response = await fetch(`${getApi()}/generate?session_id=${session}`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_input: message,
+    }),
   });
+
+  const data = await response.json();
+  return data.generated;
+  // mock api response with delay
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve("This is a mocked response");
+  //   }, 1000);
+  // });
 };
