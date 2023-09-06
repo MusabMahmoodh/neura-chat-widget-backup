@@ -102,7 +102,7 @@ export const useMessage = () => {
     }
   };
 
-  const generateSession = async () => {
+  const generateSession = useCallback(async () => {
     setIsSessionCreated(true);
     setIsError(false);
     const sessionId = nanoid();
@@ -119,10 +119,10 @@ export const useMessage = () => {
 
     setSession(sessionId);
     setIsLoadingResponse(false);
-  };
+  }, [client, week]);
   useEffect(() => {
     generateSession();
-  }, []);
+  }, [generateSession]);
 
   const addMessage = useCallback(
     (message: CustomMessageModel) => {
