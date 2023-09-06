@@ -78,6 +78,8 @@ const getGreeTingMessage = (userName: string, isFirstTime: boolean) => {
 
 export const useMessage = () => {
   const userData = getUserData();
+  const client = getBot();
+
   const userName = userData?.name;
   const isFirstTime = userData?.isFirstVisit;
   const greeTingMessage = getGreeTingMessage(userName, isFirstTime);
@@ -89,7 +91,7 @@ export const useMessage = () => {
   const [isSpeakerOn, setIsSpeakerOn] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   // only for AIeye
-  const [week, setWeek] = useState<number>(18);
+  const [week, setWeek] = useState<number>(5);
 
   const toggleSpeaker = () => {
     setIsSpeakerOn((pre) => !pre);
@@ -103,7 +105,11 @@ export const useMessage = () => {
     setIsError(false);
     const sessionId = nanoid();
     try {
-      await createSession(sessionId);
+      if (client === BOT.AIEYE) {
+        await createSession(sessionId, week);
+      } else {
+        await createSession(sessionId);
+      }
     } catch (e) {
       console.log(e);
       setIsError(true);

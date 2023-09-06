@@ -26,8 +26,12 @@ export const getBot = () => {
   }
 };
 
-export const createSession = async (sessionId: string) => {
-  const response = await fetch(`${getApi()}/create_session?session_id=${sessionId}`, {
+export const createSession = async (sessionId: string, week?: number) => {
+  let url = `${getApi()}/create_session?session_id=${sessionId}`;
+  if (week) {
+    url = `${getApi()}/create_session?session_id=${sessionId}&lesson=week${week}`;
+  }
+  const response = await fetch(url, {
     method: "GET",
     headers: {
       accept: "application/json",
