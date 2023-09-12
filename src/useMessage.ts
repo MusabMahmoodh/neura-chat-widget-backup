@@ -91,6 +91,9 @@ export const useMessage = () => {
   const [session, setSession] = useState<string>("");
   const [isSpeakerOn, setIsSpeakerOn] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [isLimitReached, setIsLimitReached] = useState<{
+    message: string;
+  } | null>();
   // only for AIeye
   const [week, setWeek] = useState<number>(5);
   // const devaiceFingerprint = fingerprint;
@@ -107,10 +110,16 @@ export const useMessage = () => {
     setIsError(false);
     const sessionId = nanoid();
     try {
+      let res;
       if (client === BOT.AIEYE) {
-        await createSession(sessionId, week);
+        res = await createSession(sessionId, week);
       } else {
-        await createSession(sessionId);
+        res = await createSession(sessionId);
+      }
+      if (res.body.error) {
+        setIsLimitReached({
+          message: res.body.error,
+        });
       }
     } catch (e) {
       console.log(e);
@@ -201,5 +210,6 @@ export const useMessage = () => {
     updateWeek,
     week,
     isError,
+    isLimitReached,
   };
 };

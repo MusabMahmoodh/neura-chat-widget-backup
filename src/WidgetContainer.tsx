@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Widget } from "./components/Widget/Widget";
 import { useMessage } from "./useMessage";
 import { useUserData } from "./useUserData";
+import ErrorScreen from "./components/ErrorScreen/ErrorScreen";
 
 export const WidgetContainer: React.FC<{
   voices: Array<any>;
@@ -20,6 +21,7 @@ export const WidgetContainer: React.FC<{
     updateWeek,
     week,
     addMessage,
+    isLimitReached,
   } = useMessage();
   const { userData, updateAgent } = useUserData();
 
@@ -32,6 +34,10 @@ export const WidgetContainer: React.FC<{
       return "Company3";
     }
   }, [license]);
+
+  if (isLimitReached != null && isLimitReached.message) {
+    return <ErrorScreen message={isLimitReached.message} />;
+  }
 
   return (
     <>

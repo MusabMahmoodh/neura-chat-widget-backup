@@ -21,6 +21,7 @@ import ErrorModal from "../ErrorModal/ErrorModal";
 import { AVATR_BE } from "../../constants";
 import SideBar from "./SideBar";
 import { replacePythonCodeWithText } from "../../utils/textUtils";
+import ErrorScreen from "../ErrorScreen/ErrorScreen";
 const _ = require("lodash");
 
 const host = AVATR_BE;
@@ -304,7 +305,7 @@ const STYLES = {
 
 function TalkingAvatar() {
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
-  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, isError } = useMessage();
+  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, isError, isLimitReached } = useMessage();
   const { userData } = useUserData();
   const agent = userData.agent;
 
@@ -396,6 +397,9 @@ function TalkingAvatar() {
     setIsThinking(false);
     setTextToShow("");
   };
+  if (isLimitReached != null && isLimitReached.message) {
+    return <ErrorScreen message={isLimitReached.message} />;
+  }
   return (
     <div style={STYLES.wrapper}>
       <SideBar message={textToShow} />

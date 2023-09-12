@@ -1,4 +1,5 @@
 import { BOT } from "./constants";
+import fingerprint from "./utils/fingerprintUtils";
 
 export const getApi = () => {
   const queryString = window.location.search;
@@ -27,9 +28,10 @@ export const getBot = () => {
 };
 
 export const createSession = async (sessionId: string, week?: number) => {
-  let url = `${getApi()}/create_session?session_id=${sessionId}`;
+  const user = fingerprint;
+  let url = `${getApi()}/create_session?session_id=${sessionId}&user_id=${user}`;
   if (week) {
-    url = `${getApi()}/create_session?session_id=${sessionId}&lesson=week${week}`;
+    url = `${getApi()}/create_session?session_id=${sessionId}&user_id=${user}&lesson=week${week}`;
   }
   const response = await fetch(url, {
     method: "GET",

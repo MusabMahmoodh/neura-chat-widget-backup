@@ -11,10 +11,12 @@ import TypeWriter from "../TypeWriter/TypeWriter";
 import { BOT } from "../../constants";
 import { getBot } from "../../messageService";
 import WeekSelect from "../WeekSelect/WeekSelect";
+import ErrorScreen from "../ErrorScreen/ErrorScreen";
 
 const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
-  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, updateWeek, week, addMessage } = useMessage();
+  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, updateWeek, week, addMessage, isLimitReached } =
+    useMessage();
   const { userData } = useUserData();
   const agent = userData.agent;
 
@@ -72,6 +74,10 @@ const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+  if (isLimitReached != null && isLimitReached.message) {
+    return <ErrorScreen message={isLimitReached.message} />;
   }
 
   const stopSpeaking = () => {
