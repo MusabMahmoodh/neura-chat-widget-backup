@@ -9,7 +9,7 @@ import { emailValidator, nameValidator, phoneValidator } from "../../utils/input
 import { storeUserData } from "../../utils/userrUtils";
 import WavingHand from "../WavingHand/WavingHand";
 import AgentSelect from "../AgentSelect/AgentSelect";
-import { getBot } from "../../messageService";
+import { getBot, isAvatarChat } from "../../messageService";
 import { BOT } from "../../constants";
 const UserFormContainer = ({ updatePage }) => {
   const [userData, setUserData] = useState({ name: "", email: "", phone: "", inquiry: "", agent: 1 });
@@ -19,6 +19,7 @@ const UserFormContainer = ({ updatePage }) => {
     setUserData({ ...userData, [name]: value });
   };
   const bot = getBot();
+  const avatarChat = isAvatarChat();
   const logo = bot === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
   const validate = () => {
     let errors = {};
@@ -76,52 +77,54 @@ const UserFormContainer = ({ updatePage }) => {
           onChange={handleChange}
         />
         <div className="user-form-container-form-error">{errors.name}</div>
-        {bot !== BOT.AIEYE && (
-          <>
-            <label className="user-form-container-form-label" htmlFor="email">
-              Email *
-            </label>
-            <input
-              className="user-form-container-form-input"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              required
-              onChange={handleChange}
-            />
-            <div className="user-form-container-form-error">{errors.email}</div>
-            <label className="user-form-container-form-label" htmlFor="phone">
-              Phone *
-            </label>
-            <input
-              className="user-form-container-form-input"
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Phone"
-              required
-              onChange={handleChange}
-            />
-            <div className="user-form-container-form-error">{errors.phone}</div>
-            <label className="user-form-container-form-label" htmlFor="phone">
-              Select agent to talk to
-            </label>
-          </>
-        )}
-        <div className="user-form-container-form-select">
-          <AgentSelect
-            agent={userData.agent}
-            toggleAgent={() =>
-              setUserData((pre) => {
-                return {
-                  ...pre,
-                  agent: pre.agent === 1 ? 2 : 1,
-                };
-              })
-            }
+
+        <>
+          <label className="user-form-container-form-label" htmlFor="email">
+            Email *
+          </label>
+          <input
+            className="user-form-container-form-input"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+            onChange={handleChange}
           />
-        </div>
+          <div className="user-form-container-form-error">{errors.email}</div>
+          <label className="user-form-container-form-label" htmlFor="phone">
+            Phone *
+          </label>
+          <input
+            className="user-form-container-form-input"
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Phone"
+            required
+            onChange={handleChange}
+          />
+          <div className="user-form-container-form-error">{errors.phone}</div>
+          <label className="user-form-container-form-label" htmlFor="phone">
+            Select agent to talk to
+          </label>
+        </>
+
+        {!avatarChat && (
+          <div className="user-form-container-form-select">
+            <AgentSelect
+              agent={userData.agent}
+              toggleAgent={() =>
+                setUserData((pre) => {
+                  return {
+                    ...pre,
+                    agent: pre.agent === 1 ? 2 : 1,
+                  };
+                })
+              }
+            />
+          </div>
+        )}
         <div className="user-form-container-form-btn" onClick={handleSubmission}>
           <img className="user-form-container-form-btn-icon" src={StartConverstionIcon} alt="chat" />
           <span className="user-form-container-form-btn-text">Start Chat</span>

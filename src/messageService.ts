@@ -27,6 +27,17 @@ export const getBot = () => {
   }
 };
 
+export const isAvatarChat = () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const _ = urlParams.get("avatarChat");
+  if (_ === "1") {
+    return true;
+  }
+
+  return false;
+};
+
 export const createSession = async (sessionId: string, week?: number) => {
   const user = fingerprint;
   let url = `${getApi()}/create_session?session_id=${sessionId}&user_id=${user}`;
