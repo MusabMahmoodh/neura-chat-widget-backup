@@ -397,7 +397,8 @@ function TalkingAvatar() {
     setIsThinking(false);
     setTextToShow("");
   };
-  if (isLimitReached != null && isLimitReached.message) {
+
+  if (isLimitReached && isLimitReached != null && isLimitReached?.message) {
     return <ErrorScreen message={isLimitReached.message} />;
   }
   return (

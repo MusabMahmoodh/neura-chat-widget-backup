@@ -116,7 +116,7 @@ export const useMessage = () => {
       } else {
         res = await createSession(sessionId);
       }
-      if (res.body.error) {
+      if (res?.body?.error) {
         setIsLimitReached({
           message: res.body.error,
         });
