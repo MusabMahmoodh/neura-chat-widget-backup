@@ -78,12 +78,12 @@
       color: $text-light;
     }
   }
-  .neura-chat-week-select-btn {
+  .neura-chat-week-select-toggle-btn {
     outline: none;
     border: none;
-    img {
-      width: 20px;
-      height: 20px;
-    }
+    padding: 0 20px 0 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
   }
 }

@@ -1,6 +1,4 @@
 import React from "react";
-import WeekSelectIconActive from "../../assets/WeekSelectOn.svg";
-import WeekSelectIconOff from "../../assets/WeekSelectoff.svg";
 import "./WeekSelect.scss";
 import { nanoid } from "nanoid";
 
@@ -56,8 +54,8 @@ const WeekSelect = ({ sendMessage, onUpdate, value }) => {
           ))}
         </div>
       ) : null}
-      <button className="neura-chat-week-select-btn" onClick={toggleInput}>
-        <img src={showInput ? WeekSelectIconActive : WeekSelectIconOff} alt="WeekSelect" />
+      <button className="neura-chat-week-select-toggle-btn" onClick={toggleInput}>
+        ☀️
       </button>
     </div>
   );
