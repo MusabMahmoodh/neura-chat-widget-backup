@@ -121,9 +121,13 @@ export const useMessage = () => {
       } else {
         res = await createSession(sessionId);
       }
-      if (!(res?.body?.error || res2?.body?.error)) {
+      if (res?.body?.error) {
         setIsLimitReached({
           message: res.body.error,
+        });
+      } else if (res2?.body?.error) {
+        setIsLimitReached({
+          message: res2.body.error,
         });
       }
     } catch (e) {

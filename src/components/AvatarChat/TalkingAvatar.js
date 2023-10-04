@@ -18,10 +18,12 @@ import AvatarMic from "./AvatarMic";
 import AvatarResponseProcess from "./AvatarResponseProcess";
 import AvatarListeningProcess from "./AvatarListeningProcess";
 import ErrorModal from "../ErrorModal/ErrorModal";
-import { AVATR_BE } from "../../constants";
+import { AVATR_BE, BOT } from "../../constants";
 import SideBar from "./SideBar";
 import { replacePythonCodeWithText } from "../../utils/textUtils";
 import ErrorScreen from "../ErrorScreen/ErrorScreen";
+import DemoSclSelect from "../DemoSclSelect/DemoSclSelect";
+import { getBot } from "../../messageService";
 const _ = require("lodash");
 
 const host = AVATR_BE;
@@ -273,7 +275,7 @@ function makeSpeech(text) {
 }
 
 const STYLES = {
-  wrapper: { position: "relative", width: "100%", height: "100vh", overflow: "hidden" },
+  wrapper: { position: "relative", width: "100%", height: "100vh", overflow: "hidden", background: "#000000" },
   area: { position: "absolute", width: "100%", bottom: "0", zIndex: 500 },
   anims: {
     display: "flex",
@@ -305,7 +307,17 @@ const STYLES = {
 
 function TalkingAvatar() {
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
-  const { messages, getApiResponse, isSpeakerOn, markMessageAsRead, isError, isLimitReached } = useMessage();
+  const {
+    messages,
+    getApiResponse,
+    isSpeakerOn,
+    markMessageAsRead,
+    isError,
+    isLimitReached,
+    sendMessage,
+    sclOption,
+    addSclOption,
+  } = useMessage();
   const { userData } = useUserData();
   const agent = userData.agent;
 
@@ -401,9 +413,16 @@ function TalkingAvatar() {
   if (isLimitReached && isLimitReached != null && isLimitReached?.message) {
     return <ErrorScreen message={isLimitReached.message} />;
   }
+
+  const bot = getBot();
   return (
     <div style={STYLES.wrapper}>
       <SideBar message={textToShow} />
+      {bot === BOT.DEMO_SCL && (
+        <div className="widget-container-chat-week-select">
+          <DemoSclSelect sendMessage={sendMessage} onUpdate={addSclOption} value={sclOption} />
+        </div>
+      )}
       {isError && <ErrorModal />}
       <div style={STYLES.area}>
         {!speak ? (
