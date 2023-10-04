@@ -22,6 +22,8 @@ export const WidgetContainer: React.FC<{
     week,
     addMessage,
     isLimitReached,
+    sclOption,
+    addSclOption,
   } = useMessage();
   const { userData, updateAgent } = useUserData();
 
@@ -56,6 +58,8 @@ export const WidgetContainer: React.FC<{
         updateWeek={updateWeek}
         week={week}
         addMessage={addMessage}
+        sclOption={sclOption}
+        addSclOption={addSclOption}
       />
     </>
   );

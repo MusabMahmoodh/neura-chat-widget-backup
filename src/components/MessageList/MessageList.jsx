@@ -9,6 +9,7 @@ import { generateTextToVoice } from "../../utils/converstionUtils";
 import WeekSelect from "../WeekSelect/WeekSelect";
 import { getBot } from "../../messageService";
 import { BOT } from "../../constants";
+import DemoSclSelect from "../DemoSclSelect/DemoSclSelect";
 const MessageList = ({
   voices,
   agent,
@@ -19,6 +20,8 @@ const MessageList = ({
   updateWeek,
   week,
   sendMessage,
+  sclOption,
+  addSclOption,
 }) => {
   const chatListRef = createRef();
 
@@ -47,6 +50,11 @@ const MessageList = ({
       {bot === BOT.AIEYE && (
         <div className="widget-container-chat-week-select">
           <WeekSelect sendMessage={sendMessage} onUpdate={updateWeek} value={week} />
+        </div>
+      )}
+      {bot === BOT.DEMO_SCL && (
+        <div className="widget-container-chat-week-select">
+          <DemoSclSelect sendMessage={sendMessage} onUpdate={addSclOption} value={sclOption} />
         </div>
       )}
       <ul className="widget-container-chat-list">

@@ -1,13 +1,17 @@
 import { BOT } from "./constants";
 import fingerprint from "./utils/fingerprintUtils";
 
-export const getApi = () => {
+export const getApi = (sclOption?: string) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const client = urlParams.get("client");
   if (client === "esoft") {
     return "https://esoft-demo.ascii.ai";
   } else if (client === "aieye") {
+    return "https://ai-eye-chatbot.ascii.ai";
+  } else if (client === "demo_scl" && sclOption === "general") {
+    return "https://esoft-demo.ascii.ai";
+  } else if (client === "demo_scl" && sclOption === "courses") {
     return "https://ai-eye-chatbot.ascii.ai";
   } else {
     return "https://esoft-demo.ascii.ai";
@@ -22,8 +26,10 @@ export const getBot = () => {
     return BOT.ESOFT;
   } else if (client === "aieye") {
     return BOT.AIEYE;
+  } else if (client === "demo_scl") {
+    return BOT.DEMO_SCL;
   } else {
-    return BOT.ESOFT;
+    return BOT.AIEYE;
   }
 };
 
@@ -38,11 +44,11 @@ export const isAvatarChat = () => {
   return false;
 };
 
-export const createSession = async (sessionId: string, week?: number) => {
+export const createSession = async (sessionId: string, week?: number, sclOption?: string) => {
   const user = fingerprint;
-  let url = `${getApi()}/create_session?session_id=${sessionId}&user_id=${user}`;
+  let url = `${getApi(sclOption)}/create_session?session_id=${sessionId}&user_id=${user}`;
   if (week) {
-    url = `${getApi()}/create_session?session_id=${sessionId}&user_id=${user}&lesson=week${week}`;
+    url = `${getApi(sclOption)}/create_session?session_id=${sessionId}&user_id=${user}&lesson=week${week}`;
   }
   const response = await fetch(url, {
     method: "GET",
@@ -53,8 +59,8 @@ export const createSession = async (sessionId: string, week?: number) => {
   return response.json();
 };
 
-export const getResponse = async (message: string, session: string) => {
-  const response = await fetch(`${getApi()}/generate?session_id=${session}`, {
+export const getResponse = async (message: string, session: string, sclOption?: string) => {
+  const response = await fetch(`${getApi(sclOption)}/generate?session_id=${session}`, {
     method: "POST",
     headers: {
       accept: "application/json",

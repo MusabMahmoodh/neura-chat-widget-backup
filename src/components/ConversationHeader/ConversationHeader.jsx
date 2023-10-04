@@ -14,7 +14,8 @@ const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeake
   const { listening } = useSpeechRecognition();
   const bot = getBot();
   const logo = bot === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
-  const titleName = bot === BOT.AIEYE ? "AI Teaching Assistant Robot" : "Esoft Chat Bot";
+  const titleName =
+    bot === BOT.AIEYE ? "AI Teaching Assistant Robot" : bot === BOT.DEMO_SCL ? "Grad College" : "Esoft Chat Bot";
   const subtitle =
     bot !== BOT.AIEYE
       ? "Hi there, let's start a conversation"

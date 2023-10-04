@@ -22,6 +22,8 @@ export const Widget: React.FC<{
   updateWeek: (week: number) => void;
   week: number;
   addMessage: (message: CustomMessageModel) => void;
+  sclOption: string;
+  addSclOption: (sclOption: string) => void;
 }> = ({
   remoteName = "",
   messages = [],
@@ -37,6 +39,8 @@ export const Widget: React.FC<{
   updateWeek,
   week,
   addMessage,
+  sclOption,
+  addSclOption,
 }) => {
   const [showSettings, setShowSettings] = React.useState(false);
   return (
@@ -67,6 +71,8 @@ export const Widget: React.FC<{
         updateWeek={updateWeek}
         week={week}
         sendMessage={addMessage}
+        sclOption={sclOption}
+        addSclOption={addSclOption}
       />
       <ChatInput sendMessage={onSend} />
     </div>

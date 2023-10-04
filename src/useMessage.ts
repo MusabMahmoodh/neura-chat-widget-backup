@@ -5,6 +5,7 @@ import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./t
 import { stopVoice } from "./utils/converstionUtils";
 import { getUserData } from "./utils/userrUtils";
 import { BOT } from "./constants";
+import { replaceEsoft, replaceGrad } from "./utils/textUtils";
 // import fingerprint from "./utils/fingerprintUtils";
 
 const getCurrentTime = () => {
@@ -96,7 +97,7 @@ export const useMessage = () => {
   } | null>();
   // only for AIeye
   const [week, setWeek] = useState<number>(5);
-  // const devaiceFingerprint = fingerprint;
+  const [sclOption, setSclOption] = useState<string>("general");
 
   const toggleSpeaker = () => {
     setIsSpeakerOn((pre) => !pre);
@@ -111,12 +112,16 @@ export const useMessage = () => {
     const sessionId = nanoid();
     try {
       let res;
+      let res2;
       if (client === BOT.AIEYE) {
-        res = await createSession(sessionId, week);
+        res = await createSession(sessionId, week, sclOption);
+      } else if (client === BOT.DEMO_SCL) {
+        res = await createSession(sessionId, week, sclOption);
+        res2 = await createSession(sessionId);
       } else {
         res = await createSession(sessionId);
       }
-      if (res?.body?.error) {
+      if (!(res?.body?.error || res2?.body?.error)) {
         setIsLimitReached({
           message: res.body.error,
         });
@@ -128,7 +133,7 @@ export const useMessage = () => {
 
     setSession(sessionId);
     setIsLoadingResponse(false);
-  }, [client, week]);
+  }, [client, week, sclOption]);
   useEffect(() => {
     generateSession();
   }, [generateSession]);
@@ -147,6 +152,12 @@ export const useMessage = () => {
   };
 
   const getApiResponse = async (message: string) => {
+    let messageForQuery = message;
+
+    if (BOT.DEMO_SCL === client) {
+      messageForQuery = replaceGrad(message);
+    }
+
     setIsLoadingResponse(true);
     const newMessage = {
       _id: nanoid(),
@@ -159,10 +170,17 @@ export const useMessage = () => {
     };
     addMessage(newMessage);
     try {
-      const res = await getResponse(message, session);
+      let messageToDisplay;
+      const res = await getResponse(messageForQuery, session, sclOption);
+      if (BOT.DEMO_SCL === client) {
+        messageToDisplay = replaceEsoft(res);
+      } else {
+        messageToDisplay = res;
+      }
+
       const response = {
         _id: nanoid(),
-        message: `${res}`,
+        message: `${messageToDisplay}`,
         sender: "remote" as SenderType,
         direction: "incoming" as DirectionType,
         position: "single" as PositionType,
@@ -196,6 +214,10 @@ export const useMessage = () => {
     setWeek(week);
   };
 
+  const addSclOption = (option: string) => {
+    setSclOption(option);
+  };
+
   return {
     addMessage,
     messages,
@@ -208,6 +230,8 @@ export const useMessage = () => {
     toggleSpeaker,
     markMessageAsRead,
     updateWeek,
+    addSclOption,
+    sclOption,
     week,
     isError,
     isLimitReached,
