@@ -12,7 +12,7 @@ export const getApi = (sclOption?: string) => {
   } else if (client === "demo_scl" && sclOption === "general") {
     return "https://esoft-demo.ascii.ai";
   } else if (client === "demo_scl" && sclOption === "courses") {
-    return "https://ai-eye-chatbot.ascii.ai";
+    return "https://demo-college.ascii.ai";
   } else {
     return "https://esoft-demo.ascii.ai";
   }
