@@ -116,7 +116,7 @@ export const useMessage = () => {
       if (client === BOT.AIEYE) {
         res = await createSession(sessionId, week, sclOption);
       } else if (client === BOT.DEMO_SCL) {
-        res = await createSession(sessionId, week, sclOption);
+        res = await createSession(sessionId, "ai", sclOption);
         res2 = await createSession(sessionId);
       } else {
         res = await createSession(sessionId);
@@ -137,7 +137,7 @@ export const useMessage = () => {
 
     setSession(sessionId);
     setIsLoadingResponse(false);
-  }, [client, week, sclOption]);
+  }, []);
   useEffect(() => {
     generateSession();
   }, [generateSession]);

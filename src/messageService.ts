@@ -44,11 +44,13 @@ export const isAvatarChat = () => {
   return false;
 };
 
-export const createSession = async (sessionId: string, week?: number, sclOption?: string) => {
+export const createSession = async (sessionId: string, week?: number | "ai", sclOption?: string) => {
   const user = fingerprint;
   let url = `${getApi(sclOption)}/create_session?session_id=${sessionId}&user_id=${user}`;
-  if (week) {
+  if (typeof week === "number") {
     url = `${getApi(sclOption)}/create_session?session_id=${sessionId}&user_id=${user}&lesson=week${week}`;
+  } else if (week === "ai") {
+    url = `${getApi(sclOption)}/create_session?session_id=${sessionId}&user_id=${user}&lesson=ai`;
   }
   const response = await fetch(url, {
     method: "GET",
