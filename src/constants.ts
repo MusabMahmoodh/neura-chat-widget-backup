@@ -5,6 +5,7 @@ export const BOT = {
     general: "https://esoft-demo.ascii.ai",
     courses: "https://esoft-demo.ascii.ai",
   },
+  INSURANCE: "https://insurance.ascii.ai/",
 };
 
 export const AVATR_BE = "https://robin.ascii.ai";

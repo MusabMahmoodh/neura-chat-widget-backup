@@ -13,6 +13,8 @@ export const getApi = (sclOption?: string) => {
     return "https://esoft-demo.ascii.ai";
   } else if (client === "demo_scl" && sclOption === "courses") {
     return "https://demo-college.ascii.ai";
+  } else if (client === "insurance") {
+    return "https://insurance.ascii.ai";
   } else {
     return "https://esoft-demo.ascii.ai";
   }
@@ -28,6 +30,8 @@ export const getBot = () => {
     return BOT.AIEYE;
   } else if (client === "demo_scl") {
     return BOT.DEMO_SCL;
+  } else if (client === "insurance") {
+    return BOT.INSURANCE;
   } else {
     return BOT.AIEYE;
   }
