@@ -6,6 +6,7 @@ import { stopVoice } from "./utils/converstionUtils";
 import { getUserData } from "./utils/userrUtils";
 import { BOT } from "./constants";
 import { replaceEsoft, replaceGrad } from "./utils/textUtils";
+import fingerprint from "./utils/fingerprintUtils";
 // import fingerprint from "./utils/fingerprintUtils";
 
 const getCurrentTime = () => {
@@ -116,7 +117,16 @@ export const useMessage = () => {
       if (client === BOT.AIEYE) {
         res = await createSession(sessionId, week, sclOption);
       } else if (client === BOT.DEMO_SCL) {
-        res = await createSession(sessionId, "ai", sclOption);
+        const user = fingerprint;
+        res = await fetch(
+          `https://demo-college.ascii.ai/create_session?session_id=${sessionId}&user_id=${user}&lesson=ai`,
+          {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+            },
+          }
+        );
         res2 = await createSession(sessionId);
       } else {
         res = await createSession(sessionId);
