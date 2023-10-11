@@ -5,7 +5,7 @@ import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./t
 import { stopVoice } from "./utils/converstionUtils";
 import { getUserData } from "./utils/userrUtils";
 import { BOT } from "./constants";
-import { replaceEsoft, replaceGrad } from "./utils/textUtils";
+import { replaceEsoft, replaceGrad, replaceLinksWithText } from "./utils/textUtils";
 import fingerprint from "./utils/fingerprintUtils";
 // import fingerprint from "./utils/fingerprintUtils";
 
@@ -187,7 +187,9 @@ export const useMessage = () => {
       let messageToDisplay;
       const res = await getResponse(messageForQuery, session, sclOption);
       if (BOT.DEMO_SCL === client) {
-        messageToDisplay = replaceEsoft(res);
+        var replaceLinks = replaceLinksWithText(res, " https://neura-demo-school.netlify.app/ ");
+        console.log("replaceLinks", replaceLinks);
+        messageToDisplay = replaceEsoft(replaceLinks);
       } else {
         messageToDisplay = res;
       }

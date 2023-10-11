@@ -3,6 +3,10 @@ export function replacePythonCodeWithText(markdown: string) {
   return markdown.replace(pythonCodeRegex, "as shown in the code");
 }
 
+export function replaceLinksWithText(markdown: string, placeholder: string) {
+  const linkRegex = /\[(.*?)\]\((.*?)\)/g;
+  return markdown.replace(linkRegex, placeholder);
+}
 export function replaceEsoft(markdown: string) {
   const esoftRegex = /eSoft/gi;
   return markdown.replace(esoftRegex, "GRAD");
