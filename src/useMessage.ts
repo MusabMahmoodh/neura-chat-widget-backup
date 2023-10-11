@@ -187,8 +187,7 @@ export const useMessage = () => {
       let messageToDisplay;
       const res = await getResponse(messageForQuery, session, sclOption);
       if (BOT.DEMO_SCL === client) {
-        var replaceLinks = replaceLinksWithText(res, " https://neura-demo-school.netlify.app/ ");
-        console.log("replaceLinks", replaceLinks);
+        var replaceLinks = replaceLinksWithText(res, "https://neura-demo-school.netlify.app");
         messageToDisplay = replaceEsoft(replaceLinks);
       } else {
         messageToDisplay = res;

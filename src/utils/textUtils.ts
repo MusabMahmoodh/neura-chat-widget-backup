@@ -4,7 +4,7 @@ export function replacePythonCodeWithText(markdown: string) {
 }
 
 export function replaceLinksWithText(markdown: string, placeholder: string) {
-  const linkRegex = /\[(.*?)\]\((.*?)\)/g;
+  const linkRegex = /http:\/\/ecet.lk/gi;
   return markdown.replace(linkRegex, placeholder);
 }
 export function replaceEsoft(markdown: string) {
