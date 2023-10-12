@@ -419,7 +419,12 @@ function TalkingAvatar() {
   }, [messages, isSpeakerOn, agent, markMessageAsRead]);
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return (
+      <ErrorScreen
+        subMessage="But you can continue with text chat"
+        message="Browser doesn't support speech recognition"
+      />
+    );
   }
 
   const stopSpeaking = () => {

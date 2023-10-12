@@ -1,11 +1,17 @@
 import React from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import ErrorScreen from "../ErrorScreen/ErrorScreen";
 
 const VoiceRecorder = () => {
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return (
+      <ErrorScreen
+        subMessage="But you can continue with text chat"
+        message="Browser doesn't support speech recognition"
+      />
+    );
   }
 
   return (

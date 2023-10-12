@@ -5,7 +5,8 @@ import "./ErrorScreen.scss";
 import LimitExceedImg from "../../assets/limit-reach.gif";
 const ErrorScreen: React.FC<{
   message: string;
-}> = ({ message }) => {
+  subMessage?: string;
+}> = ({ message, subMessage }) => {
   return (
     <div className="error-screen">
       <div className="error-screen__title">
@@ -16,6 +17,8 @@ const ErrorScreen: React.FC<{
       </div>
       <div className="error-screen__message">
         <p>{message}</p>
+        {/* sub message */}
+        {subMessage && <p className="error-screen__message--sub">{subMessage}</p>}
       </div>
     </div>
   );

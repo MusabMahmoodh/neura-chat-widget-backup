@@ -73,7 +73,12 @@ const VoiceToVoiceAgent = ({ voices, switchToChat }) => {
   }, [messages, isSpeakerOn, agent, voices, markMessageAsRead]);
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return (
+      <ErrorScreen
+        subMessage="But you can continue with text chat"
+        message="Browser doesn't support speech recognition"
+      />
+    );
   }
 
   if (isLimitReached != null && isLimitReached.message) {
