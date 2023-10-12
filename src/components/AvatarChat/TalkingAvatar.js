@@ -217,6 +217,15 @@ function Avatar({ setTextToShow, avatar_url, speak, setSpeak, text, setAudioSour
     text,
   ]);
 
+  useEffect(() => {
+    if (speak === false) {
+      setClips([]);
+      mixer.stopAllAction();
+      setAudioSource(null);
+      window.speechSynthesis.cancel();
+    }
+  }, [speak, mixer]);
+
   let idleFbx = useFBX("/idle.fbx");
   let { clips: idleClips } = useAnimations(idleFbx.animations);
 
@@ -284,6 +293,17 @@ const STYLES = {
     justifyContent: "center",
     minHeight: "200px",
   },
+  stopBtn: {
+    padding: "10px",
+    marginTop: "75px",
+    display: "block",
+    color: "#FFFFFF",
+    background: "#222222",
+    border: "None",
+    cursor: "pointer",
+    borderRadius: "5px",
+  },
+
   text: {
     margin: "0px",
     width: "300px",
@@ -403,11 +423,10 @@ function TalkingAvatar() {
   }
 
   const stopSpeaking = () => {
-    setText("");
     setSpeak(false);
-    setIsReplying(false);
-    setIsThinking(false);
-    setTextToShow("");
+    setAudioSource(null);
+    audioPlayer.current.audioEl.current.pause();
+    setPlaying(false);
   };
 
   if (isLimitReached && isLimitReached != null && isLimitReached?.message) {
@@ -425,6 +444,13 @@ function TalkingAvatar() {
       )}
       {isError && <ErrorModal />}
       <div style={STYLES.area}>
+        {speak && (
+          <div style={STYLES.anims}>
+            <div style={STYLES.stopBtn} onClick={stopSpeaking}>
+              Stop Speaking
+            </div>
+          </div>
+        )}
         {!speak ? (
           <div style={STYLES.anims}>
             {!isThinking && !isReplying && listening ? (
