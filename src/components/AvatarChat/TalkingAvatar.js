@@ -458,15 +458,14 @@ function TalkingAvatar() {
         {!speak ? (
           <div style={STYLES.anims}>
             {!isThinking && !isReplying && listening ? (
-              <AvatarListeningProcess />
+              <div>
+                <AvatarListeningProcess />
+              </div>
             ) : isThinking && !isReplying ? (
-              <AvatarListeningProcess />
+              <AvatarResponseProcess />
             ) : !isThinking && isReplying ? (
               <>
                 <AvatarResponseProcess />
-                <button className="voice-to-voice-stop-speak-btn" onClick={stopSpeaking}>
-                  Stop Speaking
-                </button>
               </>
             ) : (
               <>
