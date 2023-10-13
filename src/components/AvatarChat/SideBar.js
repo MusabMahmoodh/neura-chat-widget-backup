@@ -6,9 +6,7 @@ import ResponseComponent from "../ResponseComponent/ResponseComponent";
 const SideBar = ({ message }) => {
   return (
     <div className="avatar-chat-sidebar">
-      <div className="avatar-chat-sidebar-header">
-        <img src={Logo} alt="ascii-logo" width="140px" />
-      </div>
+      <div className="avatar-chat-sidebar-header">{/* <img src={Logo} alt="ascii-logo" width="140px" /> */}</div>
       <div className="avatar-chat-sidebar-body">
         <ResponseComponent response={message} />
       </div>

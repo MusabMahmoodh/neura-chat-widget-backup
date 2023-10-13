@@ -295,13 +295,19 @@ const STYLES = {
   },
   stopBtn: {
     padding: "10px",
-    marginTop: "75px",
+
     display: "block",
     color: "#FFFFFF",
     background: "#222222",
     border: "None",
     cursor: "pointer",
     borderRadius: "5px",
+    width: "200px",
+    margin: "auto",
+    textAlign: "center",
+    marginTop: "-20px",
+    zIndex: "9999",
+    marginBottom: "5px",
   },
 
   text: {
@@ -449,13 +455,6 @@ function TalkingAvatar() {
       )}
       {isError && <ErrorModal />}
       <div style={STYLES.area}>
-        {speak && (
-          <div style={STYLES.anims}>
-            <div style={STYLES.stopBtn} onClick={stopSpeaking}>
-              Stop Speaking
-            </div>
-          </div>
-        )}
         {!speak ? (
           <div style={STYLES.anims}>
             {!isThinking && !isReplying && listening ? (
@@ -480,6 +479,11 @@ function TalkingAvatar() {
         ) : (
           <div style={STYLES.anims}>
             <AvatarResponseProcess />
+          </div>
+        )}
+        {speak && (
+          <div style={STYLES.stopBtn} onClick={stopSpeaking}>
+            Stop Speaking
           </div>
         )}
       </div>
