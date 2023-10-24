@@ -47,6 +47,7 @@ const ResourceDisplay = ({ resources }) => {
             marginBottom: "0.5rem",
             borderLeft: "5px solid #e0e0e0",
             paddingLeft: "0.5rem",
+            maxWidth: "340px",
           }}
         >
           {url}
