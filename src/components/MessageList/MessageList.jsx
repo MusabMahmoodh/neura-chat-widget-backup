@@ -91,7 +91,7 @@ const MessageList = ({
                       : "widget-container-chat-list-item-text widget-container-chat-list-item-text--right"
                   }
                 >
-                  <ResponseComponent response={message.message} />
+                  <ResponseComponent response={message.message} resources={message.resources} />
                 </div>
 
                 {message?.time && (

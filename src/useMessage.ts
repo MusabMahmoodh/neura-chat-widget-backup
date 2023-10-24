@@ -5,7 +5,7 @@ import { CustomMessageModel, DirectionType, PositionType, SenderType } from "./t
 import { stopVoice } from "./utils/converstionUtils";
 import { getUserData } from "./utils/userrUtils";
 import { BOT } from "./constants";
-import { replaceEsoft, replaceGrad, replaceLinksWithText } from "./utils/textUtils";
+// import { replaceEsoft, replaceGrad, replaceLinksWithText } from "./utils/textUtils";
 import fingerprint from "./utils/fingerprintUtils";
 // import fingerprint from "./utils/fingerprintUtils";
 
@@ -113,7 +113,6 @@ export const useMessage = () => {
     const sessionId = nanoid();
     try {
       let res;
-      let res2;
       if (client === BOT.AIEYE) {
         res = await createSession(sessionId, week, sclOption);
       } else if (client === BOT.DEMO_SCL) {
@@ -127,17 +126,26 @@ export const useMessage = () => {
             },
           }
         );
-        res2 = await createSession(sessionId);
+        const res2 = await fetch(
+          `https://ucl-api.ascii.ai/create_session?session_id=${sessionId}&user_id=${user}&lesson=ai`,
+          {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+            },
+          }
+        );
+        if (!res2?.ok) {
+          setIsLimitReached({
+            message: "You have reached the limit of 16 sessions per day. Please try again tomorrow.",
+          });
+        }
       } else {
         res = await createSession(sessionId);
       }
       if (res?.body?.error) {
         setIsLimitReached({
           message: res.body.error,
-        });
-      } else if (res2?.body?.error) {
-        setIsLimitReached({
-          message: res2.body.error,
         });
       }
     } catch (e) {
@@ -168,9 +176,9 @@ export const useMessage = () => {
   const getApiResponse = async (message: string) => {
     let messageForQuery = message;
 
-    if (BOT.DEMO_SCL === client) {
-      messageForQuery = replaceGrad(message);
-    }
+    // if (BOT.DEMO_SCL === client) {
+    //   messageForQuery = replaceGrad(message);
+    // }
 
     setIsLoadingResponse(true);
     const newMessage = {
@@ -186,16 +194,17 @@ export const useMessage = () => {
     try {
       let messageToDisplay;
       const res = await getResponse(messageForQuery, session, sclOption);
-      if (BOT.DEMO_SCL === client) {
-        var replaceLinks = replaceLinksWithText(res, "https://neura-demo-school.netlify.app");
-        messageToDisplay = replaceEsoft(replaceLinks);
-      } else {
-        messageToDisplay = res;
-      }
+      // if (BOT.DEMO_SCL === client) {
+      //   var replaceLinks = replaceLinksWithText(res, "https://neura-demo-school.netlify.app");
+      //   messageToDisplay = replaceEsoft(replaceLinks);
+      // } else {
+      messageToDisplay = res.data;
+      // }
 
       const response = {
         _id: nanoid(),
         message: `${messageToDisplay}`,
+        resources: res.resources,
         sender: "remote" as SenderType,
         direction: "incoming" as DirectionType,
         position: "single" as PositionType,

@@ -11,4 +11,5 @@ export interface CustomMessageModel {
   time?: string;
   isRead?: boolean;
   isWeekSelectedConfirm?: boolean;
+  resources?: string;
 }

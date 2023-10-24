@@ -10,7 +10,7 @@ export const getApi = (sclOption?: string) => {
   } else if (client === "aieye") {
     return "https://ai-eye-chatbot.ascii.ai";
   } else if (client === "demo_scl" && sclOption === "general") {
-    return "https://esoft-demo.ascii.ai";
+    return "https://ucl-api.ascii.ai";
   } else if (client === "demo_scl" && sclOption === "courses") {
     return "https://demo-college.ascii.ai";
   } else if (client === "insurance") {
@@ -66,7 +66,11 @@ export const createSession = async (sessionId: string, week?: number | "ai", scl
 };
 
 export const getResponse = async (message: string, session: string, sclOption?: string) => {
-  const response = await fetch(`${getApi(sclOption)}/generate?session_id=${session}`, {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const client = urlParams.get("client");
+  const sessionUrl = client === "demo_scl" && sclOption === "general" ? "generate_with_source" : "generate";
+  const response = await fetch(`${getApi(sclOption)}/${sessionUrl}?session_id=${session}`, {
     method: "POST",
     headers: {
       accept: "application/json",
@@ -78,7 +82,7 @@ export const getResponse = async (message: string, session: string, sclOption?: 
   });
 
   const data = await response.json();
-  return data.generated;
+  return { data: data.generated, resources: data.source };
   // mock api response with delay
   // return new Promise((resolve) => {
   //   setTimeout(() => {
