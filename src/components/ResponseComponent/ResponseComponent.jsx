@@ -59,7 +59,11 @@ const ResourceDisplay = ({ resources }) => {
 
 const ResponseComponent = ({ response, resources }) => {
   return (
-    <div>
+    <div
+      style={{
+        maxWidth: "340px",
+      }}
+    >
       <ReactMarkdown components={{ a: LinkRenderer }}>{response}</ReactMarkdown>
       {resources && <ResourceDisplay resources={resources} />}
     </div>
