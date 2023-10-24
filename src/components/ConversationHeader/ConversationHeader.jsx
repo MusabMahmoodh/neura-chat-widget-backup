@@ -18,7 +18,7 @@ const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeake
     bot === BOT.AIEYE
       ? "AI Teaching Assistant Robot"
       : bot === BOT.DEMO_SCL
-      ? "Grad College"
+      ? "UCL"
       : bot === BOT.INSURANCE
       ? "Insurance Demoe"
       : "Esoft Chat Bot";
