@@ -65,7 +65,7 @@ const ResponseComponent = ({ response, resources }) => {
       }}
     >
       <ReactMarkdown components={{ a: LinkRenderer }}>{response}</ReactMarkdown>
-      {resources && <ResourceDisplay resources={resources} />}
+      {/* {resources && <ResourceDisplay resources={resources} />} */}
     </div>
   );
 };
