@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import LogoImg from "../../assets/logo.svg";
 import AiEyeLogoImg from "../../assets/AIeye.png";
+import UCLImg from "../../assets/UCL.png";
 import StartConverstionIcon from "../../assets/send.svg";
 
 import "./UserFormContainer.scss";
@@ -20,7 +21,7 @@ const UserFormContainer = ({ updatePage }) => {
   };
   const bot = getBot();
   const avatarChat = isAvatarChat();
-  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
+  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : bot === BOT.DEMO_SCL ? UCLImg : LogoImg;
   const validate = () => {
     let errors = {};
     const nameValidation = nameValidator(userData.name);

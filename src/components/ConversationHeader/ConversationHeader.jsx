@@ -2,6 +2,7 @@ import React from "react";
 import { useSpeechRecognition } from "react-speech-recognition";
 import ResetIcon from "../../assets/reset.svg";
 import LogoImg from "../../assets/logo.svg";
+import UCLImg from "../../assets/UCL.png";
 import AiEyeLogoImg from "../../assets/AIeye.png";
 import "./ConversationHeader.scss";
 import SettingButton from "../SettingBtn/SettingBtn";
@@ -13,7 +14,8 @@ import { stopVoice } from "../../utils/converstionUtils";
 const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeakerOn, toggleMic }) => {
   const { listening } = useSpeechRecognition();
   const bot = getBot();
-  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
+  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : bot === BOT.DEMO_SCL ? UCLImg : LogoImg;
+
   const titleName =
     bot === BOT.AIEYE
       ? "AI Teaching Assistant Robot"

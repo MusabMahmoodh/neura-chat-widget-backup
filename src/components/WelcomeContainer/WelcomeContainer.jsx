@@ -1,6 +1,7 @@
 import React from "react";
 
 import LogoImg from "../../assets/logo.svg";
+import UCLImg from "../../assets/UCL.png";
 import AiEyeLogoImg from "../../assets/AIeye.png";
 import StartConverstionIcon from "../../assets/send.svg";
 import "./WelcomeContainer.scss";
@@ -9,7 +10,8 @@ import { getBot } from "../../messageService";
 import { BOT } from "../../constants";
 
 const WelcomeContainer = ({ updatePage }) => {
-  const logo = getBot() === BOT.AIEYE ? AiEyeLogoImg : LogoImg;
+  const bot = getBot();
+  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : bot === BOT.DEMO_SCL ? UCLImg : LogoImg;
   return (
     <div className="welcome-container">
       <img src={logo} className="welcome-container-img" alt="welcome" />
