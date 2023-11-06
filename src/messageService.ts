@@ -15,6 +15,8 @@ export const getApi = (sclOption?: string) => {
     return "https://demo-college.ascii.ai";
   } else if (client === "insurance") {
     return "https://insurance.ascii.ai";
+  } else if (client === "ascii-web") {
+    return "http://ascii-chat.ascii.ai";
   } else {
     return "https://esoft-demo.ascii.ai";
   }
@@ -32,6 +34,8 @@ export const getBot = () => {
     return BOT.DEMO_SCL;
   } else if (client === "insurance") {
     return BOT.INSURANCE;
+  } else if (client === "ascii-web") {
+    return BOT.ASCII;
   } else {
     return BOT.AIEYE;
   }

@@ -2,6 +2,7 @@ import React from "react";
 import { useSpeechRecognition } from "react-speech-recognition";
 import ResetIcon from "../../assets/reset.svg";
 import LogoImg from "../../assets/logo.svg";
+import ASCII_LOGO from "../../assets/ascii.jpeg";
 import UCLImg from "../../assets/UCL.png";
 import AiEyeLogoImg from "../../assets/AIeye.png";
 import "./ConversationHeader.scss";
@@ -14,7 +15,8 @@ import { stopVoice } from "../../utils/converstionUtils";
 const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeakerOn, toggleMic }) => {
   const { listening } = useSpeechRecognition();
   const bot = getBot();
-  const logo = bot === BOT.AIEYE ? AiEyeLogoImg : bot === BOT.DEMO_SCL ? UCLImg : LogoImg;
+  const logo =
+    bot === BOT.AIEYE ? AiEyeLogoImg : bot === BOT.DEMO_SCL ? UCLImg : bot === BOT.ASCII ? ASCII_LOGO : LogoImg;
 
   const titleName =
     bot === BOT.AIEYE
@@ -23,6 +25,8 @@ const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeake
       ? "UCL"
       : bot === BOT.INSURANCE
       ? "Insurance Demoe"
+      : bot === BOT.ASCII
+      ? "ASCII"
       : "Esoft Chat Bot";
   const subtitle =
     bot !== BOT.AIEYE
