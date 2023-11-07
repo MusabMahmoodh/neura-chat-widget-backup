@@ -16,7 +16,7 @@ export const getApi = (sclOption?: string) => {
   } else if (client === "insurance") {
     return "https://insurance.ascii.ai";
   } else if (client === "ascii-web") {
-    return "http://ascii-chat.ascii.ai";
+    return "https://ascii-chat.ascii.ai";
   } else {
     return "https://esoft-demo.ascii.ai";
   }

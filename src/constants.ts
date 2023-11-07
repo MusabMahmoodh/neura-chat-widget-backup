@@ -1,7 +1,7 @@
 export const BOT = {
   AIEYE: "https://ai-eye-chatbot.ascii.ai",
   ESOFT: "https://esoft-demo.ascii.ai",
-  ASCII: "http://ascii-chat.ascii.ai",
+  ASCII: "https://ascii-chat.ascii.ai",
   DEMO_SCL: {
     general: "https://esoft-demo.ascii.ai",
     courses: "https://esoft-demo.ascii.ai",
