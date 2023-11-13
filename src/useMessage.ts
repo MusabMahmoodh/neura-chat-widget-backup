@@ -107,14 +107,15 @@ export const useMessage = () => {
     }
   };
 
-  const generateSession = useCallback(async () => {
+  const generateSession = useCallback(async (customWeek?: number) => {
     setIsSessionCreated(true);
     setIsError(false);
     const sessionId = nanoid();
     try {
       let res;
       if (client === BOT.AIEYE) {
-        res = await createSession(sessionId, week, sclOption);
+        const weekToConnect = customWeek ? customWeek : week;
+        res = await createSession(sessionId, Number(weekToConnect), sclOption);
       } else if (client === BOT.DEMO_SCL) {
         const user = fingerprint;
         res = await fetch(
@@ -236,6 +237,7 @@ export const useMessage = () => {
       return;
     }
     setWeek(week);
+    generateSession(week);
   };
 
   const addSclOption = (option: string) => {
