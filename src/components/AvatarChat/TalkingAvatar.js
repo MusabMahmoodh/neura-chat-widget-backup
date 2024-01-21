@@ -24,6 +24,7 @@ import { replacePythonCodeWithText } from "../../utils/textUtils";
 import ErrorScreen from "../ErrorScreen/ErrorScreen";
 import DemoSclSelect from "../DemoSclSelect/DemoSclSelect";
 import { getBot } from "../../messageService";
+import WeekSelect from "../WeekSelect/WeekSelect";
 const _ = require("lodash");
 
 const host = AVATR_BE;
@@ -224,7 +225,7 @@ function Avatar({ setTextToShow, avatar_url, speak, setSpeak, text, setAudioSour
       setAudioSource(null);
       window.speechSynthesis.cancel();
     }
-  }, [speak, mixer]);
+  }, [speak, mixer, setAudioSource]);
 
   let idleFbx = useFBX("/idle.fbx");
   let { clips: idleClips } = useAnimations(idleFbx.animations);
@@ -343,6 +344,8 @@ function TalkingAvatar() {
     sendMessage,
     sclOption,
     addSclOption,
+    updateWeek,
+    week,
   } = useMessage();
   const { userData } = useUserData();
   const agent = userData.agent;
@@ -451,6 +454,11 @@ function TalkingAvatar() {
       {bot === BOT.DEMO_SCL && (
         <div className="widget-container-chat-week-select">
           <DemoSclSelect sendMessage={sendMessage} onUpdate={addSclOption} value={sclOption} />
+        </div>
+      )}
+      {bot === BOT.AIEYE && (
+        <div className="widget-container-chat-week-select">
+          <WeekSelect sendMessage={sendMessage} onUpdate={updateWeek} value={week} />
         </div>
       )}
       {isError && <ErrorModal />}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Logo from "../../assets/ascii-logo.svg";
+// import Logo from "../../assets/ascii-logo.svg";
 import "./styles.scss";
 import ResponseComponent from "../ResponseComponent/ResponseComponent";
 const SideBar = ({ message }) => {
@@ -10,9 +10,9 @@ const SideBar = ({ message }) => {
       <div className="avatar-chat-sidebar-body">
         <ResponseComponent response={message} />
       </div>
-      <div className="avatar-chat-sidebar-footer">
+      {/* <div className="avatar-chat-sidebar-footer">
         <button className="avatar-chat-sidebar-footer-button">Reset</button>
-      </div>
+      </div> */}
     </div>
   );
 };

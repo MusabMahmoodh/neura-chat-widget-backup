@@ -1,0 +1,6 @@
+1. Set RABBITMQ, EXTERNAL_URL
+2.SET MongoDB seperately
+
+TOOD:
+3.Setup EMAIL
+4.
