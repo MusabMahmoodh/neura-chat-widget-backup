@@ -22,18 +22,18 @@ const ConversationHeader = ({ remoteName, resetSession, toggleSettings, isSpeake
     bot === BOT.AIEYE
       ? "AI Teaching Assistant Robot"
       : bot === BOT.DEMO_SCL
-      ? "UCL"
-      : bot === BOT.INSURANCE
-      ? "Insurance Demoe"
-      : bot === BOT.ASCII
-      ? "ASCII"
-      : "Esoft Chat Bot";
+        ? "UCL"
+        : bot === BOT.INSURANCE
+          ? "Insurance Demoe"
+          : bot === BOT.ASCII
+            ? "ASCII"
+            : "Grad school Chat Bot";
   const subtitle =
     bot !== BOT.AIEYE
       ? "Hi there, let's start a conversation"
       : listening
-      ? "Talk to robot teacher"
-      : "Text with robot teacher";
+        ? "Talk to robot teacher"
+        : "Text with robot teacher";
 
   const resetChat = () => {
     resetSession();
