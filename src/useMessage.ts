@@ -7,6 +7,7 @@ import { getUserData } from "./utils/userrUtils";
 import { BOT } from "./constants";
 // import { replaceEsoft, replaceGrad, replaceLinksWithText } from "./utils/textUtils";
 import fingerprint from "./utils/fingerprintUtils";
+import { replaceEsoft, replaceGrad, replaceLinksWithText } from "./utils/textUtils";
 // import fingerprint from "./utils/fingerprintUtils";
 
 const getCurrentTime = () => {
@@ -177,9 +178,9 @@ export const useMessage = () => {
   const getApiResponse = async (message: string) => {
     let messageForQuery = message;
 
-    // if (BOT.DEMO_SCL === client) {
-    //   messageForQuery = replaceGrad(message);
-    // }
+    if (BOT.DEMO_SCL === client || BOT.ESOFT === client) {
+      messageForQuery = replaceGrad(message);
+    }
 
     setIsLoadingResponse(true);
     const newMessage = {
@@ -195,12 +196,12 @@ export const useMessage = () => {
     try {
       let messageToDisplay;
       const res = await getResponse(messageForQuery, session, sclOption);
-      // if (BOT.DEMO_SCL === client) {
-      //   var replaceLinks = replaceLinksWithText(res, "https://neura-demo-school.netlify.app");
-      //   messageToDisplay = replaceEsoft(replaceLinks);
-      // } else {
-      messageToDisplay = res.data;
-      // }
+      if (BOT.DEMO_SCL === client || BOT.ESOFT === client) {
+        var replaceLinks = replaceLinksWithText(res.data, "https://neura-demo-school.netlify.app");
+        messageToDisplay = replaceEsoft(replaceLinks);
+      } else {
+        messageToDisplay = res.data;
+      }
 
       const response = {
         _id: nanoid(),
