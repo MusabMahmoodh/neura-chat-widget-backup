@@ -6,7 +6,7 @@ export const getApi = (sclOption?: string) => {
   const urlParams = new URLSearchParams(queryString);
   const client = urlParams.get("client");
   if (client === "esoft") {
-    return "https://esoft-demo.ascii.ai";
+    return "http://esoftmetro.ascii.ai";
   } else if (client === "aieye") {
     return "https://ai-eye-chatbot.ascii.ai";
   } else if (client === "demo_scl" && sclOption === "general") {
@@ -18,7 +18,7 @@ export const getApi = (sclOption?: string) => {
   } else if (client === "ascii-web") {
     return "https://ascii-chat.ascii.ai";
   } else {
-    return "https://esoft-demo.ascii.ai";
+    return "http://esoftmetro.ascii.ai";
   }
 };
 
@@ -74,19 +74,34 @@ export const getResponse = async (message: string, session: string, sclOption?: 
   const urlParams = new URLSearchParams(queryString);
   const client = urlParams.get("client");
   const sessionUrl = client === "demo_scl" && sclOption === "general" ? "generate_with_source" : "generate";
-  const response = await fetch(`${getApi(sclOption)}/${sessionUrl}?session_id=${session}`, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user_input: message,
-    }),
-  });
+  let response;
 
+  if (client === "esoft") {
+    response = await fetch(`${getApi(sclOption)}/generate/${session}`, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_input: message,
+      }),
+    });
+  } else {
+    response = await fetch(`${getApi(sclOption)}/${sessionUrl}?session_id=${session}`, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_input: message,
+      }),
+    });
+  }
   const data = await response.json();
-  return { data: data.generated, resources: data.source };
+  const dataGenereated = client === "esoft" ? data.message : data.generated;
+  return { data: dataGenereated, resources: data.source };
   // mock api response with delay
   // return new Promise((resolve) => {
   //   setTimeout(() => {
