@@ -6,7 +6,7 @@ export const getApi = (sclOption?: string) => {
   const urlParams = new URLSearchParams(queryString);
   const client = urlParams.get("client");
   if (client === "esoft") {
-    return "http://esoftmetro.ascii.ai";
+    return "https://metro.ascii.ai";
   } else if (client === "aieye") {
     return "https://ai-eye-chatbot.ascii.ai";
   } else if (client === "demo_scl" && sclOption === "general") {
@@ -18,7 +18,7 @@ export const getApi = (sclOption?: string) => {
   } else if (client === "ascii-web") {
     return "https://ascii-chat.ascii.ai";
   } else {
-    return "http://esoftmetro.ascii.ai";
+    return "https://metro.ascii.ai";
   }
 };
 
@@ -76,31 +76,19 @@ export const getResponse = async (message: string, session: string, sclOption?: 
   const sessionUrl = client === "demo_scl" && sclOption === "general" ? "generate_with_source" : "generate";
   let response;
 
-  if (client === "esoft") {
-    response = await fetch(`${getApi(sclOption)}/generate/${session}`, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_input: message,
-      }),
-    });
-  } else {
-    response = await fetch(`${getApi(sclOption)}/${sessionUrl}?session_id=${session}`, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_input: message,
-      }),
-    });
-  }
+  response = await fetch(`${getApi(sclOption)}/${sessionUrl}?session_id=${session}`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_input: message,
+    }),
+  });
+
   const data = await response.json();
-  const dataGenereated = client === "esoft" ? data.message : data.generated;
+  const dataGenereated = data.generated;
   return { data: dataGenereated, resources: data.source };
   // mock api response with delay
   // return new Promise((resolve) => {

@@ -142,16 +142,6 @@ export const useMessage = () => {
             message: "You have reached the limit of 16 sessions per day. Please try again tomorrow.",
           });
         }
-      } else if (client === BOT.ESOFT) {
-        // res = await fetch(
-        //   `https://aee0ec7e1262d4c5c808f1ecc8a849ca-d0a4fedc0b55647a.elb.us-east-1.amazonaws.com/generate/${sessionId}`,
-        //   {
-        //     method: "POST",
-        //     headers: {
-        //       accept: "application/json",
-        //     },
-        //   }
-        // );
       } else {
         res = await createSession(sessionId);
       }
