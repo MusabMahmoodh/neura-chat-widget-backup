@@ -27,6 +27,7 @@ import { getBot } from "../../messageService";
 import WeekSelect from "../WeekSelect/WeekSelect";
 const _ = require("lodash");
 
+
 const host = AVATR_BE;
 
 function Avatar({ setTextToShow, avatar_url, speak, setSpeak, text, setAudioSource, playing }) {
@@ -51,21 +52,21 @@ function Avatar({ setTextToShow, avatar_url, speak, setSpeak, text, setAudioSour
     hairNormalTexture,
     hairRoughnessTexture,
   ] = useTexture([
-    "/images/body.webp",
-    "/images/eyes.webp",
-    "/images/teeth_diffuse.webp",
-    "/images/body_specular.webp",
-    "/images/body_roughness.webp",
-    "/images/body_normal.webp",
-    "/images/teeth_normal.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033819/ascii/neura-widget/body_teht0c.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033819/ascii/neura-widget/eyes_px9lwz.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033841/ascii/neura-widget/teeth_diffuse_oczpnc.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033827/ascii/neura-widget/body_specular_mk7kfg.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033843/ascii/neura-widget/body_roughness_sljkej.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033963/ascii/neura-widget/body2_normal_ls9kvj.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033845/ascii/neura-widget/teeth_normal_ihvrje.webp",
     // "/images/teeth_specular.webp",
-    "/images/h_color.webp",
-    "/images/tshirt_diffuse.webp",
-    "/images/tshirt_normal.webp",
-    "/images/tshirt_roughness.webp",
-    "/images/h_alpha.webp",
-    "/images/h_normal.webp",
-    "/images/h_roughness.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033827/ascii/neura-widget/h_color_ojyghp.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033846/ascii/neura-widget/tshirt_diffuse_mj74du.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033848/ascii/neura-widget/tshirt_normal_ttwhhy.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033849/ascii/neura-widget/tshirt_roughness_ocigpc.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033825/ascii/neura-widget/h_alpha_z7axsk.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033838/ascii/neura-widget/h_normal_uxlhfo.webp",
+    "https://res.cloudinary.com/musabcloud/image/upload/v1713033832/ascii/neura-widget/h_roughness_v43pis.webp",
   ]);
 
   _.each(
